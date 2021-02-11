@@ -3,9 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Home page</title>
+
+    <link rel="stylesheet" type="text/css" href="../_css/index.css">
+    <script type="text/javascript" src="../../model/Dictionary.js"></script>
+    <script type="text/javascript" src="../../controller/index.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 </head>
 <body>
+<div id="main-index">
 
+    <div id="language_cha" onclick="change_lang()"> <!--- when clicking within this area function: change_lang starts---->
+        <img id="lang_pic" src="">
+        <div id="lang_txt"></div>
+    </div>
+
+    <div id="welcome_sec">
+        <h1 id="welcome_txt"></h1>
+    </div>
+</div>
 
 </body>
 </html>

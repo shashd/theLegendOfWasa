@@ -1,0 +1,31 @@
+
+
+#language_cha{
+    display: grid;
+    grid-template: "img txt";
+    padding: 10px;
+    border: solid black 2px;
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 80px;
+    height: 40px;
+}
+
+#lang_pic{
+    display: grid;
+    grid-area: img;
+    width: 20px;
+    height: 15px;
+    margin: auto;
+}
+
+#lang_txt{
+    display: grid;
+    grid-area: txt;
+    margin: auto;
+}
+
+#welcome_sec{
+    margin-top: 10%;
+    text-align: center;
+}
