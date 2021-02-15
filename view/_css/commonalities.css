@@ -1,0 +1,42 @@
+/************************ General layout/style of the buttons *********************/
+.btn{
+    align-content: center;
+    background-color: #f1f1f1;
+    border: black 2px solid;
+    color: black;
+    font-size: 16px;
+    padding: 16px 30px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+/* When the user hovers over the buttons*/
+.btn:hover{
+    background-color: black;
+    color: white;
+}
+
+/**************** Placement, etc. of the buttons within html pages ********************/
+
+/* Grid layout of the button to change language where image of the flag is on the left and the text on the right
+and placement of the button*/
+#language_cha{
+    display: grid;
+    grid-template: "img txt";
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 70px;
+}
+/* placement of the image within the button of change language */
+#lang_pic{
+    display: grid;
+    grid-area: img;
+    width: 20px;
+    height: 15px;
+    margin: auto;
+}
+/* placement if the text within the change language button*/
+#lang_txt{
+    display: grid;
+    grid-area: txt;
+    margin: auto;
+}

@@ -1,3 +1,5 @@
+/********************* Login form *********************/
+
 #log_in_form{
     border: black solid 4px;
     padding: 40px;
@@ -22,19 +24,6 @@
 #login_btn{
     width: 15%;
     margin: 10px auto;
-    align-content: center;
-    background-color: #f1f1f1;
-    border: black 2px solid;
-    color: black;
-    font-size: 16px;
-    padding: 16px 30px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-#login_btn:hover {
-    background-color: black;
-    color: white;
 }
 
 #login_error{
