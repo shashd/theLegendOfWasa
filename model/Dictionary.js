@@ -4,18 +4,28 @@ var language = "eng"
 // Current dictionary containing both swedish text and english
 // and the the images of english and swedish flag images
 dict = {
-    "keys_txt": ["welcome_txt","lang_txt"],
+    "keys_txt": ["welcome_txt","lang_txt", "log_in_txt", "username_lbl", "password_lbl", "login_btn", "login_error"],
     "keys_pic" : ["lang_pic"],
 
     "eng": {
         "welcome_txt": "Welcome to Legend of Wasa",
         "lang_txt": "Svenska",
-        "lang_pic" : "../../images/swe.png" //needs to contain folder structure from index.html
+        "lang_pic" : "../../images/swe.png", //needs to contain folder structure from index.html
+        "log_in_txt" : "Log in",
+        "username_lbl" : "Username: ",
+        "password_lbl" : "Password: ",
+        "login_btn" : "Login",
+        "login_error" : "Wrong password or username"
     },
     "sve": {
         "welcome_txt": "Välkommen till Legenden av Vasa",
         "lang_txt": "English",
-        "lang_pic" : "../../images/eng.png" //needs to contain folder structure from index.html
+        "lang_pic" : "../../images/eng.png", //needs to contain folder structure from index.html
+        "log_in_txt" : "Logga in",
+        "username_lbl" : "Användarnamn: ",
+        "password_lbl" : "Lösenord: ",
+        "login_btn" : "Logga in",
+        "login_error" : "Fel användarnamn eller lösenord"
     }
 }
 

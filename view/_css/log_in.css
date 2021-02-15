@@ -1,0 +1,42 @@
+#log_in_form{
+    border: black solid 4px;
+    padding: 40px;
+    margin: 20%;
+    text-align: center;
+}
+
+#username_input{
+    border: black solid 2px;
+    height: 40px;
+    width: 150px;
+    border-radius: 25px;
+}
+
+#password_input{
+    border: black solid 2px;
+    height: 40px;
+    width: 150px;
+    border-radius: 25px;
+}
+
+#login_btn{
+    width: 15%;
+    margin: 10px auto;
+    align-content: center;
+    background-color: #f1f1f1;
+    border: black 2px solid;
+    color: black;
+    font-size: 16px;
+    padding: 16px 30px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#login_btn:hover {
+    background-color: black;
+    color: white;
+}
+
+#login_error{
+    display: none;
+}
