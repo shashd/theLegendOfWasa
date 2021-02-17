@@ -9,9 +9,57 @@
 #log_in_txt{
     text-align: center;
 }
-/************** end of button design******************/
 
+/************** end of button design ******************/
 #welcome_sec{
-    margin-top: 10%;
+    margin-top: 5%;
     text-align: center;
+}
+
+/****************** beer menu area **************************/
+#menu{
+    text-align: center;
+    border: black solid 5px;
+    margin: 10%;
+    padding: 10px;
+}
+
+#beer_menu{
+    border: black solid 2px;
+    border-radius: 5px;
+    display: grid;
+    grid-template-areas: "name producer strength price btn";
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    padding: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#beer_name{
+    align-content: center;
+    display: grid;
+    grid-area: strength;
+}
+
+#beer_producer{
+    align-content: center;
+    display: grid;
+    grid-area: producer;
+}
+
+#beer_strength{
+    align-content: center;
+    display: grid;
+    grid-area: name;
+}
+
+#beer_price{
+    align-content: center;
+    display: grid;
+    grid-area: price;
+}
+
+#beer_btn{
+    display: grid;
+    grid-area: btn;
 }
