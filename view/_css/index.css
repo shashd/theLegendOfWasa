@@ -38,7 +38,7 @@
 #beer_name{
     align-content: center;
     display: grid;
-    grid-area: strength;
+    grid-area: name;
 }
 
 #beer_producer{
@@ -50,7 +50,7 @@
 #beer_strength{
     align-content: center;
     display: grid;
-    grid-area: name;
+    grid-area: strength;
 }
 
 #beer_price{

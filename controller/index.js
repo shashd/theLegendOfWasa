@@ -30,7 +30,10 @@ function update_view_txt() {
 // creates the element in HTML and then places the content from the array.
 // todo: Seperate into minor functions
 function update_menu(){
-    beers = get_beers();
+
+    beers = allBeverages();
+
+    console.log(beers);
 
     var menu_area = document.getElementById("menu"); // Identifies menu_area in index
 
@@ -52,10 +55,10 @@ function update_menu(){
         beer_price.setAttribute("id", "beer_price");
         beer_strength.setAttribute("id", "beer_strength");
 
-        beer_name.innerHTML = 'Name: ' + beers[i].name; // sets the text with in each element
-        beer_producer.innerHTML = 'Producer: ' + beers[i].producer;
-        beer_price.innerHTML = 'Price: ' + beers[i].price;
-        beer_strength.innerHTML = 'Alcohol: ' + beers[i].strength;
+        beer_name.innerHTML = 'Name: ' + beers[i][0].namn; // sets the text with in each element index[0] within each index of the beers array to get name.
+        beer_producer.innerHTML = 'Producer: ' + beers[i][0].producent;
+        beer_price.innerHTML = 'Price: ' + beers[i][0].prisinklmoms;
+        beer_strength.innerHTML = 'Alcohol: ' + beers[i][0].alkoholhalt;
 
         btn.innerHTML = get_string("order_btn");
 
