@@ -15,7 +15,6 @@ function addToSet(set, item) {
 }
 
 function allBeverages() {
-
     // Using a local variable to collect the items.
     var collector = [];
 
@@ -28,4 +27,27 @@ function allBeverages() {
     ;
     //
     return collector;
+}
+
+//
+// This functions returns an array containing solely the user information.
+function get_Users(){
+    var users = [];
+    for(i in DB.users){
+        users[i] = DB.users[i];
+    }
+    return users;
+}
+
+
+//
+// This function returns the users full name to be displayed after the user has logged in to the system.
+function getUserFullName(id){
+    var fullName;
+    for(i in DB.users){
+        if(DB.users[i].user_id == id){
+            fullName = DB.users[i].first_name + " " + DB.users[i].last_name;
+        }
+    }
+    return fullName;
 }

@@ -1,32 +1,4 @@
 
-//temporary json structure of user
-var temp_userList = [
-    {
-        "user_id": "1",
-        "password": "test1",
-        "username": "VIP",
-        "role" : "VIP"
-    },
-    {
-        "user_id": "2",
-        "password": "test2",
-        "username": "wait",
-        "role" : "waitress"
-    },
-    {
-        "user_id": "3",
-        "password": "test3",
-        "username": "man",
-        "role" : "manager"
-    },
-    {
-        "user_id": "4",
-        "password": "test4",
-        "username": "bar",
-        "role" : "bartender"
-    }
-];
-
 //
 // When page is loading it calls for functions update_view
 window.onload = function() {
@@ -60,10 +32,12 @@ function user_login(){
     var username = document.getElementById("username_input").value;
     var password = document.getElementById("password_input").value;
 
-    for(i in temp_userList){
-        if( temp_userList[i].username == username &&  temp_userList[i].password == password){
-            user_redirect(temp_userList[i].role); // calls function with the users role
-        } else {
+    //todo: This function might need to be in the model (loader), to follow MVC.
+    var users = get_Users();
+    for(i in users){
+        if( users[i].username == username &&  users[i].password == password){
+            user_redirect(users[i].credentials, users[i].user_id); // calls function with the users role
+        }else {
             document.getElementById("login_error").style.display = "block"; //if wrong information display error message
         }
     }
@@ -71,14 +45,17 @@ function user_login(){
 
 //
 // Depending on which role the user has he/she will be directed to the correct new page.
-function user_redirect(role){
-    if(role == "VIP"){
+function user_redirect(role, id){
+    // This line of code stores the users id locally within the browser. Which can then be retrieved with the key "user_id"
+    //  once the controller class has changed and the controller class (VIP, waitress, etc.) can display relevant information regarding the user.
+    localStorage.setItem("user_id", id);
+    if(role == "0"){
         window.location.href = "VIP_home.html";
-    } else if (role == "waitress"){
+    } else if (role == "1"){
         window.location.href = "waitress_home.html";
-    }  else if (role == "bartender"){
+    }  else if (role == "2"){
         window.location.href = "bartender_home.html";
-    } else if (role == "manager"){
+    } else if (role == "3"){
         window.location.href = "manager_home.html";
     }
 }

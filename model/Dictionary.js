@@ -4,7 +4,7 @@ var language = "eng"
 // Current dictionary containing both swedish text and english
 // and the the images of english and swedish flag images
 dict = {
-    "keys_txt": ["welcome_txt","lang_txt", "log_in_txt", "username_lbl", "password_lbl", "login_btn", "login_error", "beer_menu_title", "order_btn"],
+    "keys_txt": ["welcome_txt","lang_txt", "log_in_txt", "username_lbl", "password_lbl", "login_btn", "login_error", "beer_menu_title", "order_btn", "welcome_title"],
     "keys_pic" : ["lang_pic"],
 
     "eng": {
@@ -17,7 +17,8 @@ dict = {
         "login_btn" : "Login",
         "login_error" : "Wrong password or username",
         "beer_menu_title" : "Beer menu",
-        "order_btn": "Order"
+        "order_btn": "Order",
+        "welcome_title" : "Welcome "
     },
     "sve": {
         "welcome_txt": "Välkommen till Legenden av Vasa",
@@ -29,7 +30,8 @@ dict = {
         "login_btn" : "Logga in",
         "login_error" : "Fel användarnamn eller lösenord",
         "beer_menu_title" : "Öl meny",
-        "order_btn" : "Beställ"
+        "order_btn" : "Beställ",
+        "welcome_title" : "Välkommen "
     }
 }
 

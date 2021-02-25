@@ -47,3 +47,9 @@ and placement of the button*/
     margin: 8px 8px;
     box-sizing: border-box;
 }
+
+/********************************** Placements of texts ********************************************/
+
+#welcome_login_section{
+    text-align: center;
+}
