@@ -51,3 +51,15 @@ function getUserFullName(id){
     }
     return fullName;
 }
+
+//
+// This function returns the users full name to be displayed after the user has logged in to the system.
+function getDebt(id){
+    var debt = "0";
+    for(i in DB.account){
+        if(DB.account[i].user_id == id){
+            debt = DB.account[i].creditSEK;
+        }
+    }
+    return debt;
+}

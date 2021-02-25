@@ -7,18 +7,15 @@
     text-align: center;
 }
 
-#username_input{
+input{
     border: black solid 2px;
     height: 40px;
-    width: 150px;
+    width: 60%;
     border-radius: 25px;
 }
 
-#password_input{
-    border: black solid 2px;
-    height: 40px;
-    width: 150px;
-    border-radius: 25px;
+input:focus{
+    border:none;
 }
 
 #login_btn{

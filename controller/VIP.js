@@ -10,6 +10,7 @@ window.onload = function() {
     setVIPId();
     update_view_txt();
     setWelcome();
+    displayDebt();
 };
 
 //
@@ -32,6 +33,12 @@ function update_view_txt() {
 //
 // This function sets the welcome title to the "Welcome (users name)".
 function setWelcome(){
-    var fullName = getUserFullName(VIP_id);
+    var fullName = getUserFullName(VIP_id); //Calls function in class "Loader", which returns the users name.
     $("#welcome_userName").text(fullName);
+}
+
+function displayDebt(){
+    var debt = getDebt(VIP_id);
+
+    $("#balance_num").text(debt + " SEK");
 }
