@@ -45,7 +45,10 @@ function update_menu(){
         var beer_producer = document.createElement("beer_producer");
         var beer_price = document.createElement("beer_price");
         var beer_strength = document.createElement("beer_strength");
+        var quantity = document.createElement("quantity");
         var btn = document.createElement("btn");
+
+        quantity.setAttribute("class", "quantity");
 
         btn.setAttribute("class", "btn"); // sets attributes to the elements(id and class), so manipulation with CSS is possible
         btn.setAttribute("id", "order_btn");
@@ -60,6 +63,10 @@ function update_menu(){
         beer_price.innerHTML = 'Price: ' + beers[i][0].prisinklmoms;
         beer_strength.innerHTML = 'Alcohol: ' + beers[i][0].alkoholhalt;
 
+        quantity.innerHTML = '<input type = "button" value = "+">';
+        quantity.innerHTML += '<input type="text" name="amount" value="0">';
+        quantity.innerHTML += '<input type = "button" value = "-">';
+
         btn.innerHTML = get_string("order_btn");
 
         menu_area.appendChild(beer_menu);
@@ -68,6 +75,7 @@ function update_menu(){
         beer_menu.appendChild(beer_producer);
         beer_menu.appendChild(beer_price);
         beer_menu.appendChild(beer_strength);
+        beer_menu.appendChild(quantity);
         beer_menu.appendChild(btn);
     }
 }

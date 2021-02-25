@@ -28,8 +28,8 @@
     border: black solid 2px;
     border-radius: 5px;
     display: grid;
-    grid-template-areas: "name producer strength price btn";
-    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-areas: "name producer strength price quantity btn";
+    grid-template-columns: 15% 15% 15% 15% 20% 20%;
     padding: 20px;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -62,4 +62,10 @@
 #beer_btn{
     display: grid;
     grid-area: btn;
+}
+
+#quantity_count{
+    align-content: center;
+    display: grid;
+    grid-area: quantity;
 }
