@@ -774,102 +774,102 @@ var DB = {
     "sold": [{
         "transaction_id": "1186",
         "user_id": "2",
-        "beer_id": "8967303",
+        "articleid": "723841",
         "timestamp": "2014-10-10 19:04:13"
     }, {
         "transaction_id": "1187",
         "user_id": "25",
-        "beer_id": "198902",
+        "articleid": "723841",
         "timestamp": "2014-10-10 19:36:43"
     }, {
         "transaction_id": "1188",
         "user_id": "2",
-        "beer_id": "151503",
+        "articleid": "723841",
         "timestamp": "2014-10-10 19:46:18"
     }, {
         "transaction_id": "1189",
         "user_id": "25",
-        "beer_id": "150603",
+        "articleid": "675480",
         "timestamp": "2014-10-10 20:06:52"
     }, {
         "transaction_id": "1191",
         "user_id": "2",
-        "beer_id": "151503",
+        "articleid": "675480",
         "timestamp": "2014-10-10 20:33:43"
     }, {
         "transaction_id": "1192",
         "user_id": "25",
-        "beer_id": "196303",
+        "articleid": "675480",
         "timestamp": "2014-10-10 20:34:45"
     }, {
         "transaction_id": "1193",
         "user_id": "21",
-        "beer_id": "8953903",
+        "articleid": "675480",
         "timestamp": "2014-10-10 21:07:57"
     }, {
         "transaction_id": "1194",
         "user_id": "21",
-        "beer_id": "167903",
+        "articleid": "675480",
         "timestamp": "2014-10-10 21:08:08"
     }, {
         "transaction_id": "1195",
         "user_id": "21",
-        "beer_id": "194703",
+        "articleid": "675480",
         "timestamp": "2014-10-10 21:09:04"
     }, {
         "transaction_id": "1196",
         "user_id": "21",
-        "beer_id": "1152803",
+        "articleid": "508224",
         "timestamp": "2014-10-10 21:09:16"
     }, {
         "transaction_id": "1197",
         "user_id": "77",
-        "beer_id": "165903",
+        "articleid": "508224",
         "timestamp": "2014-10-12 00:05:15"
     }, {
         "transaction_id": "1198",
         "user_id": "77",
-        "beer_id": "8953903",
+        "articleid": "508224",
         "timestamp": "2014-10-12 00:05:28"
     }, {
         "transaction_id": "1199",
         "user_id": "77",
-        "beer_id": "1152803",
+        "articleid": "508224",
         "timestamp": "2014-10-12 00:05:37"
     }, {
         "transaction_id": "1200",
         "user_id": "24",
-        "beer_id": "165903",
+        "articleid": "508224",
         "timestamp": "2014-10-15 22:53:09"
     }, {
         "transaction_id": "1201",
         "user_id": "24",
-        "beer_id": "152601",
+        "articleid": "723841",
         "timestamp": "2014-10-15 22:53:28"
     }, {
         "transaction_id": "1202",
         "user_id": "24",
-        "beer_id": "651201",
+        "articleid": "723841",
         "timestamp": "2014-10-15 22:54:22"
     }, {
         "transaction_id": "1203",
         "user_id": "25",
-        "beer_id": "1199403",
+        "articleid": "723841",
         "timestamp": "2014-10-15 22:56:38"
     }, {
         "transaction_id": "1204",
         "user_id": "66",
-        "beer_id": "1159803",
+        "articleid": "723841",
         "timestamp": "2014-10-15 22:57:11"
     }, {
         "transaction_id": "1205",
         "user_id": "66",
-        "beer_id": "151503",
+        "articleid": "723841",
         "timestamp": "2014-10-15 22:57:30"
     }, {
         "transaction_id": "1206",
         "user_id": "66",
-        "beer_id": "151503",
+        "articleid": "723841",
         "timestamp": "2014-10-15 22:57:38"
     }],
     "account": [

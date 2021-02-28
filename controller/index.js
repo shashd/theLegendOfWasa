@@ -58,10 +58,10 @@ function update_menu(){
         beer_price.setAttribute("id", "beer_price");
         beer_strength.setAttribute("id", "beer_strength");
 
-        beer_name.innerHTML = 'Name: ' + beers[i][0].namn; // sets the text with in each element index[0] within each index of the beers array to get name.
-        beer_producer.innerHTML = 'Producer: ' + beers[i][0].producent;
-        beer_price.innerHTML = 'Price: ' + beers[i][0].prisinklmoms;
-        beer_strength.innerHTML = 'Alcohol: ' + beers[i][0].alkoholhalt;
+        beer_name.innerHTML = 'Name: ' + beers[i][0].name; // sets the text with in each element index[0] within each index of the beers array to get name.
+        beer_producer.innerHTML = 'Producer: ' + beers[i][0].producer;
+        beer_price.innerHTML = 'Price: ' + beers[i][0].priceinclvat;
+        beer_strength.innerHTML = 'Alcohol: ' + beers[i][0].alcoholstrength;
 
         quantity.innerHTML = '<input type = "button" value = "+">';
         quantity.innerHTML += '<input type="text" name="amount" value="0">';

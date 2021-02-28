@@ -11,6 +11,7 @@ window.onload = function() {
     update_view_txt();
     setWelcome();
     displayDebt();
+    setOrderHistory();
 };
 
 //
@@ -42,3 +43,34 @@ function displayDebt(){
 
     $("#balance_num").text(debt + " SEK");
 }
+
+//
+// This functions displays the users order history
+function setOrderHistory(){
+    orderHistory = getOrderHistory(VIP_id); // fetches the order list
+    var order_table = document.getElementById("order_his_tab");
+
+    var row_header = document.createElement("tr"); // first creates the row for the headers of the table
+
+    var name_header = document.createElement("th");
+    var date_header = document.createElement("th");
+
+    name_header.textContent = get_string("order_b_name");
+    date_header.textContent = get_string("order_date");
+
+    row_header.appendChild(name_header);
+    row_header.appendChild(date_header);
+    order_table.appendChild(row_header);
+
+    for(i in orderHistory) { // iterates through the orderHistory and adds a new row for each index within the array and displays the cells
+        var row = document.createElement("tr");
+        for(j in orderHistory[i]){
+            var cell = document.createElement('td');
+            cell.textContent = orderHistory[i][j];
+            row.appendChild(cell);
+        }
+        order_table.appendChild(row);
+    }
+    }
+
+

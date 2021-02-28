@@ -63,3 +63,21 @@ function getDebt(id){
     }
     return debt;
 }
+
+//
+// This function returns an array with the users order history.
+function getOrderHistory(id){
+    var oHistory = [];
+    var tempString;
+    for(i in DB.sold){ // firstly iterates through the sold (order history)
+        if(DB.sold[i].user_id == id){
+            for(j in DB2.spirits){ // iterates through the beverages
+             if(DB.sold[i].articleid == DB2.spirits[j].articleid){
+              tempString = { name : DB2.spirits[j].name , date : DB.sold[i].timestamp} // adds the name and the date of the order
+             }
+            }
+            oHistory.push(tempString);
+        }
+    }
+    return oHistory;
+}
