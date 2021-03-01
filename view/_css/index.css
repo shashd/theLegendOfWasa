@@ -10,13 +10,16 @@
     text-align: center;
 }
 
-/************** end of button design ******************/
+/* end of button design */
 #welcome_sec{
     margin-top: 5%;
     text-align: center;
 }
 
-/****************** beer menu area **************************/
+
+/******************/
+/* beer menu area */
+/******************/
 #menu{
     text-align: center;
     border: black solid 5px;
@@ -68,4 +71,38 @@
     align-content: center;
     display: grid;
     grid-area: quantity;
+}
+
+#box {
+    align-content: center;
+    display: grid;
+    grid-area: name;
+}
+
+#box ul {
+    align-content: center;
+    overflow: hidden;
+}
+
+#box li {
+    align-content: center;
+    border: black solid 2px;
+    border-radius: 5px;
+    display: grid;
+    grid-template-areas: "name producer strength price btn";
+    grid-template-columns: 25% 30% 15% 15% 15%;
+    padding: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+
+/*****************/
+/* shopping cart */
+/*****************/
+.car {
+    width: 1240px;
+    margin: 20px auto;
+    background: rgb(236, 234, 195);
 }

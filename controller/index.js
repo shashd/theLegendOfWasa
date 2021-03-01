@@ -35,48 +35,27 @@ function update_menu(){
 
     console.log(beers);
 
-    var menu_area = document.getElementById("menu"); // Identifies menu_area in index
+    //var oBox = document.getElementById("box");
+    var oUl = document.getElementsByTagName("ul")[0];
+    //var oCar = document.getElementById("car");
 
+    /* menu area */
     for (var i = 0; i < beers.length; i++) {
-        var beer_menu = document.createElement("beer_menu"); // creates element that will structure the beer menu
-        beer_menu.setAttribute("id", "beer_menu");
+        var oLi = document.createElement("li");
+        var data = beers[i];
 
-        var beer_name = document.createElement("beer_name"); // creates element with each item of the array
-        var beer_producer = document.createElement("beer_producer");
-        var beer_price = document.createElement("beer_price");
-        var beer_strength = document.createElement("beer_strength");
-        var quantity = document.createElement("quantity");
-        var btn = document.createElement("btn");
-
-        quantity.setAttribute("class", "quantity");
-
-        btn.setAttribute("class", "btn"); // sets attributes to the elements(id and class), so manipulation with CSS is possible
-        btn.setAttribute("id", "order_btn");
-
-        beer_name.setAttribute("id", "beer_name");
-        beer_producer.setAttribute("id", "beer_producer");
-        beer_price.setAttribute("id", "beer_price");
-        beer_strength.setAttribute("id", "beer_strength");
-
-        beer_name.innerHTML = 'Name: ' + beers[i][0].name; // sets the text with in each element index[0] within each index of the beers array to get name.
-        beer_producer.innerHTML = 'Producer: ' + beers[i][0].producer;
-        beer_price.innerHTML = 'Price: ' + beers[i][0].priceinclvat;
-        beer_strength.innerHTML = 'Alcohol: ' + beers[i][0].alcoholstrength;
-
-        quantity.innerHTML = '<input type = "button" value = "+">';
-        quantity.innerHTML += '<input type="text" name="amount" value="0">';
-        quantity.innerHTML += '<input type = "button" value = "-">';
-
-        btn.innerHTML = get_string("order_btn");
-
-        menu_area.appendChild(beer_menu);
-
-        beer_menu.appendChild(beer_name);
-        beer_menu.appendChild(beer_producer);
-        beer_menu.appendChild(beer_price);
-        beer_menu.appendChild(beer_strength);
-        beer_menu.appendChild(quantity);
-        beer_menu.appendChild(btn);
+        oLi.innerHTML += '<p>' +'Name: ' + data[0].name + '</p>';
+        oLi.innerHTML += '<p>'+ 'Producer:'+ data[0].producer + '</p>';
+        oLi.innerHTML += '<p>'+ 'Price:'+ data[0].priceinclvat + '</p>';
+        oLi.innerHTML += '<p>'+ 'Alcohol:'+ data[0].alcoholstrength + '</p>';
+        oLi.innerHTML += '<div class="btn" id="order_btn">order</div>';
+        oUl.appendChild(oLi);
     }
+
+    /* Shopping Cart */
+
+    ///////////////////
+    //To be continued//
+    ///////////////////
 }
 

@@ -1,4 +1,6 @@
-/************************ General layout/style of the buttons *********************/
+/***************************************/
+/* General layout/style of the buttons */
+/***************************************/
 .btn{
     align-content: center;
     background-color: #f1f1f1;
@@ -9,13 +11,16 @@
     cursor: pointer;
     border-radius: 5px;
 }
+
 /* When the user hovers over the buttons*/
 .btn:hover{
     background-color: black;
     color: white;
 }
 
-/**************** Placement, etc. of the buttons within html pages ********************/
+/****************************************************/
+/* Placement, etc. of the buttons within html pages */
+/****************************************************/
 
 /* Grid layout of the button to change language where image of the flag is on the left and the text on the right
 and placement of the button*/
@@ -26,6 +31,7 @@ and placement of the button*/
     margin-top: 10px;
     width: 70px;
 }
+
 /* placement of the image within the button of change language */
 #lang_pic{
     display: grid;
@@ -34,7 +40,8 @@ and placement of the button*/
     height: 15px;
     margin: auto;
 }
-/* placement if the text within the change language button*/
+
+/* placement if the text within the change language button */
 #lang_txt{
     display: grid;
     grid-area: txt;
@@ -48,8 +55,7 @@ and placement of the button*/
     box-sizing: border-box;
 }
 
-/********************************** Placements of texts ********************************************/
-
+/* Placements of texts */
 #welcome_login_section{
     text-align: center;
 }
