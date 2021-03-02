@@ -7,6 +7,25 @@ window.onload = function() {
 };
 
 
+window.onscroll = function(){
+    scrollFunction()
+};
+
+// When the webpage slides down 20px, a "back to top" button appears
+function scrollFunction(){
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20){
+        document.getElementById("toTop").style.display = "block";
+    }else{
+        document.getElementById("toTop").style.display = "none";
+    }
+}
+
+// Click the button to return to the top
+function topFunction(){
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
+
 //
 //This function iterates through the dictionary content and places the content of the related key on
 // the HTML-tags
