@@ -13,16 +13,41 @@
 </head>
 <body>
 
-<div class="btn" id="language_cha" onclick="change_lang()"> <!--- when clicking within this area function: change_lang starts---->
+<!--- Shows a navigation bar at the top of the page linking to: Logo, Menu, Language switch, Login --->
+<div class="topnav">
+    <ul>
+        <li><a href="#index.html">The Flying Dutchman</a></li>
+        <li><a href="#index.html">Menu</a></li>
+        <li style="float:right"><a class="active" href="#log_in.html">Log In</a></li>
+        <li style="float:right">
+            <div class="btn" id="language_cha" onclick="change_lang()"> <!--- when clicking within this area function: change_lang starts---->
+            <img id="lang_pic" src="">
+            <div id="lang_txt"></div>
+        </div>
+        </li>
+    </ul>
+</div>
+
+<!--- Moved into the top nav bar
+<div class="btn" id="language_cha" onclick="change_lang()">
     <img id="lang_pic" src="">
     <div id="lang_txt"></div>
+</div> --->
+
+<div id="welcome_sec">
+    <h1 id="welcome_login"></h1>
+    <h2 id="enter_credentials"></h2>
 </div>
 
 <div id="log_in_form">
     <div id="username_lbl"></div>
     <input type="text" id="username_input">
+
+    <br><br>
+
     <div id="password_lbl"></div>
     <input type="password" id="password_input">
+
     <div class="btn" id="login_btn" onclick="user_login()"></div>
     <div id="login_error"></div>
 </div>

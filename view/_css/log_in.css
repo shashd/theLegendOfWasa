@@ -1,17 +1,61 @@
 /********************* Login form *********************/
 
+body{
+    background-color: #344350;
+    color: #EBEBE7;
+    font-family: sans-serif;
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: white;
+}
+
+.topnav a {
+    float: left;
+    color: #344350;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #EBEBE7;
+}
+
+li a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#welcome_sec{
+    margin-top: 5%;
+    text-align: center;
+}
+
 #log_in_form{
-    border: black solid 4px;
+    /* border: black solid 4px;*/
     padding: 40px;
-    margin: 20%;
+    margin-top: 5%;
+    margin-left: 20%;
+    margin-right: 20%;
     text-align: center;
 }
 
 input{
-    border: black solid 2px;
+    /*border: black solid 2px;*/
     height: 40px;
     width: 60%;
-    border-radius: 25px;
+    border-radius: 5px;
 }
 
 input:focus{
