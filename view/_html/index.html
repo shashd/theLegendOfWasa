@@ -14,15 +14,18 @@
 </head>
 <body>
 
-<div id="main-index">
-    <a class="btn" href="log_in.html" id="log_in_area">
-        <div id="log_in_txt"></div>
-    </a>
+<!-- Header Area-->
+<div id="header">
 
-    <div class="btn" id="language_cha" onclick="change_lang()"> <!--- when clicking within this area function: change_lang starts---->
+    <!--- when clicking within this area function: change_lang starts---->
+    <div class="btn" id="language_cha" onclick="change_lang()">
         <img id="lang_pic" src="">
         <div id="lang_txt"></div>
     </div>
+
+    <a class="btn" href="log_in.html" id="log_in_area">
+        <div id="log_in_txt"></div>
+    </a>
 
     <div id="welcome_sec">
         <h1 id="welcome_txt"></h1>
@@ -30,8 +33,23 @@
 </div>
 
 <!-- Shopping Cart -->
-<div class="car">
-    <h1>shopping cart will be here.</h1>
+<div id="car" class="car">
+    <h1>Cart Area</h1>
+    <div class="head_row hid">
+        <div class="check left"> <i onclick="checkAll()">√</i></div>
+        <div class="left">Select All</div>
+        <div class="name left">Name</div>
+        <div class="price left">Price</div>
+        <div class="number left">Amount</div>
+        <div class="subtotal left">Subtotal</div>
+        <div class="ctrl left">Operation</div>
+    </div>
+</div>
+
+<!-- Sum Area-->
+<div id="sum_area">
+    <div id="pay">Order All</div>
+    <div id="pay_amount">Total: <span id="price_num">0</span>kr</div>
 </div>
 
 <!-- Menu Area -->
@@ -39,9 +57,10 @@
     <h2 id="beer_menu_title"></h2>
     <div id="box">
         <ul></ul>
-    </div>  
+    </div>
 </div>
 
+<!-- Return to top button -->
 <button onclick="topFunction()" id="toTop" title="toTop">To Top</button>
 
 
