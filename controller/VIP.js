@@ -39,7 +39,7 @@ function setWelcome(){
 }
 
 function displayBalance(){
-    var balance = getDebt(VIP_id);
+    var balance = getBalance(VIP_id);
 
     $("#balance_num").text(balance + " SEK");
 }
@@ -73,19 +73,20 @@ function setOrderHistory(){
     }
     }
 
-    function updateVipBalance(){
-    var input_elem = document.getElementById("balance_input")
-    var add_num = input_elem.value;
+    //
+    // This function lets the VIP add money to their balance.
+function updateVipBalance(){
+    var add_num = document.getElementById("balance_input").value; // Fetches the value that the users has entered in the input
 
-        if (confirm(get_string("confirm_transfer") + add_num + " SEK")) {
-            changeBalance(VIP_id, add_num);
-            alert(add_num + get_string("success_bal"));
-            displayBalance();
+        if (confirm(get_string("confirm_transfer") + add_num + " SEK")) { // Asks the user if (s)he is sure to proceed with the transaction or cancel it
+            changeBalance(VIP_id, add_num); // calls for function in Loader which changes the balance in the model
+            alert(add_num + get_string("success_bal")); // Confirms transaction
+            displayBalance(); // updates the balance text
         } else {
-            alert(get_string("cancel_transfer"));
+            alert(get_string("cancel_transfer")); // If user cancels transaction a confirmation of the action will appear
         }
 
-        document.getElementById("balance_input").value = null;
+        document.getElementById("balance_input").value = null; 
     }
 
 
