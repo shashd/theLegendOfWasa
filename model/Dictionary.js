@@ -4,7 +4,8 @@ var language = "eng"
 // Current dictionary containing both swedish text and english
 // and the the images of english and swedish flag images
 dict = {
-    "keys_txt": ["welcome_txt","lang_txt", "log_in_txt", "welcome_login", "enter_credentials", "username_lbl", "password_lbl", "login_btn", "login_error", "beer_menu_title", "order_btn", "welcome_title", "balance_txt", "ord_his_tit"],
+    "keys_txt": ["welcome_txt","lang_txt", "log_in_txt", "welcome_login", "enter_credentials", "username_lbl", "password_lbl", "login_btn", "login_error", "beer_menu_title",
+        "order_btn", "welcome_title", "balance_txt", "ord_his_tit", "update_balance_title", "btn_balance", "lbl_balance_input", "succes_bal", "confirm_transfer", "cancel_transfer"],
     "keys_pic" : ["lang_pic"],
 
     "eng": {
@@ -21,10 +22,16 @@ dict = {
         "beer_menu_title" : "Beer menu",
         "order_btn": "Order",
         "welcome_title" : "Welcome ",
-        "balance_txt" : "Your debt is: ",
+        "balance_txt" : "Your balance is: ",
         "ord_his_tit" : "Your order history",
         "order_date" : "Date of the order",
-        "order_b_name" : "Beer name"
+        "order_b_name" : "Beer name",
+        "update_balance_title" : "Add money to your balance",
+        "btn_balance" : "Add to balance",
+        "lbl_balance_input" : "Amount in SEK: ",
+        "success_bal" : " SEK have been added to your account",
+        "confirm_transfer" : "Are you sure that you want to add ",
+        "cancel_transfer" : "Transaction canceled"
     },
     "sve": {
         "welcome_txt": "Välkommen till Legenden av Vasa",
@@ -40,10 +47,16 @@ dict = {
         "beer_menu_title" : "Öl meny",
         "order_btn" : "Beställ",
         "welcome_title" : "Välkommen ",
-        "balance_txt" : "Din skuld är: ",
+        "balance_txt" : "Ditt saldo är: ",
         "ord_his_tit" : "Din orderhistorik",
         "order_date": "Order datum",
-        "order_b_name" : "Öl namn"
+        "order_b_name" : "Öl namn",
+        "update_balance_title" : "Lägg till pengar på saldo",
+        "btn_balance" : "Lägg till i saldo",
+        "lbl_balance_input" : "Antal SEK: ",
+        "success_bal" : " SEK har lagts till på ditt saldo",
+        "confirm_transfer" : "Är du säker på att du vill lägga till ",
+        "cancel_transfer" : "Transakation avbryten"
     }
 }
 

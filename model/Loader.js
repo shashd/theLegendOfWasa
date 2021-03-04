@@ -81,3 +81,18 @@ function getOrderHistory(id){
     }
     return oHistory;
 }
+
+function changeBalance(id, added_amount_str) {
+
+    for (i = 0; i < DB.account.length; i++) {
+        if (DB.account[i].user_id == id) {
+            var curr_balance_str = DB.account[i].creditSEK;
+            var added_amount_int = parseInt(added_amount_str);
+            var curr_amount_int = parseInt(curr_balance_str);
+
+            var new_balance = curr_amount_int + added_amount_int;
+
+            DB.account[i].creditSEK = new_balance;
+        }
+    }
+}

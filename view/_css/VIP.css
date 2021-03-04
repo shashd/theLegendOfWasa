@@ -6,3 +6,44 @@
 #order_his_tab{
    margin: auto;
 }
+
+#update_balance_area{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+
+#balance_input_area{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    display: grid;
+    grid-template-areas: "label"
+                         "input"
+                         "button";
+    grid-template-columns: 100%
+                        25% 50% 25%;
+}
+
+#lbl_balance_input{
+    grid-area: label;
+    margin: auto;
+}
+
+#update_balance_title{
+    grid-area: title;
+}
+
+#balance_input{
+    grid-area: input;
+    margin: auto;
+    width: 40%;
+    height: 20px;
+}
+
+#btn_balance{
+    display: inline-block;
+    text-align: center;
+    grid-area: button;
+    margin: 10px auto;
+}

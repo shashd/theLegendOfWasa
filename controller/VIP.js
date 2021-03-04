@@ -10,7 +10,7 @@ window.onload = function() {
     setVIPId();
     update_view_txt();
     setWelcome();
-    displayDebt();
+    displayBalance();
     setOrderHistory();
 };
 
@@ -38,10 +38,10 @@ function setWelcome(){
     $("#welcome_userName").text(fullName);
 }
 
-function displayDebt(){
-    var debt = getDebt(VIP_id);
+function displayBalance(){
+    var balance = getDebt(VIP_id);
 
-    $("#balance_num").text(debt + " SEK");
+    $("#balance_num").text(balance + " SEK");
 }
 
 //
@@ -71,6 +71,21 @@ function setOrderHistory(){
         }
         order_table.appendChild(row);
     }
+    }
+
+    function updateVipBalance(){
+    var input_elem = document.getElementById("balance_input")
+    var add_num = input_elem.value;
+
+        if (confirm(get_string("confirm_transfer") + add_num + " SEK")) {
+            changeBalance(VIP_id, add_num);
+            alert(add_num + get_string("success_bal"));
+            displayBalance();
+        } else {
+            alert(get_string("cancel_transfer"));
+        }
+
+        document.getElementById("balance_input").value = null;
     }
 
 
