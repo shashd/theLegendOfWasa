@@ -54,14 +54,14 @@ function getUserFullName(id){
 
 //
 // This function returns the users full name to be displayed after the user has logged in to the system.
-function getDebt(id){
-    var debt = "0";
+function getBalance(id){
+    var balance = "0";
     for(i in DB.account){
         if(DB.account[i].user_id == id){
-            debt = DB.account[i].creditSEK;
+            balance = DB.account[i].creditSEK;
         }
     }
-    return debt;
+    return balance;
 }
 
 //
@@ -80,4 +80,21 @@ function getOrderHistory(id){
         }
     }
     return oHistory;
+}
+
+//
+// This function updates the balance of a specific VIP-guest.
+function changeBalance(id, added_amount_str) {
+
+    for (i = 0; i < DB.account.length; i++) {
+        if (DB.account[i].user_id == id) { // checks the id to change balance on correct VIP
+            var curr_balance_str = DB.account[i].creditSEK;
+            var added_amount_int = parseInt(added_amount_str); // parse into integer so it can be added
+            var curr_amount_int = parseInt(curr_balance_str); // parse into integer so it can be added
+
+            var new_balance = curr_amount_int + added_amount_int;
+
+            DB.account[i].creditSEK = new_balance;
+        }
+    }
 }
