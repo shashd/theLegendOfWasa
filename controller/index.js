@@ -81,7 +81,7 @@ function createCart(beers,oBox,oCar){
             // Get all the quantity minus button and calculate the subtotal price
             decreaseBtn();
             // delete product button
-            deleteBtn(oCar,oDiv);
+            deleteBtn(oCar,oDiv,number);
         }
     }
 }
@@ -126,7 +126,7 @@ function checkBox(oDiv){
     }
 }
 
-function deleteBtn(oCar,oDiv){
+function deleteBtn(oCar,oDiv,number){
     var delBtn = oDiv.lastChild.getElementsByTagName("a")[0];
     delBtn.onclick = function() {
         var result = confirm("Confirm to delete?");
@@ -263,8 +263,11 @@ function loadDraggableMenu(){
     }
 
     var oCar = document.getElementById("car");
+    var number = 0;
     oCar.addEventListener("drop",
         function(e) {
+            number++;
+
             // get transferred data
             var objDtf = e.dataTransfer;
             var textHTML = objDtf.getData("text/html");
@@ -276,7 +279,7 @@ function loadDraggableMenu(){
             // set functions for all divs
             for(var i = 0; i<oDivs.length; i++){
                 var oDiv = oDivs[i];
-                dragToCartBtnFunctions(oDiv,oCar);
+                dragToCartBtnFunctions(oDiv,oCar,number);
             }
 
             e.preventDefault();
@@ -300,9 +303,9 @@ function loadDraggableMenu(){
     }
 
     // add drag to cart btn onclick functions
-    function dragToCartBtnFunctions(oDiv,oCar){
+    function dragToCartBtnFunctions(oDiv,oCar,number){
         checkBox(oDiv);
-        deleteBtn(oCar,oDiv);
+        deleteBtn(oCar,oDiv,number);
         increaseBtn();
         decreaseBtn();
     }
