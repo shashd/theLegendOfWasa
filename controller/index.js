@@ -7,27 +7,12 @@ window.onload = function() {
     loadDraggableMenu();
 };
 
-// todo: move to a helper js file
+// return to top button
 window.onscroll = function(){
     scrollFunction()
 };
 
-// When the webpage slides down 20px, a "back to top" button appears
-function scrollFunction(){
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20){
-        document.getElementById("toTop").style.display = "block";
-    }else{
-        document.getElementById("toTop").style.display = "none";
-    }
-}
 
-// Click the button to return to the top
-function topFunction(){
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-}
-
-//
 //This function iterates through the dictionary content and places the content of the related key on
 // the HTML-tags
 function update_view_txt() {
@@ -66,18 +51,15 @@ function update_menu(){
 // create beer menu list HTML
 function createProductMenuHTML(beers,oUl){
     for (var i = 0; i < beers.length; i++) {
-        var oLi = document.createElement("li");
-        var data = beers[i];
-
-        oLi.draggable = "true"
-        oLi.className = "beer_line"
-
-        oLi.innerHTML += '<p class="beer_name">' +'Name: ' + data[0].name + '</p>';
-        oLi.innerHTML += '<p class="beer_producer">'+ 'Producer:'+ data[0].producer + '</p>';
-        oLi.innerHTML += '<p class="beer_price">'+ 'Price:'+ data[0].priceinclvat + '</p>';
-        oLi.innerHTML += '<p class="beer_strength">'+ 'Alcohol:'+ data[0].alcoholstrength + '</p>';
-        oLi.innerHTML += '<div class="add_btn">order</div>';
-        oUl.appendChild(oLi);
+        const data = beers[i];
+        const liHTML = createLi("","beer_line",
+            createP("","beer_name",'Name: ' + data[0].name)
+            + createP("","beer_producer",'Producer:'+ data[0].producer)
+            + createP("","beer_price",'Price:'+ data[0].priceinclvat)
+            + createP("","beer_strength",'Alcohol:'+ data[0].alcoholstrength)
+            + createDiv("","add_btn","order"),
+            true);
+        oUl.innerHTML += liHTML;
     }
 }
 
@@ -91,7 +73,7 @@ function createCart(beers,oBox,oCar){
         aBtn[i].onclick = function() {
             var oDiv = document.createElement("div");
             var data = beers[this.index][0];
-            createCartProductHtml(oDiv,data,oCar);
+            createProductCartHTML(oDiv,data,oCar);
             // check box
             checkBox(oDiv);
             // Get all the quantity plus button and calculate the subtotal price
@@ -105,16 +87,30 @@ function createCart(beers,oBox,oCar){
 }
 
 // create the cart beer HTML
-function createCartProductHtml(oDiv,data,oCar){
+function createProductCartHTML(oDiv,data,oCar){
     oDiv.className = "row hid";
-    oDiv.innerHTML += '<div class="check left"> <i class="i_check" id="i_check" onclick="i_check()" >√</i></div>';
-    oDiv.innerHTML += '<div class="name left"><span>' + data.name + '</span></div>';
-    oDiv.innerHTML += '<div class="price left"><span>' + data.priceinclvat + 'kr</span></div>';
-    oDiv.innerHTML +=' <div class="item_count_i"><div class="num_count"><div class="count_d">-</div>' +
-        '<div class="c_num">1</div><div class="count_i">+</div></div> </div>'
-    oDiv.innerHTML += '<div class="subtotal left"><span>' + data.priceinclvat + 'kr</span></div>'
-    oDiv.innerHTML += '<div class="ctrl left"><a href="javascript:;">×</a></div>';
+    oDiv.innerHTML += generateCartBasicHTML(data.name, data.priceinclvat);
     oCar.appendChild(oDiv);
+}
+
+function generateCartBasicHTML(beerName, beerPrice){
+    const cartHTML = createDiv("","check left",
+        createI("i_check","i_check","i_check()","√")) +
+
+        createDiv("","name left",createSpan("","",beerName)) +
+
+        createDiv("","price left",createSpan("","",beerPrice + "kr")) +
+
+        createDiv("","item_count_i",
+            createDiv("","num_count",
+                createDiv("","count_d","-")
+                + createDiv("","c_num","1")
+                + createDiv("","count_i","+"))) +
+
+        createDiv("","subtotal left",createSpan("","",beerPrice + "kr")) +
+
+        createDiv("","ctrl left",createA("","","javascript:;","×"));
+    return cartHTML;
 }
 
 function checkBox(oDiv){
@@ -299,16 +295,8 @@ function loadDraggableMenu(){
 
     // Add the product html to cart
     function dragToCart(beerName,beerPrice){
-        var strHTML = "<div class='row hid'>";
-        strHTML += '<div class="check left"> <i class="i_check" id="i_check" onclick="i_check()" >√</i></div>';
-        strHTML += '<div class="name left"><span>' + beerName + '</span></div>';
-        strHTML += '<div class="price left"><span>' + beerPrice + 'kr</span></div>';
-        strHTML +=' <div class="item_count_i"><div class="num_count"><div class="count_d">-</div>' +
-            '<div class="c_num">1</div><div class="count_i">+</div></div> </div>'
-        strHTML += '<div class="subtotal left"><span>' + beerPrice + 'kr</span></div>'
-        strHTML += '<div class="ctrl left"><a href="javascript:;">×</a></div>';
-        strHTML += "</div>"
-        return strHTML;
+        const cartHTML = createDiv("","row hid",generateCartBasicHTML(beerName, beerPrice));
+        return cartHTML;
     }
 
     // add drag to cart btn onclick functions
@@ -318,7 +306,6 @@ function loadDraggableMenu(){
         increaseBtn();
         decreaseBtn();
     }
-
 }
 
 
