@@ -1,12 +1,3 @@
-
-function beverageTypes() {
-    var types = [];
-    for (i = 0; i < DB2.spirits.length; i++) {
-        addToSet(types, DB2.spirits[i].varugrupp);
-    };
-    return types;
-}
-
 function addToSet(set, item) {
     if (!set.includes(item)) {
         set.push(item);
@@ -15,17 +6,20 @@ function addToSet(set, item) {
 }
 
 function allBeverages() {
-    // Using a local variable to collect the items.
+    // This is the array that will be returned containing all the beverages
     var collector = [];
 
-    // The DB is stored in the variable DB2, with "spirits" as key element. If you need to select only certain
-    // items, you may introduce filter functions in the loop... see the template within comments.
-    //
-    for (i = 0; i < DB2.spirits.length; i++) {
-        collector.push([DB2.spirits[i]]);
-    }
-    ;
-    //
+    var removed_beverages = JSON.parse(localStorage.getItem("removed_bev")); // fetches from local storage and parses it from JSON so it can be used as an array
+
+    for (i in DB2.spirits) {
+        if(removed_beverages != null) { // If the removed beverages is not empty
+            if (!removed_beverages.some(r => DB2.spirits[i].articleid.includes(r))) {// checks if there beverage id is not within the removed array
+                collector.push([DB2.spirits[i]]);
+            }
+        }else{ // If the removed_beverages was empty then all beverages could be added and displayed
+            collector.push([DB2.spirits[i]]);
+        }
+    };
     return collector;
 }
 
@@ -97,4 +91,12 @@ function changeBalance(id, added_amount_str) {
             DB.account[i].creditSEK = new_balance;
         }
     }
+}
+
+//
+// This function removes an specific beverage with article id from the menu that the manager has entered
+function addToRemovedBeverages(art_id){
+    var removed_beverages =[];
+    removed_beverages.push(art_id); // pushes the ID into an array
+    localStorage.setItem("removed_bev", JSON.stringify(removed_beverages)); // stores it with local storage that stringify the array to enable local storage
 }

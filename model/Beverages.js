@@ -504,5 +504,14 @@ var DB2 = {
        "assortment": "BS",
        "organic": "0",
        "kosher": "0"
-   }]
+   }],
+    "quantity" : [ {
+        "articleid": "675480",
+        "amount": "20"
+    },
+        {
+            "articleid": "508224",
+            "amount": "20"
+        }
+    ]
 };

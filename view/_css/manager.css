@@ -1,0 +1,33 @@
+#remove_item_section{
+    text-align: center;
+    width: 40%;
+    margin: auto;
+    display: grid;
+    padding: 20px;
+    grid-template-areas: "header"
+                         "label"
+                         "input"
+                         "button";
+    border: black 1px solid;
+}
+
+#remove_item_title{
+    grid-area: header;
+}
+
+#lbl_remove_item{
+
+    margin-top: 10px;
+    grid-area: label;
+}
+
+#art_id_remove {
+    grid-area: input;
+}
+
+#remove_item_btn{
+    margin: 10px auto;
+    display: inline-block;
+    grid-area: button;
+
+}

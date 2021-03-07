@@ -5,7 +5,8 @@ var language = "eng"
 // and the the images of english and swedish flag images
 dict = {
     "keys_txt": ["welcome_txt","lang_txt", "log_in_txt", "welcome_login", "enter_credentials", "username_lbl", "password_lbl", "login_btn", "login_error", "beer_menu_title",
-        "order_btn", "welcome_title", "balance_txt", "ord_his_tit", "update_balance_title", "btn_balance", "lbl_balance_input", "succes_bal", "confirm_transfer", "cancel_transfer"],
+        "order_btn", "welcome_title", "balance_txt", "ord_his_tit", "update_balance_title", "btn_balance", "lbl_balance_input", "succes_bal", "confirm_transfer", "cancel_transfer",
+    "remove_item_btn", "lbl_remove_item", "remove_item_title"],
     "keys_pic" : ["lang_pic"],
 
     "eng": {
@@ -31,7 +32,10 @@ dict = {
         "lbl_balance_input" : "Amount in SEK: ",
         "success_bal" : " SEK have been added to your account",
         "confirm_transfer" : "Are you sure that you want to add ",
-        "cancel_transfer" : "Transaction canceled"
+        "cancel_transfer" : "Transaction canceled",
+        "remove_item_btn" : "Remove beverage",
+        "lbl_remove_item" : "Article ID",
+        "remove_item_title" : "Remove beverage from the menu"
     },
     "sve": {
         "welcome_txt": "Välkommen till Legenden av Vasa",
@@ -56,7 +60,10 @@ dict = {
         "lbl_balance_input" : "Antal SEK: ",
         "success_bal" : " SEK har lagts till på ditt saldo",
         "confirm_transfer" : "Är du säker på att du vill lägga till ",
-        "cancel_transfer" : "Transakation avbryten"
+        "cancel_transfer" : "Transakation avbryten",
+        "remove_item_btn" : "Ta bort dryck",
+        "lbl_remove_item" : "Artikel ID",
+        "remove_item_title" : "Ta bort en dryck från menyn"
     }
 }
 

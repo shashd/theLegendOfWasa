@@ -36,3 +36,12 @@ function setWelcome(){
     var fullName = getUserFullName(manager_id);
     $("#welcome_userName").text(fullName);
 }
+
+//
+// This function enables the manager to remove a beverage from the menu
+function removeTemporarilyItem(){
+    var article_id = document.getElementById("art_id_remove").value; // fetches value from input
+    addToRemovedBeverages(article_id); // Sends it to the Model function
+}
+
+

@@ -86,7 +86,7 @@ function updateVipBalance(){
             alert(get_string("cancel_transfer")); // If user cancels transaction a confirmation of the action will appear
         }
 
-        document.getElementById("balance_input").value = null; 
+        document.getElementById("balance_input").value = null;
     }
 
 
