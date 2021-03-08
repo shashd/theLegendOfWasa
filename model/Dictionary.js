@@ -4,7 +4,7 @@ var language = "eng"
 // Current dictionary containing both swedish text and english
 // and the the images of english and swedish flag images
 dict = {
-    "keys_txt": ["welcome_txt","lang_txt", "log_in_txt", "welcome_login", "enter_credentials", "username_lbl", "password_lbl", "login_btn", "login_error", "beer_menu_title",
+    "keys_txt": ["welcome_txt","lang_txt", "log_in_txt", "cart_area", "welcome_login", "enter_credentials", "username_lbl", "password_lbl", "login_btn", "login_error", "beer_menu_title",
         "order_btn", "welcome_title", "balance_txt", "ord_his_tit", "update_balance_title", "btn_balance", "lbl_balance_input", "succes_bal", "confirm_transfer", "cancel_transfer",
     "remove_item_btn", "lbl_remove_item", "remove_item_title"],
     "keys_pic" : ["lang_pic"],
@@ -14,12 +14,13 @@ dict = {
         "lang_txt": "Svenska",
         "lang_pic" : "../../images/swe.png", //needs to contain folder structure from index.html
         "log_in_txt" : "Log in",
+        "cart_area": "Your Order",
         "enter_credentials": "LOG IN TO FLY WITH US", // login page prompt
         "username_lbl" : "Username",
         "password_lbl" : "Password",
         "login_btn" : "Login",
         "login_error" : "Wrong password or username",
-        "beer_menu_title" : "Beer menu",
+        "beer_menu_title" : "Beer Menu",
         "order_btn": "Order",
         "welcome_title" : "Welcome ",
         "balance_txt" : "Your balance is: ",
@@ -33,7 +34,7 @@ dict = {
         "confirm_transfer" : "Are you sure that you want to add ",
         "cancel_transfer" : "Transaction canceled",
         "remove_item_btn" : "Remove beverage",
-        "lbl_remove_item" : "Article ID",
+        "lbl_remove_item" : "Kindly enter the Article ID to remove it from the menu",
         "remove_item_title" : "Remove beverage from the menu"
     },
     "sve": {
@@ -41,12 +42,13 @@ dict = {
         "lang_txt": "English",
         "lang_pic" : "../../images/eng.png", //needs to contain folder structure from index.html
         "log_in_txt" : "Logga in",
+        "cart_area": "Din beställning",
         "enter_credentials": "LOGGA IN OCH FLYG MED OSS",
         "username_lbl" : "Användarnamn",
         "password_lbl" : "Lösenord",
         "login_btn" : "Logga in",
         "login_error" : "Fel användarnamn eller lösenord",
-        "beer_menu_title" : "Öl meny",
+        "beer_menu_title" : "Ölmeny",
         "order_btn" : "Beställ",
         "welcome_title" : "Välkommen ",
         "balance_txt" : "Ditt saldo är: ",

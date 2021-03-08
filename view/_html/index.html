@@ -17,51 +17,103 @@
 </head>
 <body>
 
+<!--- Shows a navigation bar at the top of the page linking to: Logo, Menu, Language switch, Login --->
+<!---navbar goes here later--->
+<div class="topnav">
+    <div id="topnav>
+    <ul>
+        <li><a href="">The Flying Dutchman</a></li>
+        <li><a href="index.html">Menu</a></li>
+        <li style="float:right">
+            <a class="btn" href="log_in.html" id="log_in_area">
+                <div id="log_in_txt"></div>
+            </a></li>
+        <li style="float:right">
+            <div class="btn" id="language_cha" onclick="change_lang()"> <!--- when clicking within this area function: change_lang starts---->
+                <img id="lang_pic" src="">
+                <div id="lang_txt"></div>
+            </div>
+        </li>
+    </ul>
+    </div>
+</div>
 <!-- Header Area-->
 <div id="header">
-
-    <!--- when clicking within this area function: change_lang starts---->
-    <div class="btn" id="language_cha" onclick="change_lang()">
-        <img id="lang_pic" src="">
-        <div id="lang_txt"></div>
-    </div>
-
-    <a class="btn" href="log_in.html" id="log_in_area">
-        <div id="log_in_txt"></div>
-    </a>
-
     <div id="welcome_sec">
         <h1 id="welcome_txt"></h1>
     </div>
 </div>
 
-<!-- Shopping Cart -->
-<div id="car" class="car">
-    <h1>Cart Area</h1>
-    <div class="head_row hid">
-        <div class="check left"> <i onclick="checkAll()">√</i></div>
-        <div class="left">Select All</div>
-        <div class="name left">Name</div>
-        <div class="price left">Price</div>
-        <div class="number left">Amount</div>
-        <div class="subtotal left">Subtotal</div>
-        <div class="ctrl left">Operation</div>
+<div class="columns">
+
+    <div class="column1of2">
+        <!-- Menu Area -->
+        <div id="column_left">
+            <div id="menu">
+                <h2 id="beer_menu_title"></h2>
+                <div id="box">
+                    <ul></ul>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <div class="column2of2">
+            <div id="car" class="car">
+                <h1 id="cart_area"></h1>
+                <div class="head_row hid">
+                    <div class="check left"> <i onclick="checkAll()">√</i></div>
+                    <div class="left">Select All To Pay</div>
+                    <div class="name left"><!--Name--></div>
+                    <div class="price left"><!--Price--></div>
+                    <div class="number left"><!--Amount--></div>
+                    <div class="subtotal left"><!--Subtotal--></div>
+                    <div class="ctrl left"><!--Remove--></div>
+                </div>
+            </div>
+
+            <!-- Sum Area-->
+            <div id="sum_area">
+                <div id="pay">Order All</div>
+                <div id="pay_amount">Total: <span id="price_num">0</span>kr</div>
+            </div>
+    </div>
+
 </div>
 
-<!-- Sum Area-->
-<div id="sum_area">
-    <div id="pay">Order All</div>
-    <div id="pay_amount">Total: <span id="price_num">0</span>kr</div>
-</div>
+<!-- Below is the old vertical ordering of the cart and menu-->
 
-<!-- Menu Area -->
-<div id="menu">
-    <h2 id="beer_menu_title"></h2>
-    <div id="box">
-        <ul></ul>
+<!-- Menu Area
+<div id="column_left">
+    <div id="menu">
+        <h2 id="beer_menu_title"></h2>
+        <div id="box">
+            <ul></ul>
+        </div>
     </div>
-</div>
+</div>-->
+
+<!-- Shopping Cart
+<div id="column_right">
+    <div id="car" class="car">
+        <h1 id="cart_area"></h1>
+        <div class="head_row hid">
+            <div class="check left"> <i onclick="checkAll()">√</i></div>
+            <div class="left">Select All</div>
+            <div class="name left">Name</div>
+            <div class="price left">Price</div>
+            <div class="number left">Amount</div>
+            <div class="subtotal left">Subtotal</div>
+            <div class="ctrl left">Operation</div>
+        </div>
+    </div>-->
+
+    <!-- Sum Area
+    <div id="sum_area">
+        <div id="pay">Order All</div>
+        <div id="pay_amount">Total: <span id="price_num">0</span>kr</div>
+    </div>
+</div>-->
 
 <!-- Return to top button -->
 <button onclick="topFunction()" id="toTop" title="toTop">To Top</button>

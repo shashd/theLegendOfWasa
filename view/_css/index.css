@@ -4,23 +4,75 @@ body{
     background-color: #344350;
     color: #EBEBE7;
     font-family: 'Nunito', sans-serif;
+    margin: 0px;
 }
 
-/********************* Navigation *********************/
-
-/* placement of the login button within index page*/
-#log_in_area{
-    right: 10px;
-    top: 10px;
-    position: absolute;
+.column1of2 {
+    float: left;
+    width: 60%;
+    margin: 10px;
 }
 
-/* centers the text within login button*/
-#log_in_txt{
+.column2of2 {
+    /*float: right;*/
+    position: fixed;
+    top: 20%;
+    left: 60%;
+    width: 30%;
+    margin: 10px;
+}
+
+.columns{
+    align: center;
+}
+
+/********************* Top navigation *********************/
+
+.topnav {
+    overflow: hidden;
+    font-family: 'Astloch', cursive;
+    font-weight: bold;
+    background-color: #EBEBE7;
+}
+
+.topnav a:hover {
+    color: #A0C0D5;
+}
+
+.topnav a {
+    float: left;
+    color: #344350;
     text-align: center;
+    padding: 26px 40px;
+    text-decoration: none;
+    font-size: 16px;
 }
 
-/* end of button design */
+#topnav ul {
+    list-style-type: none;
+    margin: 0;
+    overflow: hidden;
+    background-color: #EBEBE7;
+}
+
+#topnav li a {
+    float: left;
+    display: block;
+    color: #EBEBE7;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#language_cha {
+    background: #EBEBE7;
+}
+
+#log_in_area {
+    background: #EBEBE7;
+}
+
+/********************* Welcome *********************/
 
 #welcome_sec{
     margin-top: 5%;
@@ -49,73 +101,30 @@ body{
     border-radius: 10px;
 }
 
-
-
-/******************/
-/* beer menu area */
-/******************/
-#menu{
-    text-align: center;
-    /*border: black solid 5px;*/
-    margin: 10%;
-    padding: 10px;
-}
-
-.hid {
-    overflow: hidden;
-}
-.left {
-    float: left;
-}
-
-
-#add_btn{
-    display: grid;
-    grid-area: btn;
-}
-
-#box {
-    align-content: center;
-    display: grid;
-    grid-area: name;
-}
-
-#box ul {
-    align-content: center;
-    overflow: hidden;
-}
-
-#box li {
-    align-content: center;
-   /* border: black solid 2px; */
-    border-radius: 5px;
-    display: grid;
-    grid-template-areas: "name producer strength price btn";
-    grid-template-columns: 25% 30% 15% 15% 15%;
-    padding: 20px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    overflow: hidden;
-}
-
-
-/*****************/
-/* shopping cart */
-/*****************/
+/********************* Cart Area *********************/
 
 .car {
-    width: 1240px;
+    /*width: 1240px;*/
     margin: 20px auto;
     /*background: #FFF;*/
+    border: 3px dotted;
 }
+
+#cart_area{
+    font-family: 'Astloch', cursive;
+    font-weight: 400;
+    font-size: xx-large;
+    text-align: center;
+}
+
+/***** Top Row in Cart Area *****/
+
 .car .check{
     width: 50px;
-
 }
 .car .check i{
     /*color: #fff;*/
     display: inline-block;
-
     width: 18px;
     height: 18px;
     line-height: 18px;
@@ -130,52 +139,54 @@ body{
     cursor: pointer;
     font-family: "iconfont";
 }
-.i_acity {
 
+.i_acity {
     border-color: #A0C0D5 !important;
     background-color: #A0C0D5 !important;
 }
 
 .car .name {
-    width: 300px;
+    /*width: 300px;*/
 }
+
 .car .name span {
-    line-height: 1;
+    /*line-height: 1;
     margin-top: 8px;
     margin-bottom: 8px;
     font-size: 18px;
     font-weight: normal;
     text-overflow: ellipsis;
     white-space: nowrap;
-    overflow: hidden;
+    overflow: hidden;*/
 }
 .car .price {
-    width: 144px;
+   /* width: 144px;
     text-align: right;
-    padding-right: 84px;
+    padding-right: 84px;*/
 }
+
 .car .price span {
-    color: #A0C0D5;
-    font-size: 16px;
+    /*color: #A0C0D5;
+    font-size: 16px;*/
 }
 .car .number{
-    width: 150px;
+    /*width: 150px;*/
 }
 .car .subtotal{
-    width: 130px;
+    /*width: 130px;*/
 
 }
 .car .ctrl {
-    width: 105px;
+    /*width: 105px;
     padding-right:25px;
-    text-align: center;
+    text-align: center;*/
 }
 .car .ctrl a {
     font-size: 20px;
     cursor: pointer;
     display: block;
-    width: 26px;
-    height: 26px;
+    /*width: 26px;
+    height: 26px;*/
     margin: 30px auto;
     line-height: 26px;
 }
@@ -188,20 +199,24 @@ body{
     height: 70px;
     line-height: 70px;
 }
-.head_row, .row {
+/*.head_row, .row {
     border-bottom: solid 1px #e0e0e0;
-}
+}*/
 .row {
     height: 86px;
-    line-height:86px;
+    line-height: 86px;
     padding: 15px 0;
     margin: 0px;
 }
+
+/***** Order Summation *****/
+
 #sum_area{
-    width:1240px;
+    /*width:1240px;*/
     height: 60px;
     background: #EBEBE7;
-    margin: 20px auto;
+    font-size: medium;
+    /*margin: 20px auto;*/
 }
 #sum_area #pay{
     width:250px;
@@ -209,7 +224,6 @@ body{
     text-align: center;
     float: right;
     line-height: 60px;
-    font-size: 19px;
     background: #A0C0D5;
     color: #EBEBE7;
 }
@@ -219,7 +233,6 @@ body{
     text-align: center;
     float: right;
     line-height: 60px;
-    font-size: 16px;
     color:#A0C0D5 ;
 }
 #sum_area #pay_amount #price_num{
@@ -240,7 +253,7 @@ body{
 .num_count{
     width:150px;
     height:40px;
-    border: 1.2px solid #E0E0E0;
+    border: 1.2px solid #EBEBE7;
     float:right;
     margin-top: 21px;
 
@@ -262,7 +275,7 @@ body{
     text-align: center;
     font-size:21px;
     color: #747474;
-    background: #E0E0E0;
+    background: #EBEBE7;
     cursor: pointer;
 }
 .c_num{
@@ -297,4 +310,58 @@ body{
 .i_acity2 {
     border-color: #A0C0D5 !important;
     background-color: #A0C0D5 !important;
+}
+
+/********************* Beer Menu *********************/
+
+#menu{
+    text-align: center;
+    border: #EBEBE7 double 5px;
+    margin: 10%;
+    padding: 10px;
+    overflow: auto;
+}
+
+#beer_menu_title{
+    font-family: 'Astloch', cursive;
+    font-weight: 400;
+    font-size: xx-large;
+}
+
+.hid {
+    overflow: hidden;
+}
+.left {
+    float: left;
+}
+
+#add_btn{
+    display: grid;
+    grid-area: btn;
+}
+
+#box {
+    align-content: center;
+    display: grid;
+    grid-area: name;
+}
+
+#box ul {
+    align-content: center;
+    overflow: hidden;
+}
+
+#box li {
+    /*align-content: space-evenly;*/
+    border: #EBEBE7 dotted 2px;
+    background-color: #A0C0D5;
+    color: #344350;
+    border-radius: 5px;
+    display: grid;
+    grid-template-areas: "name producer strength price btn";
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    padding: 2%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    overflow: hidden;
 }

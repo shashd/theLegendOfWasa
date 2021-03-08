@@ -54,10 +54,10 @@ function createProductMenuHTML(beers,oUl){
         const data = beers[i];
         const liHTML = createLi("","beer_line",
             createP("","beer_name",'Name: ' + data[0].name)
-            + createP("","beer_producer",'Producer:'+ data[0].producer)
-            + createP("","beer_price",'Price:'+ data[0].priceinclvat)
-            + createP("","beer_strength",'Alcohol:'+ data[0].alcoholstrength)
-            + createDiv("","add_btn","order"),
+            + createP("","beer_producer",'Producer: '+ data[0].producer)
+            + createP("","beer_price",'Price: '+ data[0].priceinclvat)
+            + createP("","beer_strength",'Alcohol: '+ data[0].alcoholstrength)
+            + createDiv("","add_btn","Drag to order"),
             true);
         oUl.innerHTML += liHTML;
     }
