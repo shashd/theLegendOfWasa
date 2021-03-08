@@ -3,9 +3,9 @@
 /***************************************/
 .btn{
     align-content: center;
-    background-color: #f1f1f1;
-    border: black 2px solid;
-    color: black;
+    background-color: #EBEBE7;
+    /*border: #344350 2px solid;*/
+    color: #344350;
     font-size: 16px;
     padding: 16px 30px;
     cursor: pointer;
@@ -14,8 +14,8 @@
 
 /* When the user hovers over the buttons*/
 .btn:hover{
-    background-color: black;
-    color: white;
+    background-color: #A0C0D5;
+    color: #344350;
 }
 
 /****************************************************/
@@ -38,7 +38,7 @@ and placement of the button*/
     grid-area: img;
     width: 20px;
     height: 15px;
-    margin: auto;
+    margin-right: 5px;
 }
 
 /* placement if the text within the change language button */

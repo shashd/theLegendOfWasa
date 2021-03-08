@@ -10,12 +10,11 @@ dict = {
     "keys_pic" : ["lang_pic"],
 
     "eng": {
-        "welcome_txt": "Welcome to Legend of Wasa",
+        "welcome_txt": "The Flying Dutchman",
         "lang_txt": "Svenska",
         "lang_pic" : "../../images/swe.png", //needs to contain folder structure from index.html
         "log_in_txt" : "Log in",
-        "welcome_login": "Welcome to The Flying Dutchman", // login page welcome
-        "enter_credentials": "Kindly enter your account credentials to log in", // login page prompt
+        "enter_credentials": "LOG IN TO FLY WITH US", // login page prompt
         "username_lbl" : "Username",
         "password_lbl" : "Password",
         "login_btn" : "Login",
@@ -38,12 +37,11 @@ dict = {
         "remove_item_title" : "Remove beverage from the menu"
     },
     "sve": {
-        "welcome_txt": "Välkommen till Legenden av Vasa",
+        "welcome_txt": "Den Flygande Holländaren",
         "lang_txt": "English",
         "lang_pic" : "../../images/eng.png", //needs to contain folder structure from index.html
         "log_in_txt" : "Logga in",
-        "welcome_login": "Välkommen",
-        "enter_credentials": "Stoppa i infon tack",
+        "enter_credentials": "LOGGA IN OCH FLYG MED OSS",
         "username_lbl" : "Användarnamn",
         "password_lbl" : "Lösenord",
         "login_btn" : "Logga in",

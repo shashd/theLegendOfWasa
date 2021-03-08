@@ -5,6 +5,8 @@
     <title>Log in</title>
     <link rel="stylesheet" type="text/css" href="../_css/log_in.css">
     <link rel="stylesheet" type="text/css" href="../_css/commonalities.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Astloch:wght@400;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <script type="text/javascript" src="../../model/Dictionary.js"></script>
     <script type="text/javascript" src="../../model/DBLoaded.js"></script>
     <script type="text/javascript" src="../../model/Loader.js"></script>
@@ -16,9 +18,9 @@
 <!--- Shows a navigation bar at the top of the page linking to: Logo, Menu, Language switch, Login --->
 <div class="topnav">
     <ul>
-        <li><a href="#index.html">The Flying Dutchman</a></li>
-        <li><a href="#index.html">Menu</a></li>
-        <li style="float:right"><a class="active" href="#log_in.html">Log In</a></li>
+        <li><a href="#">The Flying Dutchman</a></li>
+        <li><a href="#">Menu</a></li>
+        <li style="float:right"><a class="active" href="#">Log In</a></li>
         <li style="float:right">
             <div class="btn" id="language_cha" onclick="change_lang()"> <!--- when clicking within this area function: change_lang starts---->
             <img id="lang_pic" src="">
@@ -28,15 +30,9 @@
     </ul>
 </div>
 
-<!--- Moved into the top nav bar
-<div class="btn" id="language_cha" onclick="change_lang()">
-    <img id="lang_pic" src="">
-    <div id="lang_txt"></div>
-</div> --->
-
 <div id="welcome_sec">
-    <h1 id="welcome_login"></h1>
-    <h2 id="enter_credentials"></h2>
+    <h1 id="welcome_txt"></h1>
+    <p id="enter_credentials"></p>
 </div>
 
 <div id="log_in_form">

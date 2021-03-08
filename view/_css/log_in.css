@@ -1,29 +1,36 @@
-/********************* Login form *********************/
+/********************* Body *********************/
 
 body{
     background-color: #344350;
     color: #EBEBE7;
-    font-family: sans-serif;
+    margin: 0px;
+    font-family: 'Nunito', sans-serif;
 }
+
+/********************* Top navigation *********************/
 
 .topnav {
     overflow: hidden;
-    background-color: white;
+    font-family: 'Astloch', cursive;
+    font-weight: bold;
+}
+
+.topnav a:hover {
+    color: #A0C0D5;
 }
 
 .topnav a {
     float: left;
     color: #344350;
     text-align: center;
-    padding: 14px 16px;
+    padding: 26px 40px;
     text-decoration: none;
-    font-size: 17px;
+    font-size: 16px;
 }
 
 ul {
     list-style-type: none;
     margin: 0;
-    padding: 0;
     overflow: hidden;
     background-color: #EBEBE7;
 }
@@ -37,34 +44,60 @@ li a {
     text-decoration: none;
 }
 
+#language_cha {
+    background: #EBEBE7;
+}
+
+/********************* Welcome text *********************/
+
 #welcome_sec{
     margin-top: 5%;
     text-align: center;
 }
 
+#welcome_txt{
+    font-family: 'Astloch', cursive;
+    font-weight: 400;
+    font-size: xxx-large;
+}
+
+#enter_credentials{
+    font-family: 'Nunito', sans-serif;
+    font-weight: semi-bold;
+}
+
+/********************* Login form *********************/
+
 #log_in_form{
     /* border: black solid 4px;*/
     padding: 40px;
-    margin-top: 5%;
     margin-left: 20%;
     margin-right: 20%;
     text-align: center;
 }
 
 input{
-    /*border: black solid 2px;*/
+    border: #344350 solid 4px;
     height: 40px;
     width: 60%;
     border-radius: 5px;
+    background: #EBEBE7;
 }
 
 input:focus{
-    border:none;
+    border: #A0C0D5 solid 4px;
+    background: #EBEBE7;
 }
 
 #login_btn{
     width: 15%;
-    margin: 10px auto;
+    margin: 20px auto;
+    background: #EBEBE7;
+    border-color: none;
+}
+
+#login_btn:hover{
+    background:#A0C0D5;
 }
 
 #login_error{
