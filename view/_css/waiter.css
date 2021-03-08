@@ -1,0 +1,31 @@
+table {
+    margin-left:auto; 
+    margin-right:auto;   
+}
+
+td,th {
+	font-family: monospace;
+	padding: 4px;
+	background-color: #ccc;
+}
+
+#stock_sec{
+    text-align: center;
+    align-content: center;
+}
+
+#change_stock {
+    width:50%;
+	border: 3px dotted blue;
+	padding: 6px;
+	background-color: #ccc;
+    margin-left:auto; 
+    margin-right:auto;
+}
+
+#stock_tab{
+    width:15%;
+    text-align: center;
+    align-content: center;
+    border: 3px dotted #344350;
+}
