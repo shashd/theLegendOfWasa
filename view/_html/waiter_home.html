@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="../_css/waiter.css">
+    <link rel="stylesheet" type="text/css" href="../_css/commonalities.css">
+    <script type="text/javascript" src="../../model/Dictionary.js"></script>
+    <script type="text/javascript" src="../../model/DBLoaded.js"></script>
+    <script type="text/javascript" src="../../model/Loader.js"></script>
+    <script type="text/javascript" src="../../controller/waiter.js"></script>
+    <script type="text/javascript" src="../../model/Beverages.js"></script>
+
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <title>Waitress homepage</title>
+</head>
+
+<body>
+
+
+<!-- welcoming title, the name of the user and the VIP users salary---->
+<div id="welcome_login_section">
+    <h1 id="welcome_title"> <h1 id="welcome_userName"></h1></h1>
+</div>
+
+
+<div id="stock_sec">
+    <h2 id="stock_title">Stock Section</h2>   
+
+    <form name="current_stock"> 
+        <div id="change_stock">
+            <table>
+				<tr>
+					<td><b>ID:</b><input type=text name=id></td>
+					<td><b>Amount:</b><input type=text name=amount></td>
+				</tr>
+				<tr>
+					<td><input type=button value="Update" onclick="ModifyItem()"> </td>
+				</tr>
+			</table>
+        </div>
+        
+        <p></p>
+
+        <table id="stock_tab"></table>
+
+    </form>
+    
+
+</div>
+
+
+<h3 id="demo"></h3>
+
+</body>    
+</html>
