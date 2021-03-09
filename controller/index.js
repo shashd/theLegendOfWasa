@@ -5,6 +5,7 @@ window.onload = function() {
     update_menu();
     update_view_txt();
     loadDraggableMenu();
+    displayTableNumber();
 };
 
 // return to top button
@@ -12,23 +13,14 @@ window.onscroll = function(){
     scrollFunction()
 };
 
-
-//This function iterates through the dictionary content and places the content of the related key on
-// the HTML-tags
-function update_view_txt() {
-    keys_pic = dict['keys_pic'];
-    for (i in keys_pic) {
-        pic = keys_pic[i];
-        $("#" + pic).attr("src", get_string(pic));
-    }
-    keys_txt = dict["keys_txt"];
-    // iterates through the text content
-    for (i in keys_txt) {
-        key = keys_txt[i];
-        $("#" + key).text(get_string(key)); // places content within html-tag with correct ID
-    }
+function getTableNumber(){
+    return localStorage.getItem("table_number");
 }
 
+function displayTableNumber(){
+    var oCa = document.getElementById("cart_area");
+    oCa.innerHTML += ", Table " + getTableNumber();
+}
 
 //
 //This functions add new elements to the menu area of the html. For each items that is supposed to be added it
@@ -298,8 +290,7 @@ function loadDraggableMenu(){
 
     // Add the product html to cart
     function dragToCart(beerName,beerPrice){
-        const cartHTML = createDiv("","row hid",generateCartBasicHTML(beerName, beerPrice));
-        return cartHTML;
+        return createDiv("", "row hid", generateCartBasicHTML(beerName, beerPrice));
     }
 
     // add drag to cart btn onclick functions
