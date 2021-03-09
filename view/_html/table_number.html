@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Choosing Table Number</title>
+
+    <link rel="stylesheet" type="text/css" href="../_css/table_number.css">
+    <link rel="stylesheet" type="text/css" href="../_css/commonalities.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Astloch:wght@400;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="../../model/Dictionary.js"></script>
+    <script type="text/javascript" src="../../model/DBLoaded.js"></script>
+    <script type="text/javascript" src="../../model/Loader.js"></script>
+    <script type="text/javascript" src="../../controller/table_number.js"></script>
+    <script type="text/javascript" src="../../controller/helperFunctions.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+
+
+<!-- Header Area-->
+<div class="header">
+    <div id="welcome_sec">
+        <h1 id="welcome_txt"></h1>
+    </div>
+</div>
+
+<!--- Table Area -->
+<div class="table_area">
+    <div class="tip_name"></div>
+    <div id="grid_container" class="grid_container"></div>
+</div>
+
+
+<!-- Return to top button -->
+<button onclick="topFunction()" id="toTop" title="toTop">To Top</button>
+
+</body>
+</html>

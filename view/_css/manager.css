@@ -1,3 +1,66 @@
+/********************* Body *********************/
+
+body{
+    background-color: #344350;
+    color: #EBEBE7;
+    margin: 0px;
+    font-family: 'Nunito', sans-serif;
+}
+
+/********************* Top navigation *********************/
+
+.topnav {
+    overflow: hidden;
+    font-family: 'Astloch', cursive;
+    font-weight: bold;
+}
+
+.topnav a:hover {
+    color: #A0C0D5;
+}
+
+.topnav a {
+    float: left;
+    color: #344350;
+    text-align: center;
+    padding: 26px 40px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    overflow: hidden;
+    background-color: #EBEBE7;
+}
+
+li a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#language_cha {
+    background: #EBEBE7;
+}
+
+#log_in_area {
+    background: #EBEBE7;
+}
+
+/********************* Welcome text *********************/
+
+#welcome_title{
+    font-family: 'Astloch', cursive;
+    font-weight: 400;
+    font-size: xxx-large;
+}
+
+
 #remove_item_section{
     text-align: center;
     width: 40%;
@@ -8,7 +71,7 @@
                          "label"
                          "input"
                          "button";
-    border: black 1px solid;
+    /*border: black 1px solid;*/
 }
 
 #remove_item_title{
@@ -16,8 +79,7 @@
 }
 
 #lbl_remove_item{
-
-    margin-top: 10px;
+    margin: 10px;
     grid-area: label;
 }
 
@@ -26,8 +88,19 @@
 }
 
 #remove_item_btn{
-    margin: 10px auto;
+    margin: 20px auto;
     display: inline-block;
     grid-area: button;
+}
 
+input{
+    border: #344350 solid 4px;
+    height: 40px;
+    border-radius: 5px;
+    background: #EBEBE7;
+}
+
+input:focus{
+    border: #A0C0D5 solid 4px;
+    background: #EBEBE7;
 }

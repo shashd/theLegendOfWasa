@@ -52,7 +52,7 @@ function user_redirect(role, id){
     if(role == "0"){
         window.location.href = "VIP_home.html";
     } else if (role == "1"){
-        window.location.href = "waitress_home.html";
+        window.location.href = "waiter_home.html";
     }  else if (role == "2"){
         window.location.href = "bartender_home.html";
     } else if (role == "3"){

@@ -3,6 +3,8 @@
 <head>
     <link rel="stylesheet" type="text/css" href="../_css/manager.css">
     <link rel="stylesheet" type="text/css" href="../_css/commonalities.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Astloch:wght@400;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <script type="text/javascript" src="../../model/Dictionary.js"></script>
     <script type="text/javascript" src="../../model/DBLoaded.js"></script>
     <script type="text/javascript" src="../../model/Loader.js"></script>
@@ -14,10 +16,24 @@
 </head>
 <body>
 
-<div class="btn" id="language_cha" onclick="change_lang()"> <!--- when clicking within this area function: change_lang starts---->
-    <img id="lang_pic" src="">
-    <div id="lang_txt"></div>
+<!--- Shows a navigation bar at the top of the page linking to: Logo, Menu, Language switch, Login --->
+<div class="topnav">
+    <ul>
+        <li><a href="index.html">The Flying Dutchman</a></li>
+        <li><a href="index.html">Menu</a></li>
+        <li style="float:right">
+            <a class="btn" href="log_in.html" id="log_in_area">
+                <div id="log_in_txt"></div>
+            </a></li>
+        <li style="float:right">
+            <div class="btn" id="language_cha" onclick="change_lang()"> <!--- when clicking within this area function: change_lang starts---->
+                <img id="lang_pic" src="">
+                <div id="lang_txt"></div>
+            </div>
+        </li>
+    </ul>
 </div>
+
 
 <div id="welcome_login_section">
     <h1 id="welcome_title"> <h1 id="welcome_userName"></h1></h1>
