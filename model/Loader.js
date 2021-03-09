@@ -1,3 +1,5 @@
+var removed_beverages =[];
+
 function addToSet(set, item) {
     if (!set.includes(item)) {
         set.push(item);
@@ -96,7 +98,24 @@ function changeBalance(id, added_amount_str) {
 //
 // This function removes an specific beverage with article id from the menu that the manager has entered
 function addToRemovedBeverages(art_id){
-    var removed_beverages =[];
+    var removed_beverages_old = JSON.parse(localStorage.getItem("removed_bev")); // Fetches the removed beverages from local storage
+    if(removed_beverages_old != null){ // Checks if the removed beverages is not empty or exist, if not it will push the new article id into the existing array
+        if(!removed_beverages_old.some(r => art_id.includes(r))){
+        removed_beverages_old.push(art_id);
+        localStorage.setItem("removed_bev", JSON.stringify(removed_beverages_old));
+        }
+    }else{ // If removed beverage is null or does not exist it will add removed beverages which is an empty array, push the newly added article id and set it into local storage
     removed_beverages.push(art_id); // pushes the ID into an array
     localStorage.setItem("removed_bev", JSON.stringify(removed_beverages)); // stores it with local storage that stringify the array to enable local storage
+    }
+}
+
+function undoRemovedBeverage(id){
+    var removed_beverages_old = JSON.parse(localStorage.getItem("removed_bev"));
+    for(i in removed_beverages_old){
+        if(id = removed_beverages_old[i]){
+            removed_beverages_old.splice(i);
+            localStorage.setItem("removed_bev", JSON.stringify(removed_beverages_old));
+        }
+    }
 }

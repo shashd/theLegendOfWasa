@@ -11,6 +11,7 @@ window.onload = function() {
     setManagerId();
     update_view_txt();
     setWelcome();
+    setRemovedBev();
 };
 
 //
@@ -37,11 +38,44 @@ function setWelcome(){
     $("#welcome_userName").text(fullName);
 }
 
+
+
+function setRemovedBev(){
+    var removed_beverages =  JSON.parse(localStorage.getItem("removed_bev"));
+
+    var list = document.getElementById("removed_bev_list");
+
+    if(removed_beverages != null){
+        for(i in removed_beverages){
+            var id = removed_beverages[i];
+            var elementI = createI(id, "btn", "undoBeverage(id)", "undo");
+           const liHTML = createLi("", "removed_beverage_line", createP("", "removed_bev_id", "Article ID: " + removed_beverages[i]) +
+               elementI, false);
+
+            list.innerHTML += liHTML;
+         }
+    }
+}
+
+
+function undoBeverage(id){
+    if (confirm(get_string("confirm_transfer") + " SEK")) { // Asks the user if (s)he is sure to proceed with the transaction or cancel it
+        undoRemovedBeverage(id);
+        setRemovedBev();
+    } else {
+        alert(get_string("cancel_transfer")); // If user cancels transaction a confirmation of the action will appear
+    }
+}
+
 //
 // This function enables the manager to remove a beverage from the menu
 function removeTemporarilyItem(){
     var article_id = document.getElementById("art_id_remove").value; // fetches value from input
+    if(article_id != ""){
     addToRemovedBeverages(article_id); // Sends it to the Model function
+    } else {
+        alert("You have to enter a article_id")
+    }
 }
 
 
