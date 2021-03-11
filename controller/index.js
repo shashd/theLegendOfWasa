@@ -243,6 +243,10 @@ function getAmount() {
 
 // ==================== drag and drop part ====================
 
+const BEER_ID_INDEX = 0;
+const BEER_NAME_INDEX = 1;
+const BEER_PRICE_INDEX = 3;
+
 function loadDraggableMenu(){
     // get all the draggable elements
     var Drag = document.getElementsByClassName("beer_line");
@@ -253,9 +257,9 @@ function loadDraggableMenu(){
                 var objDtf = e.dataTransfer;
                 var pList = this.getElementsByTagName("p");
                 // get beer id, beer name and beer price
-                var beerId = pList[0].innerText;
-                var beerName = pList[1].innerText.split(":")[1];
-                var beerPrice = pList[3].innerText.split(":")[1];
+                var beerId = pList[BEER_ID_INDEX].innerText;
+                var beerName = pList[BEER_NAME_INDEX].innerText.split(":")[1];
+                var beerPrice = pList[BEER_PRICE_INDEX].innerText.split(":")[1];
                 // transfer data
                 objDtf.setData("text/html", dragToCart(beerId,beerName,beerPrice));
             },

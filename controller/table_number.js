@@ -13,7 +13,7 @@ window.onscroll = function(){
 
 
 function updateMenu(){
-    var table_number =20;
+    var table_number = TABLE_NUMBER;
     var oGrid = document.getElementById("grid_container");
 
     createTableGridHTML(oGrid, table_number);

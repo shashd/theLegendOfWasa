@@ -1,5 +1,7 @@
 
 
+const TABLE_NUMBER = 20;
+
 // functions for creating HTML phases with different tag names
 // the basic create functions for different tag names
 function createBasic(tag, id, classname, content, draggable){
