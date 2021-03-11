@@ -1,15 +1,14 @@
+
 // global variable
 var waitress_id;
-var id_list = [];
-var length;
 
 // function area
 window.onload = function() {
     setWaitressId();
     update_view_txt();        
     setWelcome();
-    initialStorage();               /* initial data in local storage */ 
-    displayStock();                 /* display all beers' stocks */
+    setInitStorage();               /* initial data in local storage */ 
+    displayStocks();                /* display all beers' stocks */
     updateOrderMenu();
 };
 
@@ -28,63 +27,54 @@ function setWelcome(){
     $("#welcome_userName").text(fullName);
 }
 
-function initialStorage(){
-    // store all beers in one row in local storage
-    localStorage.setItem("stocks",JSON.stringify(DB2.stocks))
 
-    // fetch stocks data from local storage
-    var stocks = localStorage.getItem("stocks");
-    stocks = JSON.parse(stocks);
+// ==================== stock part ====================
 
-    for (i = 0; i < stocks.length; i++) {
-        // record all beer ids in a global array
-        id_list.push(stocks[i].articleid);
-        // store each beer one by one in local storage
-        localStorage.setItem(stocks[i].articleid,stocks[i].amount);
-    }
-
-    length = id_list.length;
+function setInitStorage(){
+    localStorage.setItem("stocks",JSON.stringify(DB2.stocks));
 }
 
-function ModifyItem() {
-    
-    // fetch stocks data from local storage
-    var stocks = localStorage.getItem("stocks");
-    stocks = JSON.parse(stocks);
+// return stocks after parsing from local storage
+function getStocks(){
+    return JSON.parse(localStorage.getItem("stocks"));
+}
 
+function saveStocks(stocks){
+    localStorage.setItem("stocks",JSON.stringify(stocks));
+}
+
+function modifyStocks() {
+    var stocks = getStocks();
+
+    // get values that the user inputs
 	var id = document.forms.current_stock.id.value;
 	var newAmount = document.forms.current_stock.amount.value;
 
     for (i = 0; i < stocks.length; i++) {
         if(stocks[i].articleid == id){
-            localStorage.setItem(stocks[i].articleid,newAmount);
+            stocks[i].amount = newAmount;
         }
     }
-	
-	displayStock();
+
+    saveStocks(stocks);      /* update stocks in local storage */
+	displayStocks();
 }
 
-
-function displayStock(){
-    var id, amount;    
+function displayStocks(){
+    var stocks = getStocks();   
     var list = "<tr><th>ID</th><th>Amount</th></tr>\n";
 
-    for (i = 0; i < length; i++) {
-        id = id_list[i];
-        amount = localStorage.getItem(id);
-        list += "<tr><td>" + id + "</td>\n<td>"
-                + amount + "</td></tr>\n";
+    for (i = 0; i < stocks.length; i++) {
+        id = stocks[i].articleid;
+        amount = stocks[i].amount;
+        list += "<tr><td>" + id + "</td>\n<td>" + amount + "</td></tr>\n";
     }
 
     document.getElementById('stock_tab').innerHTML = list;
 }
 
 
-
-
-
 // ==================== order part ====================
-
 
 function updateOrderMenu(){
     var table_number = TABLE_NUMBER;
@@ -98,7 +88,6 @@ function updateOrderMenu(){
 }
 
 // set section button
-
 function setSecBtn(){
 
     var order = document.getElementById("order_sec_btn");
