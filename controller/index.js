@@ -6,6 +6,7 @@ window.onload = function() {
     update_view_txt();
     loadDraggableMenu();
     displayTableNumber();
+    createOrder();
 };
 
 // return to top button
@@ -45,7 +46,9 @@ function createProductMenuHTML(beers,oUl){
     for (var i = 0; i < beers.length; i++) {
         const data = beers[i];
         const liHTML = createLi("","beer_line",
-            createP("","beer_name",'Name: ' + data[0].name)
+            // hidden beer id
+            createHiddenP("","", data[0].articleid)
+            + createP("","beer_name",'Name: ' + data[0].name)
             + createP("","beer_producer",'Producer: '+ data[0].producer)
             + createP("","beer_price",'Price: '+ data[0].priceinclvat)
             + createP("","beer_strength",'Alcohol: '+ data[0].alcoholstrength)
@@ -55,6 +58,7 @@ function createProductMenuHTML(beers,oUl){
     }
 }
 
+// click button to add it to the cart
 function createCart(beers,oBox,oCar){
     // find all the class with name "add_btn"
     var aBtn = getClass(oBox, "add_btn");
@@ -81,13 +85,16 @@ function createCart(beers,oBox,oCar){
 // create the cart beer HTML
 function createProductCartHTML(oDiv,data,oCar){
     oDiv.className = "row hid";
-    oDiv.innerHTML += generateCartBasicHTML(data.name, data.priceinclvat);
+    oDiv.innerHTML += generateCartBasicHTML(data.articleid, data.name, data.priceinclvat);
     oCar.appendChild(oDiv);
 }
 
-function generateCartBasicHTML(beerName, beerPrice){
-    const cartHTML = createDiv("","check left",
-        createI("i_check","i_check","i_check()","√")) +
+// generate HTML for the cart
+function generateCartBasicHTML(beerId, beerName, beerPrice){
+    const cartHTML =
+        createDiv("","check left",
+            createHiddenP("","",beerId) +
+            createI("i_check","i_check","i_check()","√")) +
 
         createDiv("","name left",createSpan("","",beerName)) +
 
@@ -245,11 +252,12 @@ function loadDraggableMenu(){
             function(e) {
                 var objDtf = e.dataTransfer;
                 var pList = this.getElementsByTagName("p");
-                // get beer name and beer price
-                var beerName = pList[0].innerText.split(":")[1];
-                var beerPrice = pList[2].innerText.split(":")[1];
+                // get beer id, beer name and beer price
+                var beerId = pList[0].innerText;
+                var beerName = pList[1].innerText.split(":")[1];
+                var beerPrice = pList[3].innerText.split(":")[1];
                 // transfer data
-                objDtf.setData("text/html", dragToCart(beerName,beerPrice));
+                objDtf.setData("text/html", dragToCart(beerId,beerName,beerPrice));
             },
             true);
     }
@@ -259,8 +267,7 @@ function loadDraggableMenu(){
     oCar.addEventListener("drop",
         function(e) {
             number++;
-
-            // get transferred data
+            // get transferred data and set a new cart product HTML
             var objDtf = e.dataTransfer;
             var textHTML = objDtf.getData("text/html");
             this.innerHTML += textHTML;
@@ -289,8 +296,8 @@ function loadDraggableMenu(){
     }
 
     // Add the product html to cart
-    function dragToCart(beerName,beerPrice){
-        return createDiv("", "row hid", generateCartBasicHTML(beerName, beerPrice));
+    function dragToCart(beerId, beerName,beerPrice){
+        return createDiv("", "row hid", generateCartBasicHTML(beerId,beerName, beerPrice));
     }
 
     // add drag to cart btn onclick functions
