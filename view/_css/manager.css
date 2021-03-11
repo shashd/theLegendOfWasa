@@ -104,3 +104,96 @@ input:focus{
     border: #A0C0D5 solid 4px;
     background: #EBEBE7;
 }
+
+/***********************Manager content layout*****************************/
+
+#manager_content{
+    display: grid;
+    grid-template-areas: "beverage_stock remove_item"
+                         "beverage_stock removed_beverages"
+                         "beverage_stock nothing";
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 25%
+                        25%;
+}
+
+#beverage_stock_section{
+    text-align: center;
+    margin: auto;
+    grid-area: beverage_stock;
+}
+
+#remove_item_section{
+    margin: auto;
+    text-align: center;
+    grid-area: remove_item;
+}
+
+#removed_beverages_section{
+    margin: auto;
+    text-align: center;
+    grid-area: removed_beverages;
+}
+
+/***********************Manager stock list*****************************/
+
+.beverage_line{
+    margin: 10px auto;
+    border-bottom: white 1px solid;
+    padding: 10px;
+    display: grid;
+    text-align: center;
+    grid-template-areas: "articleId name stock";
+    grid-template-columns: 33% 33% 33%;
+}
+
+p.bev_id{
+    margin: auto;
+    grid-area: articleId;
+}
+
+p.bev_name{
+    margin: auto;
+    grid-area: name;
+}
+
+p.bev_amount{
+    margin: auto;
+    grid_area: name;
+}
+
+/************************ Removed beverages list***************************/
+
+#removed_bev_list_title{
+    margin-top: 10px;
+}
+
+#removed_bev_list{
+    margin: 10px auto;
+}
+
+.removed_beverage_line{
+    margin: 10px auto;
+    border: white 1px solid;
+    border-radius: 10px;
+    padding: 10px;
+    display: grid;
+    text-align: center;
+    grid-template-areas: "re_articleId re_name re_button";
+    grid-template-columns: 33% 33% 33%;
+}
+
+p.removed_bev_id{
+    margin: auto;
+    grid-area: re_articleId;
+}
+
+p.removed_bev_name{
+    margin: auto;
+    grid-area: re_name;
+}
+
+I.btn {
+    margin: auto;
+    grid-area: re_button;
+}

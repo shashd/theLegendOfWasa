@@ -6,7 +6,8 @@ var language = "eng"
 dict = {
     "keys_txt": ["welcome_txt","lang_txt", "log_in_txt", "cart_area", "welcome_login", "enter_credentials", "username_lbl", "password_lbl", "login_btn", "login_error", "beer_menu_title",
         "order_btn", "welcome_title", "balance_txt", "ord_his_tit", "update_balance_title", "btn_balance", "lbl_balance_input", "succes_bal", "confirm_transfer", "cancel_transfer",
-    "remove_item_btn", "lbl_remove_item", "remove_item_title"],
+    "remove_item_btn", "lbl_remove_item", "remove_item_title", "removed_bev_list_title", "confirm_undo_bev", "confirm_remove_bev",  "cancel_remove_bev", "bev_name",
+        "bev_id", "beverage_stock_title", "bev_amount"],
     "keys_pic" : ["lang_pic"],
 
     "eng": {
@@ -35,7 +36,16 @@ dict = {
         "cancel_transfer" : "Transaction canceled",
         "remove_item_btn" : "Remove beverage",
         "lbl_remove_item" : "Kindly enter the Article ID to remove it from the menu",
-        "remove_item_title" : "Remove beverage from the menu"
+        "remove_item_title" : "Remove beverage from the menu",
+        "removed_bev_list_title" : "Removed beverages from the menu",
+        "confirm_undo_bev" : "Are you sure that you want to put this beverage back to the menu?",
+        "cancel_undo_bev" : "The beverage has not been added back to the menu!",
+        "confirm_remove_bev" : "Are you sure you want to remove this beverage from the menu?",
+        "cancel_remove_bev" : "The beverage has not been removed from the menu!",
+        "beverage_stock_title" : "Beverage stock",
+        "bev_name" : "Name: ",
+        "bev_id" : "Article ID: ",
+        "bev_amount" : "Stock: "
     },
     "sve": {
         "welcome_txt": "Den Flygande Holländaren",
@@ -62,8 +72,17 @@ dict = {
         "confirm_transfer" : "Är du säker på att du vill lägga till ",
         "cancel_transfer" : "Transakation avbryten",
         "remove_item_btn" : "Ta bort dryck",
-        "lbl_remove_item" : "Artikel ID",
-        "remove_item_title" : "Ta bort en dryck från menyn"
+        "lbl_remove_item" : "Vänligen lägg till artikel ID för att ta bort drycken från menyn",
+        "remove_item_title" : "Ta bort en dryck från menyn",
+        "removed_bev_list_title" : "Bortagna drycker från menyn",
+        "confirm_undo_bev" : "Är du säker på att du vill lägga tillbaka drycken till menyn?",
+        "cancel_undo_bev" : "Drycken har ej lagts tillbaka till menyn!",
+        "confirm_remove_bev" : "Är du säker på att du vill ta bort drycken från menyn?",
+        "cancel_remove_bev" : "Drycken har inte tagits bort från menyn!",
+        "beverage_stock_title" : "Dryck lager",
+        "bev_name" : "Namn: ",
+        "bev_id" : "Artikel ID: ",
+        "bev_amount" : "Lager: "
     }
 }
 

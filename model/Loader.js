@@ -35,7 +35,6 @@ function get_Users(){
     return users;
 }
 
-
 //
 // This function returns the users full name to be displayed after the user has logged in to the system.
 function getUserFullName(id){
@@ -96,6 +95,23 @@ function changeBalance(id, added_amount_str) {
 }
 
 //
+// This functions returns a list containing all the elements of an beverage (name, id, strength, etc), but solely the ones that are removed from the menu
+function getRemovedBev(){
+    var removed_beverages_temp =  JSON.parse(localStorage.getItem("removed_bev")); // fetches removed beverages from local storage
+    var removed_beverages = [];
+
+    for (i in DB2.spirits) {
+        if(removed_beverages_temp != null) { // If the removed beverages is not empty
+            if (removed_beverages_temp.some(r => DB2.spirits[i].articleid.includes(r))) {// checks if there beverage id is  within the removed array
+                removed_beverages.push([DB2.spirits[i]]); // it adds to the array
+            }
+            }
+        }
+
+    return removed_beverages;
+}
+
+//
 // This function removes an specific beverage with article id from the menu that the manager has entered
 function addToRemovedBeverages(art_id){
     var removed_beverages_old = JSON.parse(localStorage.getItem("removed_bev")); // Fetches the removed beverages from local storage
@@ -110,12 +126,28 @@ function addToRemovedBeverages(art_id){
     }
 }
 
+//
+// This function removes a article id from the array containing the removed beverages from the menu. Which would add back the beverage to the menu
 function undoRemovedBeverage(id){
-    var removed_beverages_old = JSON.parse(localStorage.getItem("removed_bev"));
+    var removed_beverages_old = JSON.parse(localStorage.getItem("removed_bev")); // Fetches array from localstorage
     for(i in removed_beverages_old){
-        if(id = removed_beverages_old[i]){
-            removed_beverages_old.splice(i);
-            localStorage.setItem("removed_bev", JSON.stringify(removed_beverages_old));
+        if(id = removed_beverages_old[i]){ // If the id from the beverage is equal to the index
+            removed_beverages_old.splice(i, 1); // Removes it from the menu
+            localStorage.setItem("removed_bev", JSON.stringify(removed_beverages_old)); // Updates the array to localstorage
         }
     }
 }
+
+function getStock(){
+    var stock = [];
+    var tempString;
+    for(i in DB2.stocks){ // firstly iterates through the sold (order history)
+        for(j in DB2.spirits)
+        if(DB2.spirits[j].articleid == DB2.stocks[i].articleid){
+                    tempString = { name : DB2.spirits[j].name , amount : DB2.stocks[i].amount, ID : DB2.stocks[i].articleid} // adds the name, ID and stock
+            }
+        stock.push(tempString);
+        }
+    return stock;
+}
+

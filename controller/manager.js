@@ -12,6 +12,7 @@ window.onload = function() {
     update_view_txt();
     setWelcome();
     setRemovedBev();
+    setBevStock();
 };
 
 //
@@ -38,32 +39,56 @@ function setWelcome(){
     $("#welcome_userName").text(fullName);
 }
 
+function setBevStock(){
+ var stock_list = getStock();
+    var html_list = document.getElementById("beverage_stock_list");
+
+    for(i in stock_list){
+        const liHTML = createLi("", "beverage_line", createP("", "bev_id", get_string("bev_id") + stock_list[i].ID)+
+            createP("", "bev_name", get_string("bev_name") + stock_list[i].name) +
+            createP("", "bev_amount", get_string("bev_amount") + stock_list[i].amount),
+            false);
+
+        html_list.innerHTML += liHTML;
+    }
+}
 
 
+//
+// TODO: Add amount to each item
+// This function sets the list of the removed beverages.
 function setRemovedBev(){
-    var removed_beverages =  JSON.parse(localStorage.getItem("removed_bev"));
 
-    var list = document.getElementById("removed_bev_list");
+    var html_list = document.getElementById("removed_bev_list");
+    var removed_beverage_list = getRemovedBev(); // fetches an array of the removed beverages containing name, id, etc.
+    clearList(html_list);
 
-    if(removed_beverages != null){
-        for(i in removed_beverages){
-            var id = removed_beverages[i];
-            var elementI = createI(id, "btn", "undoBeverage(id)", "undo");
-           const liHTML = createLi("", "removed_beverage_line", createP("", "removed_bev_id", "Article ID: " + removed_beverages[i]) +
-               elementI, false);
+    var name;
+    var id;
 
-            list.innerHTML += liHTML;
+    if(removed_beverage_list != null){ // If it is not empty fill the list with the removed beverages
+        for(i in removed_beverage_list){
+            id = removed_beverage_list[i][0].articleid; // Sets id to the beverage id within the removed_beverage array
+            name = removed_beverage_list[i][0].name; // Sets id to the beverage name within the removed_beverage array
+            var elementI = createI(id, "btn", "undoBeverage(id)", "Undo");
+           const liHTML = createLi("", "removed_beverage_line", createP("", "removed_bev_id", get_string("bev_id") + id) +
+               elementI + createP("", "removed_bev_name", get_string("bev_name") + name), false);
+
+            html_list.innerHTML += liHTML;
          }
     }
 }
 
 
+
+//
+// This function adds an removed beverage back to the menu
 function undoBeverage(id){
-    if (confirm(get_string("confirm_transfer") + " SEK")) { // Asks the user if (s)he is sure to proceed with the transaction or cancel it
+    if (confirm(get_string("confirm_undo_bev"))) { // Asks the user if (s)he is sure to proceed with adding back the beverage to the menu
         undoRemovedBeverage(id);
-        setRemovedBev();
+        setRemovedBev(); // updates list
     } else {
-        alert(get_string("cancel_transfer")); // If user cancels transaction a confirmation of the action will appear
+        alert(get_string("cancel_undo_bev")); // If user cancels the action a confirmation of the action will appear
     }
 }
 
@@ -71,10 +96,24 @@ function undoBeverage(id){
 // This function enables the manager to remove a beverage from the menu
 function removeTemporarilyItem(){
     var article_id = document.getElementById("art_id_remove").value; // fetches value from input
+    if (confirm(get_string("confirm_remove_bev"))) { // Asks the user if (s)he is sure to proceed with the removal of the beverage
     if(article_id != ""){
     addToRemovedBeverages(article_id); // Sends it to the Model function
+        setRemovedBev(); //Updates the list
     } else {
         alert("You have to enter a article_id")
+    }}else {
+        alert(get_string("cancel_undo_bev"));// If user cancels the action a confirmation of the action will appear
+    }
+}
+
+//
+// This function clears the removed beverage list
+function clearList(list){
+    //This while loop removes the items on the list before applying each removed beverage. the reasoning is so the list do not
+    // duplicates if the user enters a new removed beverage
+    while( list.firstChild ){
+        list.removeChild( list.firstChild );
     }
 }
 
