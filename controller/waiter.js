@@ -10,26 +10,16 @@ window.onload = function() {
     setWelcome();
     initialStorage();               /* initial data in local storage */ 
     displayStock();                 /* display all beers' stocks */
+    updateOrderMenu();
+};
+
+// return to top button
+window.onscroll = function(){
+    scrollFunction()
 };
 
 function setWaitressId(){
     waitress_id = localStorage.getItem("user_id");
-}
-
-// This function iterates through the dictionary content and places the content of the related key on
-// the HTML-tags
-function update_view_txt() {
-    keys_pic = dict['keys_pic'];
-    for (i in keys_pic) {
-        pic = keys_pic[i];
-        $("#" + pic).attr("src", get_string(pic));
-    }
-    keys_txt = dict["keys_txt"];
-    // iterates through the text content
-    for (i in keys_txt) {
-        key = keys_txt[i];
-        $("#" + key).text(get_string(key)); // places content within html-tag with correct ID
-    }
 }
 
 // This function sets the welcome title to the "Welcome (users name)".
@@ -88,4 +78,53 @@ function displayStock(){
 
     document.getElementById('stock_tab').innerHTML = list;
 }
+
+
+
+
+
+// ==================== order part ====================
+
+
+function updateOrderMenu(){
+    var table_number = TABLE_NUMBER;
+    var oGrid = document.getElementById("grid_container");
+
+    // create table HTML
+    createTableGridHTML(oGrid, table_number);
+    // set section button
+    setSecBtn();
+
+}
+
+// set section button
+
+function setSecBtn(){
+
+    var order = document.getElementById("order_sec_btn");
+    var stock = document.getElementById("stock_sec_btn");
+
+    order.innerHTML += createSpan("","","Order Section");
+    stock.innerHTML += createSpan("","","Stock Section");
+
+    order.onclick = function (){
+        $("#order_sec").toggle();
+    }
+
+    stock.onclick = function (){
+        $("#stock_sec").toggle();
+    }
+
+}
+
+// create table grid HTML
+function createTableGridHTML(oGrid, table_number){
+    for (var i = 0; i < table_number; i++){
+        var strHTML = createDiv("","grid_item","Table " + i);
+        oGrid.innerHTML += strHTML;
+    }
+}
+
+
+
 
