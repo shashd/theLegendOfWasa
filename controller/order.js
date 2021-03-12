@@ -139,3 +139,13 @@ function getUnPaidOrdersByTableNumber(table_number){
 function changeItemsOnOrderByTransactionId(){
 
 }
+
+function calculatePriceFromOrderList(orderList){
+    var subTotal = []
+    for (var i = 0; i < orderList.length; i++){
+        const price = getBeerInfoById(orderList[i].id).price;
+        const amount = orderList[i].amount;
+        subTotal.push(parseInt(price)*parseInt(amount))
+    }
+    return subTotal;
+}
