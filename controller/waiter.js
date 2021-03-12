@@ -14,7 +14,7 @@ window.onload = function() {
 
 // return to top button
 window.onscroll = function(){
-    scrollFunction()
+    scrollFunction();
 };
 
 function setWaitressId(){
@@ -82,28 +82,26 @@ function updateOrderMenu(){
 
     // create table HTML
     createTableGridHTML(oGrid, table_number);
-    // set section button
-    setSecBtn();
+
+    // set all Accordion buttons
+    setAccordBtn();
 
 }
 
-// set section button
-function setSecBtn(){
+function setAccordBtn(){
+    var acc = document.getElementsByClassName("accordion");
 
-    var order = document.getElementById("order_sec_btn");
-    var stock = document.getElementById("stock_sec_btn");
-
-    order.innerHTML += createSpan("","","Order Section");
-    stock.innerHTML += createSpan("","","Stock Section");
-
-    order.onclick = function (){
-        $("#order_sec").toggle();
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+        });
     }
-
-    stock.onclick = function (){
-        $("#stock_sec").toggle();
-    }
-
 }
 
 // create table grid HTML
@@ -113,7 +111,4 @@ function createTableGridHTML(oGrid, table_number){
         oGrid.innerHTML += strHTML;
     }
 }
-
-
-
 
