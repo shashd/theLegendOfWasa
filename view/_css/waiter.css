@@ -268,6 +268,7 @@ td,th {
     background-color: #cccccc;
 }
 .single_product{
+    font-size: 16px;
     background-color: #344350;
     width: 96%;
     margin: 2%;
@@ -285,6 +286,59 @@ td,th {
     width: 96%;
     margin: 2%;
 }
+.left{
+    float: left;
+}
+.count_i{
+    width:30%;
+    height:40px;
+    line-height: 40px;
+    float: left;
+    text-align: center;
+    font-size:21px;
+    color: #747474;
+}
+.count_i:hover{
+    width:30%;
+    height:40px;
+    line-height: 40px;
+    float: left;
+    text-align: center;
+    font-size:21px;
+    color: #747474;
+    background: #EBEBE7;
+    cursor: pointer;
+}
+.c_num{
+    width:40%;
+    height:40px;
+    line-height: 40px;
+    float: left;
+    text-align: center;
+    font-size:16px;
+    color: #747474;
+}
+.count_d{
+    width:30%;
+    height:40px;
+    line-height: 40px;
+    float: left;
+    text-align: center;
+    font-size:25px;
+    color: #747474;
+}
+.count_d:hover{
+    width:30%;
+    height:40px;
+    line-height: 40px;
+    float: left;
+    text-align: center;
+    font-size:25px;
+    color: #747474;
+    background: #E0E0E0;
+    cursor: pointer;
+}
+
 
 /* return to top button */
 

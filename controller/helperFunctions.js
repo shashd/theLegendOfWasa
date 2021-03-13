@@ -139,7 +139,9 @@ function saveTableNumber(table_number){
 }
 
 function sum(arr) {
-    return arr.reduce(function(prev, curr, idx, arr){
-        return prev + curr;
-    });
+    ret = 0;
+    for (var i = 0; i < arr.length; i++){
+        ret += parseInt(arr[i]);
+    }
+    return ret;
 }

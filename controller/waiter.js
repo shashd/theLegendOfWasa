@@ -85,13 +85,13 @@ function updateOrderMenu(){
 
     // 2. create table HTML
     createTableGridHTML(oGrid, all_table_number);
-
-    // 3. save table number and get mask layer by clicking
-    setTableOnclick(oGrid,all_table_number);
-
-    // 4. set order html
-    setMaskLayer();
     setOrderHeaderHTML();
+
+    // 3. display / hide mask layer
+    setMaskLayer();
+
+    // 4. save table number and get mask layer by clicking
+    setTableOnclick(oGrid,all_table_number);
 
 }
 
@@ -121,14 +121,19 @@ function createTableGridHTML(oGrid, all_table_number){
 
 // set table onclick function to display order list and modify order button
 function setTableOnclick(oGrid, all_table_number){
+
     var gridList = document.getElementsByClassName("grid_item");
     for (var i = 0; i < all_table_number; i++){
         var aGrid = gridList[i];
         aGrid.index = i;
         aGrid.onclick = function (){
-            // save table_number
+
             saveTableNumber(this.index);
             setOrderMenuHTML(this.index);
+            // set button actions
+            increaseBtn();
+            decreaseBtn();
+            deleteBtn();
 
         }
     }
@@ -144,15 +149,17 @@ function setMaskLayer(){
     })
 }
 
-
+// set order header html
 function setOrderHeaderHTML(){
     var oth = document.getElementsByClassName("table_order_header")[0];
     oth.innerHTML = createSpan("","","Table Order Menu");
 }
 
+// set order menu html
 function setOrderMenuHTML(){
 
-    var table_number = localStorage.getItem("table_number")
+    var table_number = localStorage.getItem("table_number");
+    // get order list by table number
     var orderList = getOrdersByTableNumber(table_number);
     var table_order_menu = document.getElementsByClassName("table_order_menu")[0];
     table_order_menu.innerHTML = "";
@@ -160,7 +167,6 @@ function setOrderMenuHTML(){
     if (orderList.length == 0){
         table_order_menu.innerHTML +=
                 createSpan("","empty_info","This table don't have any orders yet.");
-
     }else{
         for (var i = 0; i < orderList.length; i++){
             const orderJson = orderList[i];
@@ -170,6 +176,7 @@ function setOrderMenuHTML(){
     }
 }
 
+
 function setProductListHTML(orderJson){
     var strHTML = "";
     const product_number = orderJson.orderList.length;
@@ -178,19 +185,121 @@ function setProductListHTML(orderJson){
 
         const beer_id = orderJson.orderList[i].id;
         var beer_info = getBeerInfoById(beer_id);
-
+        // generate single product html
         strHTML += createDiv("","single_product",
-            createHiddenP("","",beer_id)
-            + createP("","",'Name: ' + beer_info.name)
-            + createP("","",'Price: ' + beer_info.price)
-            + createP("","",'Amount: ' + orderJson.orderList[i].amount)
-            + createP("","",'SubTotal: ' + subTotal[i])
+            createDiv("","",createHiddenP("","",beer_id))
+            + createDiv("","",createSpan("","",beer_info.name))
+            + createDiv("","",createSpan("","",beer_info.price))
+            + createDiv("","item_count_i",
+                createDiv("","num_count",
+                    createDiv("","count_d","-")
+                    + createDiv("","c_num",orderJson.orderList[i].amount)
+                    + createDiv("","count_i","+")))
+            + createDiv("","subtotal",createSpan("","",subTotal[i]))
+            + createDiv("","product_del_btn",createA("","","javascript:;","×"))
         );
     }
-
     strHTML += createDiv("","order_total_price",'Total: '+sum(subTotal));
-
     return strHTML;
 }
 
 
+// increase btn for single product
+function increaseBtn(){
+    var i_btn = document.getElementsByClassName("count_i");
+    for (var k = 0; k < i_btn.length; k++) {
+        i_btn[k].onclick = function() {
+            bt = this;
+            // Get subtotal node
+            at = this.parentElement.parentElement.nextElementSibling;
+            // Get unit price node
+            pt = this.parentElement.parentElement.previousElementSibling;
+            // Get quantity value
+            node = bt.parentNode.childNodes[1];
+            num = node.innerText;
+            num = parseInt(num);
+            num++;
+            node.innerText = num;
+            // Get unit price
+            price = pt.innerText;
+            // Calculate subtotal value
+            at.innerText = price * num;
+            // Calculate the total value
+            resetTotalPrice(bt.parentElement.parentElement.parentElement.parentElement);
+        }
+    }
+}
+// decrease btn for single product
+function decreaseBtn(){
+    var d_btn = document.getElementsByClassName("count_d");
+    var i_btn = document.getElementsByClassName("count_i");
+    for (k = 0; k < i_btn.length; k++) {
+        d_btn[k].onclick = function() {
+            bt = this;
+            // Get subtotal node
+            at = this.parentElement.parentElement.nextElementSibling;
+            // Get unit price node
+            pt = this.parentElement.parentElement.previousElementSibling;
+            // Get quantity value
+            node = bt.parentNode.childNodes[1];
+            num = node.innerText;
+            num = parseInt(num);
+            if (num > 1) {
+                num--;
+            }
+            node.innerText = num;
+            // Get unit price
+            price = pt.innerText;
+            // Calculate subtotal value
+            at.innerText = price * num
+            // Calculate the total value
+            resetTotalPrice(bt.parentElement.parentElement.parentElement.parentElement);
+        }
+    }
+}
+
+// delete product from order
+function deleteBtn() {
+    var del_btn = document.getElementsByClassName("product_del_btn");
+    for (k = 0; k < del_btn.length; k++) {
+        del_btn[k].onclick = function () {
+            bt = this;
+            var result = confirm("Confirm to delete?");
+            if (result) {
+                single_order = this.parentElement.parentElement;
+                single_product = this.parentElement;
+
+                const single_product_length = single_order.getElementsByClassName("single_product").length;
+                // if it's the last single product
+                if (single_product_length == 1){
+                    table_order_menu = single_order.parentElement;
+                    const single_order_length = table_order_menu.getElementsByClassName("single_order").length;
+                    table_order_menu.removeChild(single_order);
+                    // if it's the last single order and add empty info
+                    if (single_order_length == 1){
+                        table_order_menu.innerHTML +=
+                            createSpan("","empty_info","This table don't have any orders yet.");
+                    }
+                }else{
+                    single_order.removeChild(single_product);
+                    resetTotalPrice(single_order);
+                }
+            }
+        }
+    }
+}
+
+function resetTotalPrice(single_order_node) {
+
+    var subtotal_list = [];
+    var products = single_order_node.getElementsByClassName("single_product");
+
+    for (var i = 0; i < products.length; i++){
+        const single_product = products[i];
+        const subtotal = single_product.getElementsByClassName("subtotal")[0].innerText;
+        subtotal_list.push(subtotal);
+    }
+
+    var totalPrice = single_order_node.getElementsByClassName("order_total_price")[0];
+    totalPrice.innerText = "Total: " + sum(subtotal_list);;
+}
