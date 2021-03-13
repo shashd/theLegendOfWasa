@@ -134,6 +134,8 @@ function setTableOnclick(oGrid, all_table_number){
             increaseBtn();
             decreaseBtn();
             deleteBtn();
+            setModifyBtn();
+            setOrderDeleteBtn();
 
         }
     }
@@ -181,13 +183,26 @@ function setProductListHTML(orderJson){
     var strHTML = "";
     const product_number = orderJson.orderList.length;
     var subTotal = calculatePriceFromOrderList(orderJson.orderList);
+
+    // html for order header
+    const is_paid = orderJson.isPaid;
+    const transaction_id = orderJson.transaction_id;
+    const time = orderJson.time;
+
+    strHTML += createDiv("","order_header",
+        createSpan("","order_transaction_id",' Transaction ID: ' + transaction_id)
+        + createSpan("","order_is_paid",' Paid: ' + is_paid)
+        + createSpan("","order_created_time",' Created Time: ' + time)
+    );
+
+    // html for product information
     for (var i = 0; i < product_number; i++){
 
         const beer_id = orderJson.orderList[i].id;
         var beer_info = getBeerInfoById(beer_id);
         // generate single product html
         strHTML += createDiv("","single_product",
-            createDiv("","",createHiddenP("","",beer_id))
+            createDiv("","",createHiddenP("","beer_id",beer_id))
             + createDiv("","",createSpan("","",beer_info.name))
             + createDiv("","",createSpan("","",beer_info.price))
             + createDiv("","item_count_i",
@@ -199,7 +214,10 @@ function setProductListHTML(orderJson){
             + createDiv("","product_del_btn",createA("","","javascript:;","×"))
         );
     }
-    strHTML += createDiv("","order_total_price",'Total: '+sum(subTotal));
+
+    strHTML += createDiv("","order_total_price",'Total: '+sum(subTotal))
+        + createDiv("","modify_btn","Modify")
+        + createDiv("","order_del_btn","Delete");
     return strHTML;
 }
 
@@ -272,14 +290,7 @@ function deleteBtn() {
                 const single_product_length = single_order.getElementsByClassName("single_product").length;
                 // if it's the last single product
                 if (single_product_length == 1){
-                    table_order_menu = single_order.parentElement;
-                    const single_order_length = table_order_menu.getElementsByClassName("single_order").length;
-                    table_order_menu.removeChild(single_order);
-                    // if it's the last single order and add empty info
-                    if (single_order_length == 1){
-                        table_order_menu.innerHTML +=
-                            createSpan("","empty_info","This table don't have any orders yet.");
-                    }
+                    alert("Cannot remove the last product in an order.")
                 }else{
                     single_order.removeChild(single_product);
                     resetTotalPrice(single_order);
@@ -302,4 +313,81 @@ function resetTotalPrice(single_order_node) {
 
     var totalPrice = single_order_node.getElementsByClassName("order_total_price")[0];
     totalPrice.innerText = "Total: " + sum(subtotal_list);;
+}
+
+function getTransactionId(single_order_node){
+    var transaction_id = single_order_node.getElementsByClassName("order_header")[0]
+        .getElementsByClassName("order_transaction_id")[0];
+    return $.trim(transaction_id.innerText.split(":")[1]);
+}
+
+// get beer id and amount from the order menu
+function getBeerIdAndAmount(single_order_node) {
+    var ret = []
+    var products = single_order_node.getElementsByClassName("single_product");
+    for (var i = 0; i < products.length; i++) {
+        const single_product = products[i];
+        const beer_id = single_product.getElementsByClassName("beer_id")[0].innerText;
+        const amount = single_product.getElementsByClassName("c_num")[0].innerText;
+        const temp = {"id": beer_id, "amount": amount};
+        ret.push(temp);
+    }
+    return ret;
+}
+
+// set order modify button
+function setModifyBtn(){
+    var modify_btn = document.getElementsByClassName("modify_btn");
+    for (var i = 0; i < modify_btn.length; i++){
+        modify_btn[i].onclick = function () {
+
+            bt = this;
+            var result = confirm("Confirm to modify the order?");
+            if (result) {
+
+                // 1. get transaction_id
+                const single_order = this.parentElement;
+                const tid = getTransactionId(single_order);
+
+                // 2. set new order list
+                const new_order_list = getBeerIdAndAmount(single_order);
+                if (new_order_list.length != 0){
+                    setOrderListByTransactionId(tid, new_order_list);
+                }
+
+            }
+        }
+    }
+}
+
+// set order delete button
+function setOrderDeleteBtn() {
+    var del_btn = document.getElementsByClassName("order_del_btn");
+    for (var i = 0; i < del_btn.length; i++) {
+        del_btn[i].onclick = function () {
+
+            bt = this;
+            var result = confirm("Confirm to delete the order?");
+            if (result) {
+
+                // 1. get transaction_id
+                const single_order = this.parentElement;
+                const tid = getTransactionId(single_order);
+
+                // 2. delete html and set empty info if necessary
+                var table_order_menu = single_order.parentElement;
+                const single_order_length = table_order_menu.getElementsByClassName("single_order").length;
+                table_order_menu.removeChild(single_order);
+                // if it's the last single order and add empty info
+                if (single_order_length == 1){
+                    table_order_menu.innerHTML +=
+                        createSpan("","empty_info","This table don't have any orders yet.");
+                }
+
+                // 3. delete order from storage by tid
+                deleteOrderByTransactionId(tid);
+
+            }
+        }
+    }
 }

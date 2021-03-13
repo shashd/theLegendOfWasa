@@ -135,11 +135,6 @@ function getUnPaidOrdersByTableNumber(table_number){
     return tableOrders;
 }
 
-// todo: bartender can change items on an order by transaction id
-function changeItemsOnOrderByTransactionId(){
-
-}
-
 function calculatePriceFromOrderList(orderList){
     var subTotal = []
     for (var i = 0; i < orderList.length; i++){
@@ -148,4 +143,38 @@ function calculatePriceFromOrderList(orderList){
         subTotal.push(parseInt(price)*parseInt(amount))
     }
     return subTotal;
+}
+
+
+function setOrderListByTransactionId(transaction_id, orderList){
+    var list = localStorage.getItem(ORDER_STORAGE_NAME);
+    list = JSON.parse(list);
+
+    for (var i = 0; i < list.length; i++){
+        var item = list[i];
+        if (item.transaction_id == transaction_id){
+            item.orderList = orderList;
+            break;
+        }
+    }
+    localStorage.setItem(ORDER_STORAGE_NAME,JSON.stringify(list));
+
+}
+
+function deleteOrderByTransactionId(transaction_id){
+    var list = localStorage.getItem(ORDER_STORAGE_NAME);
+    list = JSON.parse(list);
+
+    var index = -1;
+    for (var i = 0; i < list.length; i++){
+        var item = list[i];
+        if (item.transaction_id == transaction_id){
+            index = i;
+            break;
+        }
+    }
+    if (index != -1){
+        list.splice(i,1);
+        localStorage.setItem(ORDER_STORAGE_NAME,JSON.stringify(list));
+    }
 }
