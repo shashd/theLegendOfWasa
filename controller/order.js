@@ -19,6 +19,9 @@ function submitOrder(){
     else if (checkBox.length > orderLimitNumber){
         alert("An order cannot consist of more than 10 items");
     }
+    else if (checkStock() == 0){
+        alert("Please decrease the product out of stock.");
+    }
     else{
         // 1. generateOrderJSON
         var cartProductJson = generateOrderJSON();
@@ -43,6 +46,42 @@ function submitOrder(){
     }
 }
 
+// check the stock when submit the order
+function checkStock(){
+    var checkBox = document.getElementsByClassName("i_acity");
+    var out_of_stock = [];
+    for (var i = 0; i < checkBox.length; i++){
+        var oItem = checkBox[i].parentElement.parentElement;
+
+        const id = oItem.getElementsByClassName("check left")[0].
+        getElementsByTagName("p")[0].innerText;
+
+        const amount = oItem.getElementsByClassName("item_count_i")[0].
+        getElementsByClassName("num_count")[0].
+        getElementsByClassName("c_num")[0].innerText;
+
+        const name = oItem.getElementsByClassName("name left")[0]
+            .getElementsByTagName("span")[0].innerText;
+
+        // if out of stock
+        const stock_available = checkAndChangeStockByBeerId(id, amount);
+        if (stock_available == 0){
+            out_of_stock.push({"name": name, "amount":amount});
+        }
+    }
+    if (out_of_stock.length == 0){
+        return 1;
+    }else{
+        // set alert message
+        var message = "";
+        for (var j = 0; j < out_of_stock.length; j++){
+            message += "Name: " + out_of_stock[j].name + ", Amount: " + out_of_stock[j].amount
+                + " is out of stock\n";
+        }
+        alert(message);
+        return 0;
+    }
+}
 
 function generateOrderJSON(){
     var checkBox = document.getElementsByClassName("i_acity");

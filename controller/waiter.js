@@ -7,8 +7,8 @@ window.onload = function() {
     setWaitressId();
     update_view_txt();        
     setWelcome();
-    setInitStorage();               /* initial data in local storage */ 
     displayStocks();                /* display all beers' stocks */
+    checkStockAndReset();
     updateOrderMenu();
 };
 
@@ -29,19 +29,6 @@ function setWelcome(){
 
 
 // ==================== stock part ====================
-
-function setInitStorage(){
-    localStorage.setItem("stocks",JSON.stringify(DB2.stocks));
-}
-
-// return stocks after parsing from local storage
-function getStocks(){
-    return JSON.parse(localStorage.getItem("stocks"));
-}
-
-function saveStocks(stocks){
-    localStorage.setItem("stocks",JSON.stringify(stocks));
-}
 
 function modifyStocks() {
     var stocks = getStocks();
