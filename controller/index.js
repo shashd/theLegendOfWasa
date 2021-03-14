@@ -2,6 +2,7 @@
 //
 // When page is loading it calls for functions update_view
 window.onload = function() {
+    initStock();
     update_menu();
     update_view_txt();
     loadDraggableMenu();
