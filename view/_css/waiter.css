@@ -359,6 +359,12 @@ td,th {
     width: 10%;
     margin: 2%;
 }
+.is_paid_btn{
+    font-size: 26px;
+    background-color: #344350;
+    width: 10%;
+    margin: 2%;
+}
 /* return to top button */
 
 #toTop{

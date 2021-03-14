@@ -135,6 +135,7 @@ function setTableOnclick(oGrid, all_table_number){
             decreaseBtn();
             deleteBtn();
             setModifyBtn();
+            setOrderIsPaidBtn();
             setOrderDeleteBtn();
 
         }
@@ -217,6 +218,7 @@ function setProductListHTML(orderJson){
 
     strHTML += createDiv("","order_total_price",'Total: '+sum(subTotal))
         + createDiv("","modify_btn","Modify")
+        + createDiv("","is_paid_btn","Set Paid")
         + createDiv("","order_del_btn","Delete");
     return strHTML;
 }
@@ -321,6 +323,20 @@ function getTransactionId(single_order_node){
     return $.trim(transaction_id.innerText.split(":")[1]);
 }
 
+function setIsPaidStatus(single_order_node) {
+    var is_paid = single_order_node.getElementsByClassName("order_header")[0]
+        .getElementsByClassName("order_is_paid")[0];
+    var is_paid_string = $.trim(is_paid.innerText.split(":")[1]);
+    if (is_paid_string == "true") {
+        alert("the status is already paid.");
+    }else{
+        is_paid.innerText = ' Paid: true'
+    }
+}
+
+
+
+
 // get beer id and amount from the order menu
 function getBeerIdAndAmount(single_order_node) {
     var ret = []
@@ -388,6 +404,30 @@ function setOrderDeleteBtn() {
                 deleteOrderByTransactionId(tid);
 
             }
+        }
+    }
+}
+
+
+// set order paid status
+function setOrderIsPaidBtn() {
+    var paid_btn = document.getElementsByClassName("is_paid_btn");
+    for (var i = 0; i < paid_btn.length; i++) {
+        paid_btn[i].onclick = function () {
+            bt = this;
+            var result = confirm("Confirm the order is paid?");
+            if (result){
+                // 1. get transaction_id
+                const single_order = this.parentElement;
+                const tid = getTransactionId(single_order);
+
+                // 2. change the html
+                setIsPaidStatus(single_order);
+
+                // 3. change the storage
+                modifyIsPaidStatus(tid);
+            }
+
         }
     }
 }
