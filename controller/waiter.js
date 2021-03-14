@@ -1,21 +1,20 @@
+
 // global variable
 var waitress_id;
-var id_list = [];
-var length;
 
 // function area
 window.onload = function() {
     setWaitressId();
     update_view_txt();        
     setWelcome();
-    initialStorage();               /* initial data in local storage */ 
-    displayStock();                 /* display all beers' stocks */
+    setInitStorage();               /* initial data in local storage */ 
+    displayStocks();                /* display all beers' stocks */
     updateOrderMenu();
 };
 
 // return to top button
 window.onscroll = function(){
-    scrollFunction()
+    scrollFunction();
 };
 
 function setWaitressId(){
@@ -28,103 +27,407 @@ function setWelcome(){
     $("#welcome_userName").text(fullName);
 }
 
-function initialStorage(){
-    // store all beers in one row in local storage
-    localStorage.setItem("stocks",JSON.stringify(DB2.stocks))
 
-    // fetch stocks data from local storage
-    var stocks = localStorage.getItem("stocks");
-    stocks = JSON.parse(stocks);
+// ==================== stock part ====================
 
-    for (i = 0; i < stocks.length; i++) {
-        // record all beer ids in a global array
-        id_list.push(stocks[i].articleid);
-        // store each beer one by one in local storage
-        localStorage.setItem(stocks[i].articleid,stocks[i].amount);
-    }
-
-    length = id_list.length;
+function setInitStorage(){
+    localStorage.setItem("stocks",JSON.stringify(DB2.stocks));
 }
 
-function ModifyItem() {
-    
-    // fetch stocks data from local storage
-    var stocks = localStorage.getItem("stocks");
-    stocks = JSON.parse(stocks);
+// return stocks after parsing from local storage
+function getStocks(){
+    return JSON.parse(localStorage.getItem("stocks"));
+}
 
+function saveStocks(stocks){
+    localStorage.setItem("stocks",JSON.stringify(stocks));
+}
+
+function modifyStocks() {
+    var stocks = getStocks();
+
+    // get values that the user inputs
 	var id = document.forms.current_stock.id.value;
 	var newAmount = document.forms.current_stock.amount.value;
 
     for (i = 0; i < stocks.length; i++) {
         if(stocks[i].articleid == id){
-            localStorage.setItem(stocks[i].articleid,newAmount);
+            stocks[i].amount = newAmount;
         }
     }
-	
-	displayStock();
+
+    saveStocks(stocks);      /* update stocks in local storage */
+	displayStocks();
 }
 
-
-function displayStock(){
-    var id, amount;    
+function displayStocks(){
+    var stocks = getStocks();   
     var list = "<tr><th>ID</th><th>Amount</th></tr>\n";
 
-    for (i = 0; i < length; i++) {
-        id = id_list[i];
-        amount = localStorage.getItem(id);
-        list += "<tr><td>" + id + "</td>\n<td>"
-                + amount + "</td></tr>\n";
+    for (i = 0; i < stocks.length; i++) {
+        id = stocks[i].articleid;
+        amount = stocks[i].amount;
+        list += "<tr><td>" + id + "</td>\n<td>" + amount + "</td></tr>\n";
     }
 
     document.getElementById('stock_tab').innerHTML = list;
 }
 
 
-
-
-
 // ==================== order part ====================
 
-
 function updateOrderMenu(){
-    var table_number = TABLE_NUMBER;
+    var all_table_number = TABLE_NUMBER;
     var oGrid = document.getElementById("grid_container");
 
-    // create table HTML
-    createTableGridHTML(oGrid, table_number);
-    // set section button
-    setSecBtn();
+    // 1. set all Accordion buttons
+    setAccordBtn();
+
+    // 2. create table HTML
+    createTableGridHTML(oGrid, all_table_number);
+    setOrderHeaderHTML();
+
+    // 3. display / hide mask layer
+    setMaskLayer();
+
+    // 4. save table number and get mask layer by clicking
+    setTableOnclick(oGrid,all_table_number);
 
 }
 
-// set section button
+function setAccordBtn(){
+    var acc = document.getElementsByClassName("accordion");
 
-function setSecBtn(){
-
-    var order = document.getElementById("order_sec_btn");
-    var stock = document.getElementById("stock_sec_btn");
-
-    order.innerHTML += createSpan("","","Order Section");
-    stock.innerHTML += createSpan("","","Stock Section");
-
-    order.onclick = function (){
-        $("#order_sec").toggle();
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+        });
     }
-
-    stock.onclick = function (){
-        $("#stock_sec").toggle();
-    }
-
 }
 
 // create table grid HTML
-function createTableGridHTML(oGrid, table_number){
-    for (var i = 0; i < table_number; i++){
+function createTableGridHTML(oGrid, all_table_number){
+    for (var i = 0; i < all_table_number; i++){
         var strHTML = createDiv("","grid_item","Table " + i);
         oGrid.innerHTML += strHTML;
     }
 }
 
+// set table onclick function to display order list and modify order button
+function setTableOnclick(oGrid, all_table_number){
+
+    var gridList = document.getElementsByClassName("grid_item");
+    for (var i = 0; i < all_table_number; i++){
+        var aGrid = gridList[i];
+        aGrid.index = i;
+        aGrid.onclick = function (){
+
+            saveTableNumber(this.index);
+            setOrderMenuHTML(this.index);
+            // set button actions
+            increaseBtn();
+            decreaseBtn();
+            deleteBtn();
+            setModifyBtn();
+            setOrderIsPaidBtn();
+            setOrderDeleteBtn();
+
+        }
+    }
+}
+
+// set mask layer
+function setMaskLayer(){
+    $(".grid_item").on('click', function() {
+        $(".mask_div").show();
+    });
+    $(".close_btn").on("click", function() {
+        $(".mask_div").hide();
+    })
+}
+
+// set order header html
+function setOrderHeaderHTML(){
+    var oth = document.getElementsByClassName("table_order_header")[0];
+    oth.innerHTML = createSpan("","","Table Order Menu");
+}
+
+// set order menu html
+function setOrderMenuHTML(){
+
+    var table_number = localStorage.getItem("table_number");
+    // get order list by table number
+    var orderList = getOrdersByTableNumber(table_number);
+    var table_order_menu = document.getElementsByClassName("table_order_menu")[0];
+    table_order_menu.innerHTML = "";
+
+    if (orderList.length == 0){
+        table_order_menu.innerHTML +=
+                createSpan("","empty_info","This table don't have any orders yet.");
+    }else{
+        for (var i = 0; i < orderList.length; i++){
+            const orderJson = orderList[i];
+            var strHTML = createDiv("","single_order",setProductListHTML(orderJson));
+            table_order_menu.innerHTML += strHTML;
+        }
+    }
+}
+
+
+function setProductListHTML(orderJson){
+    var strHTML = "";
+    const product_number = orderJson.orderList.length;
+    var subTotal = calculatePriceFromOrderList(orderJson.orderList);
+
+    // html for order header
+    const is_paid = orderJson.isPaid;
+    const transaction_id = orderJson.transaction_id;
+    const time = orderJson.time;
+
+    strHTML += createDiv("","order_header",
+        createSpan("","order_transaction_id",' Transaction ID: ' + transaction_id)
+        + createSpan("","order_is_paid",' Paid: ' + is_paid)
+        + createSpan("","order_created_time",' Created Time: ' + time)
+    );
+
+    // html for product information
+    for (var i = 0; i < product_number; i++){
+
+        const beer_id = orderJson.orderList[i].id;
+        var beer_info = getBeerInfoById(beer_id);
+        // generate single product html
+        strHTML += createDiv("","single_product",
+            createDiv("","",createHiddenP("","beer_id",beer_id))
+            + createDiv("","",createSpan("","",beer_info.name))
+            + createDiv("","",createSpan("","",beer_info.price))
+            + createDiv("","item_count_i",
+                createDiv("","num_count",
+                    createDiv("","count_d","-")
+                    + createDiv("","c_num",orderJson.orderList[i].amount)
+                    + createDiv("","count_i","+")))
+            + createDiv("","subtotal",createSpan("","",subTotal[i]))
+            + createDiv("","product_del_btn",createA("","","javascript:;","×"))
+        );
+    }
+
+    strHTML += createDiv("","order_total_price",'Total: '+sum(subTotal))
+        + createDiv("","modify_btn","Modify")
+        + createDiv("","is_paid_btn","Set Paid")
+        + createDiv("","order_del_btn","Delete");
+    return strHTML;
+}
+
+
+// increase btn for single product
+function increaseBtn(){
+    var i_btn = document.getElementsByClassName("count_i");
+    for (var k = 0; k < i_btn.length; k++) {
+        i_btn[k].onclick = function() {
+            bt = this;
+            // Get subtotal node
+            at = this.parentElement.parentElement.nextElementSibling;
+            // Get unit price node
+            pt = this.parentElement.parentElement.previousElementSibling;
+            // Get quantity value
+            node = bt.parentNode.childNodes[1];
+            num = node.innerText;
+            num = parseInt(num);
+            num++;
+            node.innerText = num;
+            // Get unit price
+            price = pt.innerText;
+            // Calculate subtotal value
+            at.innerText = price * num;
+            // Calculate the total value
+            resetTotalPrice(bt.parentElement.parentElement.parentElement.parentElement);
+        }
+    }
+}
+// decrease btn for single product
+function decreaseBtn(){
+    var d_btn = document.getElementsByClassName("count_d");
+    var i_btn = document.getElementsByClassName("count_i");
+    for (k = 0; k < i_btn.length; k++) {
+        d_btn[k].onclick = function() {
+            bt = this;
+            // Get subtotal node
+            at = this.parentElement.parentElement.nextElementSibling;
+            // Get unit price node
+            pt = this.parentElement.parentElement.previousElementSibling;
+            // Get quantity value
+            node = bt.parentNode.childNodes[1];
+            num = node.innerText;
+            num = parseInt(num);
+            if (num > 1) {
+                num--;
+            }
+            node.innerText = num;
+            // Get unit price
+            price = pt.innerText;
+            // Calculate subtotal value
+            at.innerText = price * num
+            // Calculate the total value
+            resetTotalPrice(bt.parentElement.parentElement.parentElement.parentElement);
+        }
+    }
+}
+
+// delete product from order
+function deleteBtn() {
+    var del_btn = document.getElementsByClassName("product_del_btn");
+    for (k = 0; k < del_btn.length; k++) {
+        del_btn[k].onclick = function () {
+            bt = this;
+            var result = confirm("Confirm to delete?");
+            if (result) {
+                single_order = this.parentElement.parentElement;
+                single_product = this.parentElement;
+
+                const single_product_length = single_order.getElementsByClassName("single_product").length;
+                // if it's the last single product
+                if (single_product_length == 1){
+                    alert("Cannot remove the last product in an order.")
+                }else{
+                    single_order.removeChild(single_product);
+                    resetTotalPrice(single_order);
+                }
+            }
+        }
+    }
+}
+
+function resetTotalPrice(single_order_node) {
+
+    var subtotal_list = [];
+    var products = single_order_node.getElementsByClassName("single_product");
+
+    for (var i = 0; i < products.length; i++){
+        const single_product = products[i];
+        const subtotal = single_product.getElementsByClassName("subtotal")[0].innerText;
+        subtotal_list.push(subtotal);
+    }
+
+    var totalPrice = single_order_node.getElementsByClassName("order_total_price")[0];
+    totalPrice.innerText = "Total: " + sum(subtotal_list);;
+}
+
+function getTransactionId(single_order_node){
+    var transaction_id = single_order_node.getElementsByClassName("order_header")[0]
+        .getElementsByClassName("order_transaction_id")[0];
+    return $.trim(transaction_id.innerText.split(":")[1]);
+}
+
+function setIsPaidStatus(single_order_node) {
+    var is_paid = single_order_node.getElementsByClassName("order_header")[0]
+        .getElementsByClassName("order_is_paid")[0];
+    var is_paid_string = $.trim(is_paid.innerText.split(":")[1]);
+    if (is_paid_string == "true") {
+        alert("the status is already paid.");
+    }else{
+        is_paid.innerText = ' Paid: true'
+    }
+}
 
 
 
+
+// get beer id and amount from the order menu
+function getBeerIdAndAmount(single_order_node) {
+    var ret = []
+    var products = single_order_node.getElementsByClassName("single_product");
+    for (var i = 0; i < products.length; i++) {
+        const single_product = products[i];
+        const beer_id = single_product.getElementsByClassName("beer_id")[0].innerText;
+        const amount = single_product.getElementsByClassName("c_num")[0].innerText;
+        const temp = {"id": beer_id, "amount": amount};
+        ret.push(temp);
+    }
+    return ret;
+}
+
+// set order modify button
+function setModifyBtn(){
+    var modify_btn = document.getElementsByClassName("modify_btn");
+    for (var i = 0; i < modify_btn.length; i++){
+        modify_btn[i].onclick = function () {
+
+            bt = this;
+            var result = confirm("Confirm to modify the order?");
+            if (result) {
+
+                // 1. get transaction_id
+                const single_order = this.parentElement;
+                const tid = getTransactionId(single_order);
+
+                // 2. set new order list
+                const new_order_list = getBeerIdAndAmount(single_order);
+                if (new_order_list.length != 0){
+                    setOrderListByTransactionId(tid, new_order_list);
+                }
+
+            }
+        }
+    }
+}
+
+// set order delete button
+function setOrderDeleteBtn() {
+    var del_btn = document.getElementsByClassName("order_del_btn");
+    for (var i = 0; i < del_btn.length; i++) {
+        del_btn[i].onclick = function () {
+
+            bt = this;
+            var result = confirm("Confirm to delete the order?");
+            if (result) {
+
+                // 1. get transaction_id
+                const single_order = this.parentElement;
+                const tid = getTransactionId(single_order);
+
+                // 2. delete html and set empty info if necessary
+                var table_order_menu = single_order.parentElement;
+                const single_order_length = table_order_menu.getElementsByClassName("single_order").length;
+                table_order_menu.removeChild(single_order);
+                // if it's the last single order and add empty info
+                if (single_order_length == 1){
+                    table_order_menu.innerHTML +=
+                        createSpan("","empty_info","This table don't have any orders yet.");
+                }
+
+                // 3. delete order from storage by tid
+                deleteOrderByTransactionId(tid);
+
+            }
+        }
+    }
+}
+
+
+// set order paid status
+function setOrderIsPaidBtn() {
+    var paid_btn = document.getElementsByClassName("is_paid_btn");
+    for (var i = 0; i < paid_btn.length; i++) {
+        paid_btn[i].onclick = function () {
+            bt = this;
+            var result = confirm("Confirm the order is paid?");
+            if (result){
+                // 1. get transaction_id
+                const single_order = this.parentElement;
+                const tid = getTransactionId(single_order);
+
+                // 2. change the html
+                setIsPaidStatus(single_order);
+
+                // 3. change the storage
+                modifyIsPaidStatus(tid);
+            }
+
+        }
+    }
+}

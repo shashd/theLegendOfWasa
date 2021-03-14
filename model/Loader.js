@@ -156,3 +156,18 @@ function getStock(){
     return stock;
 }
 
+// get beer info by beer id
+function getBeerInfoById(beer_id){
+
+    var beer_name, beer_price, beer_producer, beer_power;
+    for (i in DB2.spirits) {
+        if (DB2.spirits[i].articleid == beer_id){
+            beer_name = DB2.spirits[i].name;
+            beer_price = DB2.spirits[i].priceinclvat;
+            beer_producer = DB2.spirits[i].producer;
+            beer_power = DB2.spirits[i].alcoholstrength;
+        }
+    }
+    return {"name": beer_name, "price": beer_price, "producer": beer_producer, "power": beer_power};
+}
+

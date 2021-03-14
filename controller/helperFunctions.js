@@ -132,3 +132,16 @@ function isArray(o){
     return Object.prototype.toString.call(o) == '[object Array]';
 }
 
+
+// set table number in local storage
+function saveTableNumber(table_number){
+    localStorage.setItem("table_number",table_number);
+}
+
+function sum(arr) {
+    ret = 0;
+    for (var i = 0; i < arr.length; i++){
+        ret += parseInt(arr[i]);
+    }
+    return ret;
+}

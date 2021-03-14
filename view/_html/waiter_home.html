@@ -6,6 +6,8 @@
 
     <link rel="stylesheet" type="text/css" href="../_css/waiter.css">
     <link rel="stylesheet" type="text/css" href="../_css/commonalities.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Astloch:wght@400;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <script type="text/javascript" src="../../model/Dictionary.js"></script>
     <script type="text/javascript" src="../../model/DBLoaded.js"></script>
     <script type="text/javascript" src="../../model/Loader.js"></script>
@@ -19,52 +21,135 @@
 <body>
 
 
-<!-- welcoming title, the name of the user and the VIP users salary---->
-<div id="welcome_login_section">
-    <h1 id="welcome_title"></h1>
-    <h1 id="welcome_userName"></h1>
+<div class="topnav">
+    <ul>
+        <li><a href="index.html">The Flying Dutchman</a></li>
+        <li><a href="index.html">Menu</a></li>
+        <li style="float:right">
+            <a class="btn" href="log_in.html" id="log_in_area">
+                <div id="log_in_txt"></div>
+            </a></li>
+        <li style="float:right">
+            <div class="btn" id="language_cha" onclick="change_lang()"> <!--- when clicking within this area function: change_lang starts---->
+                <img id="lang_pic" src="">
+                <div id="lang_txt"></div>
+            </div>
+        </li>
+    </ul>
 </div>
 
 
-
-<div id="order_sec_btn" class="sec_btn"></div>
-<div id="order_sec">
-    <div class="table_area">
-        <div class="tip_name"></div>
-        <div id="grid_container" class="grid_container"></div>
+<!-- Sidebar Menu -->
+<div id="menu" class="menu">
+    <div class="container">
+    <nav class="main-nav" role="navigation">
+        <ul class="main-menu">
+        <li><a href="#section1">Home</a></li>
+        <li><a href="#section2">Order</a></li>
+        <li><a href="#section3">Stock</a></li>
+        <li><a href="#section4">Other</a></li>
+        </ul>
+    </nav>
     </div>
 </div>
 
 
-
-<div id="stock_sec_btn" class="sec_btn"></div>
-<div id="stock_sec">
-    <h2 id="stock_title">Stock Section</h2>   
-
-    <form name="current_stock"> 
-        <div id="change_stock">
-            <table>
-				<tr>
-					<td><b>ID:</b><input type=text name=id></td>
-					<td><b>Amount:</b><input type=text name=amount></td>
-				</tr>
-				<tr>
-					<td><input type=button value="Update" onclick="ModifyItem()"> </td>
-				</tr>
-			</table>
+<!-- welcoming title, the name of the user and the VIP users salary -->
+<section class="section" id=section1 data-section="section1">
+    <div class="container">
+        <div id="welcome_login_section">
+            <h1 id="welcome_title"></h1>
+            <h1 id="welcome_userName"></h1>
         </div>
+    </div>
+</section>
+
+
+
+
+<section class="section" id=section2 data-section="section2">
+    <div class="container">
+
+        <!--mask layer-->
+        <div class="mask_div">
+            <div class="table_order_page">
+                <span class="close_btn">X</span>
+                <div class="table_order_header"></div>
+                <div class="table_order_menu"></div>
+            </div>
+        </div>
+
+        <!-- The first accordion button -->
+        <div class="accordion">Order Management</div>
+        <div id="table_area">
+            <div class="tip_name"></div>
+            <div id="grid_container" class="grid_container"></div>
+        </div>
+
+        <!-- The second accordion button -->
+        <div class="accordion">Modify/Calculate price of product</div>
+        <div class="panel">
+            <p>Insert new codes here...</p>
+        </div>
+
+        <!-- The third accordion button -->
+        <div class="accordion">Offer Product on the house</div>
+        <div class="panel">
+            <p>Insert new codes here...</p>
+        </div>
+
+
+    </div>
+</section>
+
+
+<section class="section" id=section3 data-section="section3">
+    <div class="container">  
+
+        <!-- The first accordion button -->
+        <div class="accordion">See Availability & Update number in Stock</div>
+        <div id="stock_sec">
+            <form name="current_stock"> 
+                <div id="change_stock">
+                    <table>
+                        <tr>
+                            <td><b>ID:</b><input type=text name=id></td>
+                            <td><b>Amount:</b><input type=text name=amount></td>
+                        </tr>
+                        <tr>
+                            <td><input type=button value="Update" onclick="modifyStocks()"> </td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <p></p>
         
-        <p></p>
+                <table id="stock_tab"></table>
+        
+            </form>
+        </div>   
 
-        <table id="stock_tab"></table>
+        <!-- The second accordion button -->
+        <div class="accordion">Remove product from menu</div>
+        <div class="panel">
+            <p>Insert new codes here...</p>
+        </div>
 
-    </form>
-    
-
-</div>
+    </div>
+</section>
 
 
+<section class="section" id=section4 data-section="section4">
+    <div class="container">  
 
+        <!-- The accordion button -->
+        <div class="accordion">Notify security of problem</div>
+        <div class="panel">
+            <p>Insert new codes here...</p>
+        </div>
+
+    </div>
+</section>
 
 
 <!-- Return to top button -->
