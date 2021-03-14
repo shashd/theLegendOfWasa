@@ -115,6 +115,7 @@ function getRemovedBev(){
 // This function removes an specific beverage with article id from the menu that the manager has entered
 function addToRemovedBeverages(art_id){
     var removed_beverages_old = JSON.parse(localStorage.getItem("removed_bev")); // Fetches the removed beverages from local storage
+
     if(removed_beverages_old != null){ // Checks if the removed beverages is not empty or exist, if not it will push the new article id into the existing array
         if(!removed_beverages_old.some(r => art_id.includes(r))){
         removed_beverages_old.push(art_id);
@@ -130,8 +131,12 @@ function addToRemovedBeverages(art_id){
 // This function removes a article id from the array containing the removed beverages from the menu. Which would add back the beverage to the menu
 function undoRemovedBeverage(id){
     var removed_beverages_old = JSON.parse(localStorage.getItem("removed_bev")); // Fetches array from localstorage
+
+    console.log(id);
+    console.log(removed_beverages_old);
+
     for(i in removed_beverages_old){
-        if(id = removed_beverages_old[i]){ // If the id from the beverage is equal to the index
+        if(id == removed_beverages_old[i]){ // If the id from the beverage is equal to the index
             removed_beverages_old.splice(i, 1); // Removes it from the menu
             localStorage.setItem("removed_bev", JSON.stringify(removed_beverages_old)); // Updates the array to localstorage
         }
