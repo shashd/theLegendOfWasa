@@ -30,8 +30,8 @@ function checkAndChangeStockByBeerId(beer_id, amount){
     var ret = -1;
     for (var i = 0; i < list.length; i++) {
         if (list[i].articleid == beer_id){
-            if (list[i].amount >= amount){
-                list[i].amount = (list[i].amount - amount).toString();
+            if (parseInt(list[i].amount) >= parseInt(amount)){
+                list[i].amount = (parseInt(list[i].amount) - parseInt(amount)).toString();
                 ret = 1;
             }else{
                 ret = 0;

@@ -108,6 +108,8 @@ body{
     margin: 20px auto;
     /*background: #FFF;*/
     border: 3px dotted;
+    overflow: auto;
+    height: 55rem;
 }
 
 #cart_area{
@@ -204,7 +206,7 @@ body{
 }*/
 .row {
     height: 86px;
-    line-height: 86px;
+    /*line-height: 86px;*/
     padding: 15px 0;
     margin: 0px;
 }
@@ -344,11 +346,12 @@ body{
     align-content: center;
     display: grid;
     grid-area: name;
+    height: 60rem;
 }
 
 #box ul {
     align-content: center;
-    overflow: hidden;
+    overflow: auto;
 }
 
 #box li {

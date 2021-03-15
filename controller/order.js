@@ -1,5 +1,7 @@
 
 const ORDER_STORAGE_NAME = "orders";
+// An order can only consist of up to ten items
+const ORDER_LIMIT_NUMBER = 10;
 
 function createOrder(){
     var orderBtn = document.getElementById("pay");
@@ -9,14 +11,13 @@ function createOrder(){
 }
 
 function submitOrder(){
-    // An order can only consist of up to ten items
-    var orderLimitNumber = 10;
+
 
     var checkBox = document.getElementsByClassName("i_acity");
     if (checkBox.length == 0){
         alert("Please select items in the cart");
     }
-    else if (checkBox.length > orderLimitNumber){
+    else if (checkCartNumber() == 0){
         alert("An order cannot consist of more than 10 items");
     }
     else if (checkStock() == 0){
@@ -45,6 +46,26 @@ function submitOrder(){
         getAmount();
     }
 }
+
+// calculate the selected product number
+function checkCartNumber() {
+    var checkBox = document.getElementsByClassName("i_acity");
+    var selected_product_number = 0;
+    for (var i = 0; i < checkBox.length; i++) {
+
+        var oItem = checkBox[i].parentElement.parentElement;
+        const amount = oItem.getElementsByClassName("item_count_i")[0].
+        getElementsByClassName("num_count")[0].
+        getElementsByClassName("c_num")[0].innerText;
+
+        selected_product_number += parseInt(amount);
+    }
+    if (selected_product_number > ORDER_LIMIT_NUMBER){
+        return 0;
+    }
+    return 1;
+}
+
 
 // check the stock when submit the order
 function checkStock(){
