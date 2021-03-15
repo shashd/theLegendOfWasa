@@ -211,7 +211,6 @@ function setProductListHTML(orderJson){
     return strHTML;
 }
 
-
 // increase btn for single product
 function increaseBtn(){
     var i_btn = document.getElementsByClassName("count_i");
@@ -237,6 +236,7 @@ function increaseBtn(){
         }
     }
 }
+
 // decrease btn for single product
 function decreaseBtn(){
     var d_btn = document.getElementsByClassName("count_d");
@@ -321,9 +321,6 @@ function setIsPaidStatus(single_order_node) {
         is_paid.innerText = ' Paid: true'
     }
 }
-
-
-
 
 // get beer id and amount from the order menu
 function getBeerIdAndAmount(single_order_node) {
@@ -420,72 +417,65 @@ function setOrderIsPaidBtn() {
     }
 }
 
-/* on the house */
+// ==================== on the house ===================
+
 // get order with parsing from local storage
 function getOrders(){
     return JSON.parse(localStorage.getItem("orders"));
 }
+
 function saveOrders(orders){
     localStorage.setItem("orders",JSON.stringify(orders));
 }
 
 // get the table number in one assigned order
-function getTableNumber(){
+function getTableNumber(i){
     orders = getOrders();
-    return orders[0].table_number;
-}
-
-function getNumOrder(){
-    var orders = getOrders();
-    return orders.length;
+    return orders[i].table_number;
 }
 
 function update_house(){
     orders = getOrders();
-    
+
     /* select table area */
     var hSelect = document.getElementById("select_table");
     var optionString = "";
-    console.log(orders.length);
+
     for(i=0; i<orders.length; i++){
-        const table = getTableNumber();
+        const table = getTableNumber(i);
         
         optionString += createOption(table,"Table "+table);
     }
 
-    hSelect.innerHTML = createForm("choose_table",
+    hSelect.innerHTML = createForm("choose_tab","",
                         createSelect("table_option","",optionString)
-                        +"<button onclick=calTableOrder()>Show</button>"
+                        +"<button id=select_tab onclick=createHouseListHTML()>Show</button>"
                      );
-
 }
 
-/*
 function getOrderJsonByTable(table){
     orders = getOrders();
     for(i=0; i<orders.length; i++){
         if(orders[i].table_number == table){
-            return orders[i].orderJson;
+            console.log(orders[i]);
+            return orders[i].orderList;
         }
     }
 }
-*/
-function calTableOrder(){
+
+// show order list according table number 
+function createHouseListHTML(){
+
     var table = $("#table_option").val();
-    //to be editted
-    orders = getOrders();
-    orderJson = orders[0].orderList;
-    /* order list according table */
-    var hUl = document.getElementsByTagName("ul")[2];
-    createHouseListHTML(orderJson,hUl);
-}
-// create beer menu list HTML
-function createHouseListHTML(orderList,hUl){
+    var orderJson = getOrderJsonByTable(table);
     var beer_info;
+
+    var hUl = document.getElementsByTagName("ul")[2];
     hUl.innerHTML ="";
-    for(j=0; j < orderList.length; j++){
-        beer_id = orderList[j].id;
-        beer_amount = orderList[j].amount;
+
+    for(j=0; j < orderJson.length; j++){
+        beer_id = orderJson[j].id;
+        beer_amount = orderJson[j].amount;
         beer_info = getBeerInfoById(beer_id);
        
         liHTML = createLi("","",
@@ -497,22 +487,22 @@ function createHouseListHTML(orderList,hUl){
         hUl.innerHTML += liHTML;
     }
 }
+
 function onHouse(){
     // get values that the user inputs
 	var beer_id = document.forms.on_the_house.id.value;
 	var houseAmount = document.forms.on_the_house.amount.value;
     beer_info = getBeerInfoById(beer_id);
-    var housePrice = -beer_info.price * houseAmount;
-    //to be editted
-    orders = getOrders();
-    orderJson = orders[0].orderList;
-    
-    //calcuation
+    var houseValue = -beer_info.price * houseAmount;
+
+    var table = $("#table_option").val();
+    var orderJson = getOrderJsonByTable(table);
+
+
+    //calcuation & alert final result
     var subTotal = calculatePriceFromOrderList(orderJson);
-    var oldTotal = sum(subTotal);
-    
-    subTotal.push(housePrice);
+    subTotal.push(houseValue)
     var newTotal = sum(subTotal);
-    var calString="Old total:" + oldTotal +", and the new total: "+ newTotal;
+    var calString="New total(on the house) is: "+ newTotal;
     alert(calString);
 }

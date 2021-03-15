@@ -7,6 +7,10 @@ body{
     margin: 0px;
 }
 
+ul{
+    list-style-type: none;
+}
+
 .column1of2 {
     float: left;
     width: 60%;
@@ -350,12 +354,14 @@ body{
 }
 
 #box ul {
+    list-style:none;
     align-content: center;
     overflow: auto;
 }
 
 #box li {
     /*align-content: space-evenly;*/
+    list-style: none;
     border: #EBEBE7 dotted 2px;
     background-color: #A0C0D5;
     color: #344350;

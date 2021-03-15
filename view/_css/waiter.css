@@ -169,8 +169,10 @@ td,th {
 	background-color: #ccc;
 }
 
-#panel2{
-    margin-top: 20px;
+.panel2{
+    padding: 15px;
+    margin-left:auto; 
+    margin-right:auto;
 }
 
 #change_stock {
@@ -394,7 +396,6 @@ td,th {
     text-align: center;
     align-content: center;
     overflow: hidden;
-    list-style:none;
     margin:0; 
     padding:3px;
 }

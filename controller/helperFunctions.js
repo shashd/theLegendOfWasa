@@ -74,9 +74,9 @@ function createOption(value,content){
 function createSelect(id,classname,content){
     return createBasic("select", id, classname, content, false);
 }
-function createForm(name,content){
+function createForm(id,name,content){
     const nameString = createAttribute("name", name);
-    return "<form" + nameString + ">" + content + "</form>"; 
+    return "<form id=" +id + " name=" + nameString + ">" + content + "</form>"; 
 }
 
 // ============== return to top ==============
