@@ -238,3 +238,4 @@ function deleteOrderByTransactionId(transaction_id){
         localStorage.setItem(ORDER_STORAGE_NAME,JSON.stringify(list));
     }
 }
+

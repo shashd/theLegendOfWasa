@@ -169,7 +169,7 @@ td,th {
 	background-color: #ccc;
 }
 
-#stock_sec{
+#panel2{
     margin-top: 20px;
 }
 
@@ -380,4 +380,47 @@ td,th {
     cursor: pointer;
     padding: 15px;
     border-radius: 10px;
+}
+
+/* on the house */
+#house_list {
+    width: 50%;
+    align-content: center;
+    display: grid;
+    margin-left:auto; 
+    margin-right:auto;
+}
+#house_list ul {
+    text-align: center;
+    align-content: center;
+    overflow: hidden;
+    list-style:none;
+    margin:0; 
+    padding:3px;
+}
+#house_list li {
+    border: #EBEBE7 dotted 2px;
+    background-color: #A0C0D5;
+    color: #344350;
+    border-radius: 2px;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    margin: 3px auto;
+    overflow: hidden;
+}
+#house_sec{
+    margin-top: 20px;
+}
+#change_house {
+    width:50%;
+	padding: 6px;
+	background-color: #ccc;
+    margin-left:auto; 
+    margin-right:auto;
+}
+#order_tab{
+    width:15%;
+    text-align: center;
+    align-content: center;
+    border: 3px dotted #344350;
 }

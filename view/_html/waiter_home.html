@@ -95,8 +95,38 @@
 
         <!-- The third accordion button -->
         <div class="accordion">Offer Product on the house</div>
-        <div class="panel">
-            <p>Insert new codes here...</p>
+        <div class="panel2">
+            
+            <form name="on_the_house"> 
+                <div id="change_house">
+
+                    <div id="select_table"></div>
+                    <div id="calculate_table"></div>
+                    
+                    <table>
+                        <tr>
+                            <td><b>ID:</b><input type=text name=id></td>
+                            <td><b>Amount(on the house):</b><input type=text name=amount></td>
+                        </tr>
+                        <tr>
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <td><input type=button value="Submit" onclick="onHouse()"> </td>
+                        </tr>
+                    </table>
+                    
+                </div>
+                
+                <p></p>
+            
+                <!-- order list -->
+                <div id="house_list">
+                    <ul></ul>
+                </div>                
+            
+            </form>
+
         </div>
 
 
@@ -109,27 +139,29 @@
 
         <!-- The first accordion button -->
         <div class="accordion">See Availability & Update number in Stock</div>
-        <div id="stock_sec">
-            <form name="current_stock"> 
-                <div id="change_stock">
-                    <table>
-                        <tr>
-                            <td><b>ID:</b><input type=text name=id></td>
-                            <td><b>Amount:</b><input type=text name=amount></td>
-                        </tr>
-                        <tr>
-                            <td><input type=button value="Update" onclick="modifyStocks()"> </td>
-                        </tr>
-                    </table>
-                </div>
-                
-                <p></p>
+        <div class="panel2">
+            <div id="stock_sec">
+                <form name="current_stock"> 
+                    <div id="change_stock">
+                        <table>
+                            <tr>
+                                <td><b>ID:</b><input type=text name=id></td>
+                                <td><b>Amount:</b><input type=text name=amount></td>
+                            </tr>
+                            <tr>
+                                <td><input type=button value="Update" onclick="modifyStocks()"> </td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <p></p>
+            
+                    <table id="stock_tab"></table>
+            
+                </form>
+            </div>   
+        </div>
         
-                <table id="stock_tab"></table>
-        
-            </form>
-        </div>   
-
         <!-- The second accordion button -->
         <div class="accordion">Remove product from menu</div>
         <div class="panel">

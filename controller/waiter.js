@@ -10,6 +10,7 @@ window.onload = function() {
     displayStocks();                /* display all beers' stocks */
     checkStockAndReset();
     updateOrderMenu();
+    update_house();
 };
 
 // return to top button
@@ -417,4 +418,101 @@ function setOrderIsPaidBtn() {
 
         }
     }
+}
+
+/* on the house */
+// get order with parsing from local storage
+function getOrders(){
+    return JSON.parse(localStorage.getItem("orders"));
+}
+function saveOrders(orders){
+    localStorage.setItem("orders",JSON.stringify(orders));
+}
+
+// get the table number in one assigned order
+function getTableNumber(){
+    orders = getOrders();
+    return orders[0].table_number;
+}
+
+function getNumOrder(){
+    var orders = getOrders();
+    return orders.length;
+}
+
+function update_house(){
+    orders = getOrders();
+    
+    /* select table area */
+    var hSelect = document.getElementById("select_table");
+    var optionString = "";
+    console.log(orders.length);
+    for(i=0; i<orders.length; i++){
+        const table = getTableNumber();
+        
+        optionString += createOption(table,"Table "+table);
+    }
+
+    hSelect.innerHTML = createForm("choose_table",
+                        createSelect("table_option","",optionString)
+                        +"<button onclick=calTableOrder()>Show</button>"
+                     );
+
+}
+
+/*
+function getOrderJsonByTable(table){
+    orders = getOrders();
+    for(i=0; i<orders.length; i++){
+        if(orders[i].table_number == table){
+            return orders[i].orderJson;
+        }
+    }
+}
+*/
+function calTableOrder(){
+    var table = $("#table_option").val();
+    //to be editted
+    orders = getOrders();
+    orderJson = orders[0].orderList;
+    /* order list according table */
+    var hUl = document.getElementsByTagName("ul")[2];
+    createHouseListHTML(orderJson,hUl);
+}
+// create beer menu list HTML
+function createHouseListHTML(orderList,hUl){
+    var beer_info;
+    hUl.innerHTML ="";
+    for(j=0; j < orderList.length; j++){
+        beer_id = orderList[j].id;
+        beer_amount = orderList[j].amount;
+        beer_info = getBeerInfoById(beer_id);
+       
+        liHTML = createLi("","",
+              createP("","",beer_id)
+            + createP("","",beer_info.name)  
+            + createP("","",beer_info.price)
+            + createP("","",beer_amount)
+            ,false);
+        hUl.innerHTML += liHTML;
+    }
+}
+function onHouse(){
+    // get values that the user inputs
+	var beer_id = document.forms.on_the_house.id.value;
+	var houseAmount = document.forms.on_the_house.amount.value;
+    beer_info = getBeerInfoById(beer_id);
+    var housePrice = -beer_info.price * houseAmount;
+    //to be editted
+    orders = getOrders();
+    orderJson = orders[0].orderList;
+    
+    //calcuation
+    var subTotal = calculatePriceFromOrderList(orderJson);
+    var oldTotal = sum(subTotal);
+    
+    subTotal.push(housePrice);
+    var newTotal = sum(subTotal);
+    var calString="Old total:" + oldTotal +", and the new total: "+ newTotal;
+    alert(calString);
 }

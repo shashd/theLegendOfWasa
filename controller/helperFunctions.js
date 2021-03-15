@@ -67,6 +67,17 @@ function createAttribute(attr, val) {
     return  attr + '="' + val + '" ';
 }
 
+function createOption(value,content){
+    const valueString = createAttribute("value", value);
+    return  "<option " + valueString + ">" + content + "</option>";
+}
+function createSelect(id,classname,content){
+    return createBasic("select", id, classname, content, false);
+}
+function createForm(name,content){
+    const nameString = createAttribute("name", name);
+    return "<form" + nameString + ">" + content + "</form>"; 
+}
 
 // ============== return to top ==============
 
