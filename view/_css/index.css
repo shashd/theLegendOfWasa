@@ -356,12 +356,13 @@ ul{
 #box ul {
     list-style:none;
     align-content: center;
+    margin:0; padding:0; 
+    list-style:none;
     overflow: auto;
 }
 
 #box li {
     /*align-content: space-evenly;*/
-    list-style: none;
     border: #EBEBE7 dotted 2px;
     background-color: #A0C0D5;
     color: #344350;
