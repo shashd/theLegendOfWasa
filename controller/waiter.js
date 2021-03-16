@@ -25,7 +25,20 @@ function setWaitressId(){
 // This function sets the welcome title to the "Welcome (users name)".
 function setWelcome(){
     var fullName = getUserFullName(waitress_id);
-    $("#welcome_userName").text(fullName);
+    var info = document.getElementById("welcome_userName");
+    var num = getNumOfOrders();
+    var welcomeStr = "";
+
+    welcomeStr = createBasic("h1","","","Waiter/Waitress: "+fullName ,false)
+                +createBasic("h1","","",num+" order(s) in the system." ,false)
+                +" <br/> "
+                +createBasic("h2","","","Choose a table number to show products in this order." ,false);
+    info.innerHTML = welcomeStr;
+
+    /* select table */
+    var hSelect = document.getElementById("select_table1");
+    createTableOpt(hSelect,"choose_tab1","table_option1","orderListInHome()");
+
 }
 
 
@@ -428,6 +441,11 @@ function saveOrders(orders){
     localStorage.setItem("orders",JSON.stringify(orders));
 }
 
+function getNumOfOrders(){
+    orders = getOrders();
+    return orders.length;
+}
+
 // get the table number in one assigned order
 function getTableNumber(i){
     orders = getOrders();
@@ -435,44 +453,58 @@ function getTableNumber(i){
 }
 
 function update_house(){
-    orders = getOrders();
-
-    /* select table area */
+    /* select table */
     var hSelect = document.getElementById("select_table");
-    var optionString = "";
+    createTableOpt(hSelect,"choose_tab2","table_option2","orderListInHouse()");
+}
 
+function createTableOpt(hSelect,formid,selectid,funcname){
+    orders = getOrders();
+    var optionStr = "";
     for(i=0; i<orders.length; i++){
-        const table = getTableNumber(i);
-        
-        optionString += createOption(table,"Table "+table);
-    }
-
-    hSelect.innerHTML = createForm("choose_tab","",
-                        createSelect("table_option","",optionString)
-                        +"<button id=select_tab onclick=createHouseListHTML()>Show</button>"
+        const table = getTableNumber(i);    
+        optionStr += createOption(table,"Table "+table);
+    }   
+    hSelect.innerHTML = createForm(formid,"",
+                        createSelect(selectid,"",optionStr)
+                        +createInput("button","select_tab2",funcname,"Show")
                      );
 }
 
 function getOrderJsonByTable(table){
     orders = getOrders();
+    
     for(i=0; i<orders.length; i++){
+
         if(orders[i].table_number == table){
-            console.log(orders[i]);
+         
             return orders[i].orderList;
-        }
+        } 
     }
 }
 
-// show order list according table number 
-function createHouseListHTML(){
-
-    var table = $("#table_option").val();
-    var orderJson = getOrderJsonByTable(table);
-    var beer_info;
-
+function orderListInHome(){
+    var selectid = "#table_option1";
     var hUl = document.getElementsByTagName("ul")[2];
-    hUl.innerHTML ="";
+    hUl.innerHTML = "";
 
+    showOrderListHTML(selectid,hUl);
+}
+
+function orderListInHouse(){
+    var selectid = "#table_option2";
+    var hUl = document.getElementsByTagName("ul")[3];
+    hUl.innerHTML = "";
+
+    showOrderListHTML(selectid,hUl);
+}
+
+// show order list according table number 
+function showOrderListHTML(selectid,hUl){
+    var table = $(selectid).val();
+    var orderJson = getOrderJsonByTable(table);
+    var beer_info; 
+   
     for(j=0; j < orderJson.length; j++){
         beer_id = orderJson[j].id;
         beer_amount = orderJson[j].amount;
@@ -486,6 +518,7 @@ function createHouseListHTML(){
             ,false);
         hUl.innerHTML += liHTML;
     }
+
 }
 
 function onHouse(){
@@ -495,14 +528,13 @@ function onHouse(){
     beer_info = getBeerInfoById(beer_id);
     var houseValue = -beer_info.price * houseAmount;
 
-    var table = $("#table_option").val();
+    var table = $("#table_option2").val();
     var orderJson = getOrderJsonByTable(table);
 
-
-    //calcuation & alert final result
+    // calcuation & alert final result
     var subTotal = calculatePriceFromOrderList(orderJson);
     subTotal.push(houseValue)
     var newTotal = sum(subTotal);
-    var calString="New total(on the house) is: "+ newTotal;
+    var calString="New total(after on the house) is: "+ newTotal;
     alert(calString);
 }

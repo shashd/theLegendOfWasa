@@ -194,6 +194,7 @@ td,th {
 /********************* Order Area *********************/
 
 .grid_container{
+
     width: 60%;
     display: grid;
     grid-template-columns: auto auto auto auto;
@@ -384,22 +385,30 @@ td,th {
     border-radius: 10px;
 }
 
-/* on the house */
-#house_list {
+/********************* On the house *********************/
+input{
+    font-size:15px;
+    margin:6px;
+}
+select{
+    font-size:15px;
+}
+.order_list {
     width: 50%;
     align-content: center;
     display: grid;
+    padding:10px;
     margin-left:auto; 
     margin-right:auto;
 }
-#house_list ul {
+.order_list ul {
     text-align: center;
     align-content: center;
     overflow: hidden;
-    margin:0; 
+    margin:0px; 
     padding:3px;
 }
-#house_list li {
+.order_list li {
     border: #EBEBE7 dotted 2px;
     background-color: #A0C0D5;
     color: #344350;

@@ -79,6 +79,19 @@ function createForm(id,name,content){
     return "<form id=" +id + " name=" + nameString + ">" + content + "</form>"; 
 }
 
+function createInput(type,id,funcname,value){
+    const typeString = createAttribute("type", type);    
+    const idString = createAttribute("id", id);
+    const funcString = "onclick="+funcname+" ";
+    const valueString = createAttribute("value",value);
+    return "<input " + typeString + idString + funcString + valueString +"></input>"; 
+}
+
+function createButton(name,funcname,content){
+    const nameString = createAttribute("name", name); 
+    const funcString = "onclick="+funcname+"() ";
+    return "<button " + nameString + funcString + ">" + content + "</button>"; 
+}
 // ============== return to top ==============
 
 // When the webpage slides down 20px, a "back to top" button appears
