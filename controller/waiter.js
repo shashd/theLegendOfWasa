@@ -32,7 +32,7 @@ function setWelcome(){
     welcomeStr = createBasic("h1","","","Waiter/Waitress: "+fullName ,false)
                 +createBasic("h1","","",num+" order(s) in the system." ,false)
                 +" <br/> "
-                +createBasic("h2","","","Choose a table number to show products in this order." ,false);
+                +createBasic("h2","","","Choose a table number:" ,false);
     info.innerHTML = welcomeStr;
 
     /* select table */
@@ -538,3 +538,13 @@ function onHouse(){
     var calString="New total(after on the house) is: "+ newTotal;
     alert(calString);
 }
+
+// ==================== Notify Security ===================
+function alertSecurity() {
+    var txt;
+    if (confirm("Are you sure to notify Security?")) {
+        alert("Already notified Security.");
+    } else {
+        alert("Canceled to notify Security!");
+    }
+  }
