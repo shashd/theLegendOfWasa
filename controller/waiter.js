@@ -25,7 +25,20 @@ function setWaitressId(){
 // This function sets the welcome title to the "Welcome (users name)".
 function setWelcome(){
     var fullName = getUserFullName(waitress_id);
-    $("#welcome_userName").text(fullName);
+    var info = document.getElementById("welcome_userName");
+    var num = getNumOfOrders();
+    var welcomeStr = "";
+
+    welcomeStr = createBasic("h1","","","Waiter/Waitress: "+fullName ,false)
+                +createBasic("h1","","",num+" order(s) in the system." ,false)
+                +" <br/> "
+                +createBasic("h2","","","Choose a table number:" ,false);
+    info.innerHTML = welcomeStr;
+
+    /* select table */
+    var hSelect = document.getElementById("select_table1");
+    createTableOpt(hSelect,"choose_tab1","table_option1","orderListInHome()");
+
 }
 
 
@@ -211,7 +224,6 @@ function setProductListHTML(orderJson){
     return strHTML;
 }
 
-
 // increase btn for single product
 function increaseBtn(){
     var i_btn = document.getElementsByClassName("count_i");
@@ -237,6 +249,7 @@ function increaseBtn(){
         }
     }
 }
+
 // decrease btn for single product
 function decreaseBtn(){
     var d_btn = document.getElementsByClassName("count_d");
@@ -321,9 +334,6 @@ function setIsPaidStatus(single_order_node) {
         is_paid.innerText = ' Paid: true'
     }
 }
-
-
-
 
 // get beer id and amount from the order menu
 function getBeerIdAndAmount(single_order_node) {
@@ -420,72 +430,84 @@ function setOrderIsPaidBtn() {
     }
 }
 
-/* on the house */
+// ==================== on the house ===================
+
 // get order with parsing from local storage
 function getOrders(){
     return JSON.parse(localStorage.getItem("orders"));
 }
+
 function saveOrders(orders){
     localStorage.setItem("orders",JSON.stringify(orders));
 }
 
-// get the table number in one assigned order
-function getTableNumber(){
+function getNumOfOrders(){
     orders = getOrders();
-    return orders[0].table_number;
-}
-
-function getNumOrder(){
-    var orders = getOrders();
     return orders.length;
 }
 
-function update_house(){
+// get the table number in one assigned order
+function getTableNumber(i){
     orders = getOrders();
-    
-    /* select table area */
-    var hSelect = document.getElementById("select_table");
-    var optionString = "";
-    console.log(orders.length);
-    for(i=0; i<orders.length; i++){
-        const table = getTableNumber();
-        
-        optionString += createOption(table,"Table "+table);
-    }
-
-    hSelect.innerHTML = createForm("choose_table",
-                        createSelect("table_option","",optionString)
-                        +"<button onclick=calTableOrder()>Show</button>"
-                     );
-
+    return orders[i].table_number;
 }
 
-/*
+function update_house(){
+    /* select table */
+    var hSelect = document.getElementById("select_table");
+    createTableOpt(hSelect,"choose_tab2","table_option2","orderListInHouse()");
+}
+
+function createTableOpt(hSelect,formid,selectid,funcname){
+    orders = getOrders();
+    var optionStr = "";
+    for(i=0; i<orders.length; i++){
+        const table = getTableNumber(i);    
+        optionStr += createOption(table,"Table "+table);
+    }   
+    hSelect.innerHTML = createForm(formid,"",
+                        createSelect(selectid,"",optionStr)
+                        +createInput("button","select_tab2",funcname,"Show")
+                     );
+}
+
 function getOrderJsonByTable(table){
     orders = getOrders();
+    
     for(i=0; i<orders.length; i++){
+
         if(orders[i].table_number == table){
-            return orders[i].orderJson;
-        }
+         
+            return orders[i].orderList;
+        } 
     }
 }
-*/
-function calTableOrder(){
-    var table = $("#table_option").val();
-    //to be editted
-    orders = getOrders();
-    orderJson = orders[0].orderList;
-    /* order list according table */
+
+function orderListInHome(){
+    var selectid = "#table_option1";
     var hUl = document.getElementsByTagName("ul")[2];
-    createHouseListHTML(orderJson,hUl);
+    hUl.innerHTML = "";
+
+    showOrderListHTML(selectid,hUl);
 }
-// create beer menu list HTML
-function createHouseListHTML(orderList,hUl){
-    var beer_info;
-    hUl.innerHTML ="";
-    for(j=0; j < orderList.length; j++){
-        beer_id = orderList[j].id;
-        beer_amount = orderList[j].amount;
+
+function orderListInHouse(){
+    var selectid = "#table_option2";
+    var hUl = document.getElementsByTagName("ul")[3];
+    hUl.innerHTML = "";
+
+    showOrderListHTML(selectid,hUl);
+}
+
+// show order list according table number 
+function showOrderListHTML(selectid,hUl){
+    var table = $(selectid).val();
+    var orderJson = getOrderJsonByTable(table);
+    var beer_info; 
+   
+    for(j=0; j < orderJson.length; j++){
+        beer_id = orderJson[j].id;
+        beer_amount = orderJson[j].amount;
         beer_info = getBeerInfoById(beer_id);
        
         liHTML = createLi("","",
@@ -496,23 +518,33 @@ function createHouseListHTML(orderList,hUl){
             ,false);
         hUl.innerHTML += liHTML;
     }
+
 }
+
 function onHouse(){
     // get values that the user inputs
 	var beer_id = document.forms.on_the_house.id.value;
 	var houseAmount = document.forms.on_the_house.amount.value;
     beer_info = getBeerInfoById(beer_id);
-    var housePrice = -beer_info.price * houseAmount;
-    //to be editted
-    orders = getOrders();
-    orderJson = orders[0].orderList;
-    
-    //calcuation
+    var houseValue = -beer_info.price * houseAmount;
+
+    var table = $("#table_option2").val();
+    var orderJson = getOrderJsonByTable(table);
+
+    // calcuation & alert final result
     var subTotal = calculatePriceFromOrderList(orderJson);
-    var oldTotal = sum(subTotal);
-    
-    subTotal.push(housePrice);
+    subTotal.push(houseValue)
     var newTotal = sum(subTotal);
-    var calString="Old total:" + oldTotal +", and the new total: "+ newTotal;
+    var calString="New total(after on the house) is: "+ newTotal;
     alert(calString);
 }
+
+// ==================== Notify Security ===================
+function alertSecurity() {
+    var txt;
+    if (confirm("Are you sure to notify Security?")) {
+        alert("Already notified Security.");
+    } else {
+        alert("Canceled to notify Security!");
+    }
+  }

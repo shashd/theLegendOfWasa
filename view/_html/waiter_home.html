@@ -48,7 +48,7 @@
         <li><a href="#section1">Home</a></li>
         <li><a href="#section2">Order</a></li>
         <li><a href="#section3">Stock</a></li>
-        <li><a href="#section4">Other</a></li>
+        <li><a onclick="alertSecurity()">Security</a></li>
         </ul>
     </nav>
     </div>
@@ -59,13 +59,19 @@
 <section class="section" id=section1 data-section="section1">
     <div class="container">
         <div id="welcome_login_section">
-            <h1 id="welcome_title"></h1>
-            <h1 id="welcome_userName"></h1>
+
+            <div id="welcome_userName"></div>
+
+            <form name="basic_order"> 
+                <div id="select_table1"></div>
+                <div class="order_list" id="home_list">
+                    <ul></ul>
+                </div>   
+            </form>
+
         </div>
     </div>
 </section>
-
-
 
 
 <section class="section" id=section2 data-section="section2">
@@ -101,18 +107,12 @@
                 <div id="change_house">
 
                     <div id="select_table"></div>
-                    <div id="calculate_table"></div>
                     
                     <table>
                         <tr>
                             <td><b>ID:</b><input type=text name=id></td>
                             <td><b>Amount(on the house):</b><input type=text name=amount></td>
-                        </tr>
-                        <tr>
-                            <td> </td>
-                        </tr>
-                        <tr>
-                            <td><input type=button value="Submit" onclick="onHouse()"> </td>
+                            <td><input id=house_submit type=button value="Submit" onclick="onHouse()"> </td>
                         </tr>
                     </table>
                     
@@ -121,7 +121,7 @@
                 <p></p>
             
                 <!-- order list -->
-                <div id="house_list">
+                <div class="order_list" id="house_list">
                     <ul></ul>
                 </div>                
             
@@ -171,18 +171,6 @@
     </div>
 </section>
 
-
-<section class="section" id=section4 data-section="section4">
-    <div class="container">  
-
-        <!-- The accordion button -->
-        <div class="accordion">Notify security of problem</div>
-        <div class="panel">
-            <p>Insert new codes here...</p>
-        </div>
-
-    </div>
-</section>
 
 
 <!-- Return to top button -->
