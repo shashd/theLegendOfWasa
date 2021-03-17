@@ -92,6 +92,14 @@ function createButton(name,funcname,content){
     const funcString = "onclick="+funcname+"() ";
     return "<button " + nameString + funcString + ">" + content + "</button>"; 
 }
+
+function createButtonWithIdAndClass(id, classname, method, content){
+    const idString = createAttribute("id", id);
+    const classString = createAttribute("class", classname);
+    const methodString = "onclick=" + method + "() ";
+    return "<button " + idString + classString + methodString + ">" + content + "</button>";
+}
+
 // ============== return to top ==============
 
 // When the webpage slides down 20px, a "back to top" button appears

@@ -5,6 +5,7 @@ window.onload = function() {
     initStock();
     update_menu();
     update_view_txt();
+    generateUndoRedoBtn();
     loadDraggableMenu();
     displayTableNumber();
     createOrder();
@@ -313,5 +314,99 @@ function loadDraggableMenu(){
         decreaseBtn();
     }
 }
+
+
+// ==================== undo and redo part ====================
+
+
+// search product by clicking the search button
+function searchProduct(){
+    doInit();
+}
+
+function searchByFilter(filter){
+    var li = document.getElementsByClassName("beer_line");
+
+    for (var i = 0; i < li.length; i++) {
+        var beer_name = li[i].getElementsByClassName("beer_name")[0];
+        beer_name = $.trim(beer_name.innerText.split(":")[1]);
+        if (beer_name.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+
+function getCurrentFilter(){
+    var input = document.getElementById("search_input");
+    return input.value.toUpperCase();
+}
+
+var redoStack = [];
+var undoStack = [];
+
+function generateUndoRedoBtn(){
+    var obj = document.getElementById("undo_redo");
+    obj.innerHTML += createButtonWithIdAndClass("","undo_btn","undoIt()","undo")
+        + createButtonWithIdAndClass("","redo_btn","redoIt()","redo");
+}
+
+function doIt(funcObj) {
+    funcObj.execute();
+    undoStack.push(funcObj);
+    redoStack = [];
+}
+
+function redoIt(){
+    funcObj = redoStack.pop();
+    funcObj.reexecute();
+    undoStack.push(funcObj);
+}
+
+function undoIt(){
+    funcObj = undoStack.pop();
+    funcObj.unexecute();
+    redoStack.push(funcObj);
+}
+
+
+function searchFun(filter, old_filter){
+    var temp = {
+        arg: filter,
+        old_filter: old_filter,
+
+        execute: function (){
+            searchByFilter(filter);
+        },
+        unexecute: function () {
+            searchByFilter(old_filter);
+        },
+        reexecute: function () {
+            searchByFilter(filter);
+        }
+    }
+    return temp;
+}
+
+function doInit(){
+
+    // 1. current filter
+    var filter = getCurrentFilter();
+    filterHistory.push(filter);
+
+    // 2. get old filter and execute
+    if (undoStack.length != 0){
+        var old_filter = undoStack[undoStack.length-1].arg;
+        doIt(searchFun(filter,old_filter));
+    }else{
+        doIt(searchFun(filter,""));
+    }
+
+}
+
+
+
+
 
 
