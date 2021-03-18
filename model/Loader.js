@@ -112,18 +112,40 @@ function getRemovedBev(){
 }
 
 //
+// This function returns the variable temp to which is called from the class "UNDOmanager".
+// The variable contains the function execute (add beverage to the removed list), unexecute (remove beverage from the removed list)
+// and reexecute (add beverage to the removed list).
+function addToRemovedBeverages(article_id) {
+
+    var funcObj = {
+        art_id: article_id,
+        execute: function () {     // if function execute is called
+            addRemovedBev(this.art_id); // start function addRemovedBev
+        },
+        unexecute: function () {   // if function unexecute is called
+            undoRemovedBeverage(this.art_id); // start undoRemovedBeverage
+        },
+        reexecute: function () { // if function execute is called
+            addRemovedBev(this.art_id); // start function addRemovedBev
+        }
+    };
+
+    return funcObj;
+}
+
+//
 // This function removes an specific beverage with article id from the menu that the manager has entered
-function addToRemovedBeverages(art_id){
+function addRemovedBev(article_id){
     var removed_beverages_old = JSON.parse(localStorage.getItem("removed_bev")); // Fetches the removed beverages from local storage
 
-    if(removed_beverages_old != null){ // Checks if the removed beverages is not empty or exist, if not it will push the new article id into the existing array
-        if(!removed_beverages_old.some(r => art_id.includes(r))){
-        removed_beverages_old.push(art_id);
-        localStorage.setItem("removed_bev", JSON.stringify(removed_beverages_old));
+    if (removed_beverages_old != null) { // Checks if the removed beverages is not empty or exist, if not it will push the new article id into the existing array
+        if (!removed_beverages_old.some(r => article_id.includes(r))) {
+            removed_beverages_old.push(article_id);
+            localStorage.setItem("removed_bev", JSON.stringify(removed_beverages_old));
         }
-    }else{ // If removed beverage is null or does not exist it will add removed beverages which is an empty array, push the newly added article id and set it into local storage
-    removed_beverages.push(art_id); // pushes the ID into an array
-    localStorage.setItem("removed_bev", JSON.stringify(removed_beverages)); // stores it with local storage that stringify the array to enable local storage
+    } else { // If removed beverage is null or does not exist it will add removed beverages which is an empty array, push the newly added article id and set it into local storage
+        removed_beverages.push(article_id); // pushes the ID into an array
+        localStorage.setItem("removed_bev", JSON.stringify(removed_beverages)); // stores it with local storage that stringify the array to enable local storage
     }
 }
 
@@ -131,9 +153,6 @@ function addToRemovedBeverages(art_id){
 // This function removes a article id from the array containing the removed beverages from the menu. Which would add back the beverage to the menu
 function undoRemovedBeverage(id){
     var removed_beverages_old = JSON.parse(localStorage.getItem("removed_bev")); // Fetches array from localstorage
-
-    console.log(id);
-    console.log(removed_beverages_old);
 
     for(i in removed_beverages_old){
         if(id == removed_beverages_old[i]){ // If the id from the beverage is equal to the index

@@ -61,50 +61,6 @@ li a {
 }
 
 
-#remove_item_section{
-    text-align: center;
-    width: 40%;
-    margin: auto;
-    display: grid;
-    padding: 20px;
-    grid-template-areas: "header"
-                         "label"
-                         "input"
-                         "button";
-    /*border: black 1px solid;*/
-}
-
-#remove_item_title{
-    grid-area: header;
-}
-
-#lbl_remove_item{
-    margin: 10px;
-    grid-area: label;
-}
-
-#art_id_remove {
-    grid-area: input;
-}
-
-#remove_item_btn{
-    margin: 20px auto;
-    display: inline-block;
-    grid-area: button;
-}
-
-input{
-    border: #344350 solid 4px;
-    height: 40px;
-    border-radius: 5px;
-    background: #EBEBE7;
-}
-
-input:focus{
-    border: #A0C0D5 solid 4px;
-    background: #EBEBE7;
-}
-
 /***********************Manager content layout*****************************/
 
 #manager_content{
@@ -160,6 +116,65 @@ p.bev_name{
 p.bev_amount{
     margin: auto;
     grid_area: name;
+}
+
+/*************************Remove beverage area*****************************/
+#remove_item_section{
+    text-align: center;
+    width: 40%;
+    margin: auto;
+    display: grid;
+    padding: 20px;
+    grid-template-areas: "header"
+                         "label"
+                         "input"
+                         "button"
+                         "undo-redo-area";
+}
+
+#remove_item_title{
+    grid-area: header;
+}
+
+#lbl_remove_item{
+    margin: 10px;
+    grid-area: label;
+}
+
+#art_id_remove {
+    border: #344350 solid 4px;
+    height: 40px;
+    border-radius: 5px;
+    background: #EBEBE7;
+    grid-area: input;
+}
+
+#remove_item_btn{
+    margin: 20px auto;
+    display: inline-block;
+    grid-area: button;
+}
+
+input:focus{
+    border: #A0C0D5 solid 4px;
+    background: #EBEBE7;
+}
+
+#un-redo-area{
+    grid-area: undo-redo-area;
+    display: grid;
+    grid-template-areas: "undo-btn redo-btn";
+    grid-template-columns: 50% 50%;
+}
+
+#undo{
+    display: inline-block;
+    grid-area: undo-btn;
+}
+
+#redo{
+    display: inline-block;
+    grid-area: redo-btn;
 }
 
 /************************ Removed beverages list***************************/

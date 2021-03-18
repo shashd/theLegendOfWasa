@@ -7,7 +7,7 @@ dict = {
     "keys_txt": ["welcome_txt","lang_txt", "log_in_txt", "cart_area", "welcome_login", "enter_credentials", "username_lbl", "password_lbl", "login_btn", "login_error", "beer_menu_title",
         "order_btn", "welcome_title", "balance_txt", "ord_his_tit", "update_balance_title", "btn_balance", "lbl_balance_input", "succes_bal", "confirm_transfer", "cancel_transfer",
     "remove_item_btn", "lbl_remove_item", "remove_item_title", "removed_bev_list_title", "confirm_undo_bev", "confirm_remove_bev",  "cancel_remove_bev", "bev_name",
-        "bev_id", "beverage_stock_title", "bev_amount"],
+        "bev_id", "beverage_stock_title", "bev_amount", "undo", "redo"],
     "keys_pic" : ["lang_pic"],
 
     "eng": {
@@ -45,7 +45,9 @@ dict = {
         "beverage_stock_title" : "Beverage stock",
         "bev_name" : "Name: ",
         "bev_id" : "Article ID: ",
-        "bev_amount" : "Stock: "
+        "bev_amount" : "Stock: ",
+        "undo" : "Undo",
+        "redo" : "Redo"
     },
     "sve": {
         "welcome_txt": "Den Flygande Holländaren",
@@ -82,7 +84,9 @@ dict = {
         "beverage_stock_title" : "Dryck lager",
         "bev_name" : "Namn: ",
         "bev_id" : "Artikel ID: ",
-        "bev_amount" : "Lager: "
+        "bev_amount" : "Lager: ",
+        "undo" : "Ångra",
+        "redo" : "Upprepa"
     }
 }
 

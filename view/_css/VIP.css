@@ -1,3 +1,57 @@
+body{
+    background-color: #344350;
+    color: #EBEBE7;
+    margin: 0px;
+    font-family: 'Nunito', sans-serif;
+}
+
+/********************* Top navigation *********************/
+/********************* Top navigation *********************/
+
+.topnav {
+    overflow: hidden;
+    font-family: 'Astloch', cursive;
+    font-weight: bold;
+}
+
+.topnav a:hover {
+    color: #A0C0D5;
+}
+
+.topnav a {
+    float: left;
+    color: #344350;
+    text-align: center;
+    padding: 26px 40px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    overflow: hidden;
+    background-color: #EBEBE7;
+}
+
+li a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#language_cha {
+    background: #EBEBE7;
+}
+
+#log_in_area {
+    background: #EBEBE7;
+}
+
+
 #order_history_sec{
     text-align: center;
     align-content: center;
