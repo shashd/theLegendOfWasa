@@ -4,10 +4,12 @@ var language = "eng"
 // Current dictionary containing both swedish text and english
 // and the the images of english and swedish flag images
 dict = {
-    "keys_txt": ["welcome_txt","lang_txt", "log_in_txt", "cart_area", "welcome_login", "enter_credentials", "username_lbl", "password_lbl", "login_btn", "login_error", "beer_menu_title",
+    "keys_txt": ["welcome_txt","lang_txt", "log_in_txt", "log_out_txt", "cart_area", "welcome_login", "enter_credentials", "username_lbl", "password_lbl", "login_btn", "login_error", "beer_menu_title",
         "order_btn", "welcome_title", "balance_txt", "ord_his_tit", "update_balance_title", "btn_balance", "lbl_balance_input", "succes_bal", "confirm_transfer", "cancel_transfer",
     "remove_item_btn", "lbl_remove_item", "remove_item_title", "removed_bev_list_title", "confirm_undo_bev", "confirm_remove_bev",  "cancel_remove_bev", "bev_name",
-        "bev_id", "beverage_stock_title", "bev_amount", "undo", "redo"],
+        "bev_id", "beverage_stock_title", "bev_amount", "undo", "redo", "on_the_house_title", "alter_price_title", "order_manag_title", "stock_manag_title",
+        "bart_side_menu_home", "bart_side_menu_orders", "bart_side_menu_stock" , "bart_side_menu_security"],
+
     "keys_pic" : ["lang_pic"],
 
     "eng": {
@@ -15,6 +17,7 @@ dict = {
         "lang_txt": "Svenska",
         "lang_pic" : "../../images/swe.png", //needs to contain folder structure from index.html
         "log_in_txt" : "Log in",
+        "log_out_txt" : "Log out",
         "cart_area": "Your Order",
         "enter_credentials": "LOG IN TO FLY WITH US", // login page prompt
         "username_lbl" : "Username",
@@ -47,13 +50,22 @@ dict = {
         "bev_id" : "Article ID: ",
         "bev_amount" : "Stock: ",
         "undo" : "Undo",
-        "redo" : "Redo"
+        "redo" : "Redo",
+        "on_the_house_title" : "Offer Product on the house",
+        "alter_price_title" : "Modify/Calculate price of product",
+        "order_manag_title" : "Order management",
+        "stock_manag_title": "Review & update stock",
+        "bart_side_menu_home" : "Home",
+        "bart_side_menu_orders" : "Orders",
+        "bart_side_menu_stock" : "Stock",
+        "bart_side_menu_security" : "Security"
     },
     "sve": {
         "welcome_txt": "Den Flygande Holländaren",
         "lang_txt": "English",
         "lang_pic" : "../../images/eng.png", //needs to contain folder structure from index.html
         "log_in_txt" : "Logga in",
+        "log_out_txt" : "Logga ut",
         "cart_area": "Din beställning",
         "enter_credentials": "LOGGA IN OCH FLYG MED OSS",
         "username_lbl" : "Användarnamn",
@@ -86,10 +98,17 @@ dict = {
         "bev_id" : "Artikel ID: ",
         "bev_amount" : "Lager: ",
         "undo" : "Ångra",
-        "redo" : "Upprepa"
+        "redo" : "Upprepa",
+        "on_the_house_title" : "Bjud på produkt",
+        "alter_price_title" : "Ändra/beräkna pris på produkten",
+        "order_manag_title" : "Hantering av beställningar",
+        "stock_manag_title": "Granska & uppdatera lager",
+        "bart_side_menu_home" : "Hem",
+        "bart_side_menu_orders" : "Beställningar",
+        "bart_side_menu_stock" : "Lager",
+        "bart_side_menu_security" : "Tillkalla vakt"
     }
 }
-
 
 // returns the dictionary containing with specified language (english/swedish) and the content of specified key
 function get_string(key){

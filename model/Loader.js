@@ -145,14 +145,14 @@ function addRemovedBev(article_id){
         }
     } else { // If removed beverage is null or does not exist it will add removed beverages which is an empty array, push the newly added article id and set it into local storage
         removed_beverages.push(article_id); // pushes the ID into an array
-        localStorage.setItem("removed_bev", JSON.stringify(removed_beverages)); // stores it with local storage that stringify the array to enable local storage
+        localStorage.setItem("removed_bev", JSON.stringify(removed_beverages)); //  stringify the array to enable local storage
     }
 }
 
 //
 // This function removes a article id from the array containing the removed beverages from the menu. Which would add back the beverage to the menu
 function undoRemovedBeverage(id){
-    var removed_beverages_old = JSON.parse(localStorage.getItem("removed_bev")); // Fetches array from localstorage
+    var removed_beverages_old = JSON.parse(localStorage.getItem("removed_bev")); // Fetches and parses array from localstorage
 
     for(i in removed_beverages_old){
         if(id == removed_beverages_old[i]){ // If the id from the beverage is equal to the index
@@ -162,6 +162,8 @@ function undoRemovedBeverage(id){
     }
 }
 
+//
+// This function returns a list/array containing the amount of beverages that are in stock.
 function getStock(){
     var stock = [];
     var tempString;
@@ -170,7 +172,7 @@ function getStock(){
         if(DB2.spirits[j].articleid == DB2.stocks[i].articleid){
                     tempString = { name : DB2.spirits[j].name , amount : DB2.stocks[i].amount, ID : DB2.stocks[i].articleid} // adds the name, ID and stock
             }
-        stock.push(tempString);
+        stock.push(tempString); // push to array
         }
     return stock;
 }

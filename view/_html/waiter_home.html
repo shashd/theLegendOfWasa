@@ -25,10 +25,9 @@
 <div class="topnav">
     <ul>
         <li><a href="index.html">The Flying Dutchman</a></li>
-        <li><a href="index.html">Menu</a></li>
         <li style="float:right">
-            <a class="btn" href="log_in.html" id="log_in_area">
-                <div id="log_in_txt"></div>
+            <a class="btn" href="index.html" id="log_in_area">
+                <div id="log_out_txt"></div>
             </a></li>
         <li style="float:right">
             <div class="btn" id="language_cha" onclick="change_lang()"> <!--- when clicking within this area function: change_lang starts---->
@@ -45,10 +44,10 @@
     <div class="container">
     <nav class="main-nav" role="navigation">
         <ul class="main-menu">
-        <li><a href="#section1">Home</a></li>
-        <li><a href="#section2">Order</a></li>
-        <li><a href="#section3">Stock</a></li>
-        <li><a onclick="alertSecurity()">Security</a></li>
+        <li><a id="bart_side_menu_home" href="#section1"></a></li>
+        <li><a id="bart_side_menu_orders" href="#section2"></a></li>
+        <li><a id="bart_side_menu_stock" href="#section3"></a></li>
+        <li><a id="bart_side_menu_security" onclick="alertSecurity()"></a></li>
         </ul>
     </nav>
     </div>
@@ -87,20 +86,20 @@
         </div>
 
         <!-- The first accordion button -->
-        <div class="accordion">Order Management</div>
+        <div id="order_manag_title" class="accordion"></div>
         <div id="table_area">
             <div class="tip_name"></div>
             <div id="grid_container" class="grid_container"></div>
         </div>
 
         <!-- The second accordion button -->
-        <div class="accordion">Modify/Calculate price of product</div>
+        <div id="alter_price_title" class="accordion"></div>
         <div class="panel">
             <p>Insert new codes here...</p>
         </div>
 
         <!-- The third accordion button -->
-        <div class="accordion">Offer Product on the house</div>
+        <div id="on_the_house_title" class="accordion"></div>
         <div class="panel2">
             
             <form name="on_the_house"> 
@@ -138,7 +137,7 @@
     <div class="container">  
 
         <!-- The first accordion button -->
-        <div class="accordion">See Availability & Update number in Stock</div>
+        <div id="stock_manag_title" class="accordion"></div>
         <div class="panel2">
             <div id="stock_sec">
                 <form name="current_stock"> 
@@ -163,7 +162,7 @@
         </div>
         
         <!-- The second accordion button -->
-        <div class="accordion">Remove product from menu</div>
+        <div id="remove_item_title" class="accordion"></div>
         <div class="panel">
             <p>Insert new codes here...</p>
         </div>
