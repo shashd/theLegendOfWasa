@@ -54,7 +54,7 @@ function user_redirect(role, id){
     } else if (role == "1"){
         window.location.href = "waiter_home.html";
     }  else if (role == "2"){
-        window.location.href = "bartender_home.html";
+        window.location.href = "bartender_home.html"; // TODO: Does not exist any more the Waiter and bartender is the same user
     } else if (role == "3"){
         window.location.href = "manager_home.html";
     }
